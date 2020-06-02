@@ -1,9 +1,10 @@
 \documentclass[12pt,twoside,a4paper,polish]{report}
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{babel}
 
-\usepackage{indentfirst}
+\usepackage[utf8]{inputenc} % https://tex.stackexchange.com/a/44699
+
+% \usepackage{indentfirst}
 
 \renewcommand{\thechapter}{\arabic{chapter}.}
 \renewcommand{\thesection}{\thechapter\arabic{section}.}
@@ -33,11 +34,18 @@
 \usepackage{chngcntr}
 \counterwithout*{footnote}{chapter}
 
-\title{...}
+% \renewcommand{\theequation}{\arabic{equation}}
+
+% TODO: https://tex.stackexchange.com/a/246285
+
+\title{Web browsers and Internet-connected devices digital fingerprinting methods - challenges and solutions}
 \author{Artur Wolff}
 \date{February 2021}
 
 \begin{document}
 \include{tex/00_Introduction}
 \tableofcontents
+\include{tex/01_Introduction_to_fingerprinting}
+\listoffigures
+\listoftables
 \end{document}

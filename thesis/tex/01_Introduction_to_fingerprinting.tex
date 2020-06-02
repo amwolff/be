@@ -1,0 +1,93 @@
+\chapter{Wprowadzenie do fingerprintingu}
+
+\section{Sformułowanie problemu}
+
+\subsection{Nomenklatura używana w tej pracy}
+Pisząc o odcisku palca użyto (także w tytule pracy) ogólnie przyjętego skrótu
+myślowego, oznaczającego odbitkę linii papilarnych, czyli formę językową
+uznawaną za poprawną przez specjalistów od daktyloskopii.
+
+Użycie formy językowej ,,odcisk palca'' w terminie ,,cyfrowy odcisk palca'' ma
+wiele sensu. Jeszcze bez zdefiniowania tego specjalistycznego terminu, możemy
+domyślić się, co oznacza. Oczywiście wynika to z faktu, że cyfrowy odcisk palca
+i analogowy odcisk palca są ze sobą w pewien sposób powiązane (koncepcja
+cyfrowego odcisku palca czerpie z wartości wynikających ze stosowania odbitek
+ludzkich linii papilarnych w dziedzinie kryminalistyki).
+
+Angielskie słowo ,,fingerprint'' tłumaczy się jako odcisk palca, jednakże w
+zagranicznych publikacjach dotyczących cyfrowego odcisku palca rzadko występuje
+termin ,,digital fingerprint''. Kontekst użycia jest na tyle wyraźny, że użycie
+samego ,,fingerprint'' jest wystarczające.
+
+Zachodnie nazewnictwo ma tę przewagę, że jest zdecydowanie bardziej kompaktowe.
+Także w przypadku słowotwórczego zabiegu \emph{fingerprinting}, oznaczającego
+czynność; szukając polskiego odpowienika musielibyśmy sięgnąć po ,,cyfrowe
+znakowanie''. Z uwagi na tę kompaktowość i łatwość użycia, w pracy preferowane
+będzie użycie oryginalnej nomenklatury.
+
+\subsection{Definicje}
+W kolejnych punktach zawarto najważniejsze definicje, które będą używane w
+przeciągu całej pracy.
+
+\subsubsection{Fingerprint}
+Wektor cech pozwalający zidentyfikować dowolny zbiór danych.
+
+Aby fingerprint pełnił praktyczną funkcję identyfikacyjną, tak jak odbitka
+ludzkich linii papilarnych pełni praktyczną funkcję identyfikacyjną, często
+stosuje się algorytm, który kojarzy wektor cech z określonej długości (zwykle
+krótkim) ciągiem bajtów (identyfikatorem). Takim algorytmem może być na przykład
+wysokiej wydajności funkcja skrótu (niekoniecznie zdatna do zastosowań
+kryptograficznych---na przykład MurmurHash). W niektórych źródłach można także
+spotkać się z taką definicją, że fingerprint to już sam wynik wyżej wspomnianego
+algorytmu. Taka definicja nie zmienia istoty fingerprintu, ale jest mniej
+przydatna w kontekście fingerprintingu urządzeń podłączonych do Internetu i
+przeglądarek internetowych, czego dotyczy niniejsza praca.
+
+\subsubsection{Fingerprint urządzenia podłączonego do Internetu}
+Wektor cech pozwalający zidentyfikować urządzenie podłączone do Internetu.
+
+\subsubsection{Instalacja przeglądarki internetowej}
+Instalacja na konkretnym urządzeniu. W przypadku zmiany ustawień, konfiguracji i
+liczby pluginów oraz aktualizacji przeglądarki, instalacja przeglądarki
+pozostaje ciągle tą samą instalacją.
+
+\subsubsection{Fingerprint przeglądarki internetowej}
+Wektor cech pozwalający zidentyfikować instalację przeglądarki internetowej.
+
+\subsection{Właściwości fingerprintu}
+Ludzkie linie papilarne są na ogół niepowtarzalne, niezmienne i nieusuwalne. Z
+wartości wynikających ze stosowania ich w swojej dziedzinie badawczej czerpie
+(także etymologicznie) koncepcja fingerprintu i dlatego też fingerprint z dobrze
+dobranymi cechami będzie odzwierciedlać podobne właściwości.
+
+W przypadku fingerprintingu urządzeń podłączonych do Internetu i przeglądarek
+internetowych najważniejszymi ich właściwościami są unikalność / różnorodność
+(niepowtarzalność) oraz stabilność (niezmienność), przy czym zwiększenie
+unikalności lub stabilności ma najczęściej negatywny wpływ na drugi parametr.
+
+Jedną ze stosowanych\footnote{Metrykę tę stosowało na przykład badanie ,,How
+	Unique Is Your Web Browser?'' Electronic Frontier Foundation, jedno z
+największych badań tego typu.} metod pomiaru unikalności fingerprintu urządzeń i
+przeglądarek jest entropia Shannona.
+
+\subsubsection{Entropia Shannona}
+Wartość entropii można rozumieć jako liczbę pytań binarnych potrzebnych do
+sklasyfikowania losowo wybranego elementu z danego zbioru. Entropia Shannona
+zbioru \(D\) z etykietami \(\{l_{0}, l_{1}, \dots, l_{n - 1}\}\) wyraża się
+wzorem \[H(D) = -{\sum_{i = 0}^{n - 1}{p(l_{i})\log_{2}{p(l_{i})}}}\] gdzie
+\(p(l_{i})\) to wyrażona ułamkiem częstość \(x_{i} \in D\) mającego etykietę
+\(l_{i}\). W specjalnym przypadku w którym każda etykieta występuje tak samo
+często entropia ma wartość maksymalną równą \(\log_{2}{(n - 1)}\).
+
+Przykład: jeśli zbiór fingerprintów przeglądarek internetowych ma \(32\) bity
+entropii, to w przypadku losowego wyboru jednego z nich oczekujemy, że w
+najlepszym przypadku tylko \(1\) na \(4294967295\) przeglądarek będzie miała
+taki sam fingerprint.
+
+\section{Fingerprinting a Internet} % https://sjp.pwn.pl/poradnia/haslo/;228
+
+\subsection{Podstawy funkcjonowania Internetu}
+
+\subsection{Założenia funkcjonowania Internetu}
+
+\subsection{Realizacja założeń funkcjonowania Internetu}

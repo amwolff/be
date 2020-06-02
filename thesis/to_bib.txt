@@ -1,0 +1,5 @@
+http://publications.lib.chalmers.se/records/fulltext/163728.pdf
+https://towardsdatascience.com/the-intuition-behind-shannons-entropy-e74820fe9800
+http://wazniak.mimuw.edu.pl/index.php?title=Teoria_informacji/TI_Wyk%C5%82ad_5
+http://www.shannonentropy.netmark.pl/
+http://bearcave.com/misl/misl_tech/wavelets/compression/shannon.html
