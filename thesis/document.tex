@@ -38,6 +38,12 @@
 
 % TODO: https://tex.stackexchange.com/a/246285
 
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{caption}
+\newcommand{\source}[1]{\caption*{\footnotesize{Źródło: {#1}}}}
+\renewcommand{\thefigure}{\arabic{figure}}
+
 \title{Web browsers and Internet-connected devices digital fingerprinting methods - challenges and solutions}
 \author{Artur Wolff}
 \date{February 2021}
