@@ -94,9 +94,9 @@ fingerprintu. Dzieje się tak ponieważ jest to kolejna rzecz, która może zmie
 się w czasie. Jeśli jedną z cech wejściowych jest wersja oprogramowania
 urządzenia lub wersja przeglądarki (która zwykle zmienia się parę razy w ciągu
 roku), to kolejne fingerprinty mogą odbiegać od siebie i naiwny klasyfikator,
-korzystający z algorytmu fingerprintingowego reagującego na najmniejsze zmiany
-(na przykład funkcja skrótu), mógłby nadać takiemu urządzeniu/przeglądarce
-kolejną etykietę, zamiast potraktowania jej jako poprzednio widzianą instalację.
+korzystający z algorytmu reagującego na najmniejsze zmiany (na przykład funkcja
+skrótu), mógłby nadać takiemu urządzeniu/przeglądarce kolejną etykietę, zamiast
+potraktowania jej jako poprzednio widzianą instalację.
 
 \section{Fingerprinting a Internet} % https://sjp.pwn.pl/poradnia/haslo/;228
 Aby lepiej zrozumieć istotę fingerprintu i motywację stojącą za stosowaniem
@@ -133,9 +133,6 @@ reklamy i sprzedaży. Zniesienie zakazu wykorzystywania Internetu do celów
 zarobkowych w 1991 roku zakończyło chwilę w której Internet był medium naukowego
 dyskursu i zapoczątkowało okres istnienia Internetu dla mas, który trwa do dziś.
 
-\subsubsection{Początki śledzenia użytkowników Internetu}
-\dots
-
 \subsubsection{Perspektywa techniczna}
 Podstawą struktury obecnego Internetu jest model TCP/IP i konceptualnie składa
 się ze współpracujących ze sobą 4 warstw:
@@ -150,6 +147,9 @@ przeglądarka czy serwer WWW. To najbardziej interesująca warstwa z perspektywy
 niniejszej pracy, ale fingerprinting urządzeń podłączonych do Internetu może
 odbywać się także w niższych warstwach. % TODO Elaborate?
 
+\subsubsection{Początki śledzenia użytkowników Internetu}
+\dots
+
 \section{Fingerprinting w branży komputerowej}
 Fingerprinting to technika wykorzystywana w wielu obszarach w dyscyplinie
 informatyki; fingerprinting urządzeń podłączonych do Internetu i przeglądarek
@@ -158,10 +158,20 @@ początku tego rozdziału definicje ujmują fingerprint w sposób ogólny i tak�
 taki, który pokrywa się z definicjami, które można znaleźć w publikacjach
 dotyczących fingerprintingu urządzeń i przeglądarek, to definicje dotyczące
 zastosowań fingerprintu innych bytów mogą być bardziej specyficzne czy też mogą
-zwracać większą uwagę na inne właściwości, charakterystyczne dla stosownych
-zastosowań. Kolejne punkty służą jako referencja do ukazania jak szeroko
-wykorzystywana jest omawiana koncepcja.
+eksponować inne właściwości, charakterystyczne dla stosownych zastosowań.
+Kolejne punkty służą jako referencja do ukazania jak szeroko wykorzystywana jest
+omawiana koncepcja.
 
 \subsection{Fingerprinting audio, wideo i algorytmy ACR}
+Metody fingerprintingu akustycznego i cyfrowych materiałów wideo, znane także
+jako algorytmy Automatic Content Recognition (ACR), powstały ze względu na
+potrzebę kontroli treści umieszczanych w serwisach internetowych pod kątem
+potencjalnych naruszeń praw do wykorzystania. Algorytmy Automatic Content
+Recognition są sparametryzowane w podobny sposób, co algorytmy fingerprintingu
+urządzeń i przeglądarek, czyli istotny jest balans pomiędzy niepowtarzalnością a
+stabilnością fingerprintu. Fingeprint audio lub wideo musi działać w podobny
+sposób do zachowania ludzkiego moderatora, czyli w przypadku kiedy materiał jest
+nieodróżnialny dla ludzkiego ucha lub oka jako ten, wobec którego przeprowadzany
+jest proces rozpoznawania, to powinien on zostać oflagowany.
 
 \subsection{Fingerprinting klucza publicznego}
