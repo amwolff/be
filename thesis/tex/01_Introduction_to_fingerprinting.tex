@@ -85,8 +85,6 @@ Jeśli zbiór fingerprintów przeglądarek internetowych ma \(32\) bity entropii
 w przypadku losowego wyboru jednego z nich oczekujemy, że w najlepszym przypadku
 tylko \(1\) na \(4294967295\) przeglądarek będzie miała taki sam fingerprint.
 
-\pagebreak
-
 \subsubsection{Stabilność}
 W przypadku dodania kolejnej cechy do wektora cech, identyfikującego urządzenie
 lub przeglądarkę, zwykle zwiększy to entropię, ale także zmniejszy stabilność
@@ -164,14 +162,17 @@ omawiana koncepcja.
 
 \subsection{Fingerprinting audio, wideo i algorytmy ACR}
 Metody fingerprintingu akustycznego i cyfrowych materiałów wideo, znane także
-jako algorytmy Automatic Content Recognition (ACR), powstały ze względu na
-potrzebę kontroli treści umieszczanych w serwisach internetowych pod kątem
+jako algorytmy Automatic Content Recognition (ACR), powstały głównie ze względu
+na potrzebę kontroli treści umieszczanych w serwisach internetowych pod kątem
 potencjalnych naruszeń praw do wykorzystania. Algorytmy Automatic Content
 Recognition są sparametryzowane w podobny sposób, co algorytmy fingerprintingu
 urządzeń i przeglądarek, czyli istotny jest balans pomiędzy niepowtarzalnością a
-stabilnością fingerprintu. Fingeprint audio lub wideo musi działać w podobny
-sposób do zachowania ludzkiego moderatora, czyli w przypadku kiedy materiał jest
-nieodróżnialny dla ludzkiego ucha lub oka jako ten, wobec którego przeprowadzany
-jest proces rozpoznawania, to powinien on zostać oflagowany.
+stabilnością fingerprintu. Klasyfikacja fingeprintu audio lub wideo musi działać
+w podobny sposób do zachowania ludzkiego moderatora, czyli w przypadku kiedy
+materiał jest nieodróżnialny dla ludzkiego ucha lub oka jako ten, wobec którego
+przeprowadzany jest proces rozpoznawania, to powinien on zostać oflagowany.
+Proces wykorzystywany przez algorytmy ACR określany jest mianem \emph{perceptual
+	hashing}\footnote{Termin nie został	przetłumaczony umyślnie, ze względu na
+fakt, iż polskie nazewnictwo jest w tym przypadku raczej nieistniejące.}.
 
 \subsection{Fingerprinting klucza publicznego}

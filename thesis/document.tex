@@ -12,9 +12,7 @@
 
 \setlength\parindent{1.25cm}
 
-\setcounter{page}{3}
-
-\usepackage[vmargin=2.5cm,lmargin=3cm,rmargin=2.5cm]{geometry}
+\usepackage[vmargin=2.5cm,lmargin=3cm,rmargin=2.5cm,includehead]{geometry}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -24,6 +22,8 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead[LO,RE]{\thepage}
 \fancypagestyle{plain}{\fancyhf{}\fancyhead[LO,RE]{\thepage}}
+
+% \setlength{\headheight}{14.49998pt} % https://tex.stackexchange.com/a/327298
 
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
@@ -36,19 +36,20 @@
 
 % \renewcommand{\theequation}{\arabic{equation}}
 
-% TODO: https://tex.stackexchange.com/a/246285
-
 \usepackage{graphicx}
-\usepackage{grffile}
-\usepackage{caption}
-\newcommand{\source}[1]{\caption*{\footnotesize{Źródło: {#1}}}}
-\renewcommand{\thefigure}{\arabic{figure}}
+
+\usepackage[figurename=Rys.,labelsep=space]{caption} % https://tex.stackexchange.com/a/287616 & https://tex.stackexchange.com/a/192451
+\newcommand{\source}[1]{\caption*{\footnotesize{Źródło: {#1}}}} % https://tex.stackexchange.com/a/246285
+\renewcommand{\thefigure}{\arabic{figure}.}
 
 \title{Web browsers and Internet-connected devices digital fingerprinting methods - challenges and solutions}
 \author{Artur Wolff}
 \date{February 2021}
 
+\usepackage{pdfpages}
+
 \begin{document}
+\includepdf[pages=-]{title/title}
 \include{tex/00_Introduction}
 \tableofcontents
 \include{tex/01_Introduction_to_fingerprinting}
