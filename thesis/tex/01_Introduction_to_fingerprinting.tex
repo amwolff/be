@@ -116,12 +116,6 @@ komunikacyjnym, rozrywkowym), które później połączono z ARPANET. Badacze
 historii Internetu wskazują na fakt, iż gwałtowny rozwój Internetu zawdzięcza
 się właśnie komunikacyjnemu i rozrywkowemu aspektowi konkurencyjnych sieci.
 
-\begin{figure}
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{img/01.png}
-	\source{http://www.opte.org/maps/ (odwrócono kolory w celu zaoszczędzenia tuszu)}
-	\caption{Mapa Internetu z 16 stycznia 2005 roku.}
-\end{figure}
-
 \subsection{Założenia funkcjonowania Internetu i ich realizacja}
 Po tym jak w 1989 Tim Bernes-Lee oraz Robert Cailliau utworzyli projekt sieci
 dokumentów hipertekstowych, czyli tego, co obecnie znamy jako World Wide Web i
@@ -146,7 +140,75 @@ niniejszej pracy, ale fingerprinting urządzeń podłączonych do Internetu moż
 odbywać się także w niższych warstwach. % TODO Elaborate?
 
 \subsubsection{Początki śledzenia użytkowników Internetu}
-\dots
+Gwałtowny rozwój komercyjnego Internetu sprawił, że firmy zajmujące się reklamą
+i sprzedażą w Internecie zaczęły także dostrzegać korzyści płynące ze śledzenia
+użytkowników Internetu. W szczególności zaczęto analizować aktywność i
+zachowanie użytkowników. Oprócz instytucji komercyjnych, śledzeniem użytkowników
+zainteresowane są instytucje rządowe, co dobitnie pokazał wyciek poufnych,
+tajnych i ściśle tajnych dokumentów NSA w 2013 roku. Techniki śledzenia
+zmieniały się w czasie, wraz z rozwojem Internetu.
+
+\paragraph{Adres IP}
+Był na początku istnienia Internetu swego rodzaju globalnym identyfikatorem,
+dzięki któremu można było unikalnie identyfikować użytkowników Internetu. Adres
+IPv4 to \(32\) bitowy identyfikator. Prosta estymacja pozwala nam zauważyć, że
+adresów IP w wersji czwartej jest około \(4,3\) miliarda\footnote{W
+rzeczywistości liczba adresów IP w wersji czwartej jest niższa.}. Internet
+dzisiaj, to wielomiliardowa społeczność, a liczba urządzeń podłączonych do
+Internetu zdecydowanie przewyższa wyżej wymienioną estymatę. Już w 1992 roku
+zauważono, że w najbliższym czasie pula adresów IPv4 zostanie
+wyczerpana\footnote{RFC 1338}. W następnych latach proponowano kolejne
+rozwiązania (takie jak na przykład NAT\footnote{RFC 1631}), które implementowali
+dostawcy usług internetowych, pozwalając na łączenie się wielu urządzeń za
+pośrednictwem jednego, publicznego adresu IP. Wyczerpywanie się kolejnych pul
+adresów pokazuje Rys. 1.
+
+\begin{figure}
+	\includegraphics[width=\textwidth,keepaspectratio]{img/01}
+	\source{https://upload.wikimedia.org/wikipedia/commons/c/cf/Ipv4-exhaust.svg}
+	\caption{Wykres wyczerpywania się kolejnych pul adresów IPv4}
+\end{figure}
+
+Biorąc pod uwagę powyższe, na mocy Zasady Szufladkowej Dirichleta możemy
+stwierdzić, że adres IPv4 nie jest już identyfikatorem, który mógłby unikalnie
+identyfikować każde urządzenie podłączone do Internetu. W tym momencie warto
+także zaznaczyć, że o ile nowy standard IPv6 pozwalałby na taką identyfikację,
+to został on zaprojektowany z myślą o prywatności i posiada szereg rozszerzeń,
+które w przyszłości (kiedy Internet w pełni przejdzie na adresację w wersji
+szóstej) będą zapobiegać precyzyjnej identyfikacji.
+
+\paragraph{Cookies}
+Małe porcje informacji zapisywane na urządzeniu użytkownika, w obszarze pamięci
+trwałej przeglądarki, po interakcji ze stroną internetową, która je zapisuje.
+Powstały głównie ze względu na potrzebę poprawienia doświadczeń użytkowników ze
+stronami internetowymi, tak aby zapamiętywać pewien stan, o znaczeniu dla danej
+sesji dla danego użytkownika (na przykład lista produktów w koszyku w sklepie
+internetowym).
+
+Cookies dzielą się na tak zwane \emph{first-party cookies} i \emph{third-party
+cookies}. O ile pierwsze z wymienionego podziału faktycznie desygnowane są do
+tego aby spełniać wymienioną funkcję, to \emph{third-party cookies} mogą być
+nadawane przez skrypty reklamowe (na przykład), umieszczone na serwującej je
+stronie i w kontekście całej sieci reklamowej, użytkownik może być śledzony w
+Internecie nawet o tym nie wiedząc. Ubogie mechanizmy kontroli cookies w
+przeglądarkach internetowych i obawy związane z naruszaniem prywatności
+użytkowników przez śledzenie wykorzystujące cookies, doprowadziły do powstania
+dyrektywy Unii Europejskiej dotyczącej obowiązku informacyjnego, która zawiera
+m.in. obowiązek informowania o polityce stosowania cookies. Doprowadziło to
+wcześniej także do powstania rozszerzeń w przeglądarkach, takich jak nagłówek Do
+Not Track i Tryb Prywatny, które w domyśle miały pomóc częściowo rozwiązać
+wspomniany problem.
+
+Niektóre przeglądarki internetowe, takie jak Apple Safari (Intelligent Tracking
+Prevention silnika WebKit) lub Mozilla Firefox wykorzystują natywnie mechanizmy
+inteligentnego blokowania \emph{third-party cookies}. Powstało także wiele
+rozszerzeń do przeglądarek, które pozwalają blokować niechciane cookies.
+
+\paragraph{Inne techniki śledzenia użytkowników}
+Fingerprinting urządzeń podłączonych do Internetu i przeglądarek internetowych,
+to jedna ze zbioru wymyślnych technik, które zaczęto stosować ze względu na
+ułomność i/lub postępujące ograniczenia technik wykorzystujących na przykład
+adresy IP urządzeń i/lub cookies.
 
 \section{Fingerprinting w branży komputerowej}
 Fingerprinting to technika wykorzystywana w wielu obszarach w dyscyplinie
