@@ -46,6 +46,12 @@
 \author{Artur Wolff}
 \date{February 2021}
 
+\usepackage[autostyle]{csquotes}  % TODO move 49-53 somewhere else;
+\DeclareQuoteAlias{dutch}{polish} % https://tex.stackexchange.com/a/281280
+
+\usepackage{biblatex}
+\addbibresource{bib/references.bib}
+
 \usepackage{pdfpages}
 
 \begin{document}
@@ -60,5 +66,5 @@
 \include{tex/05}
 \listoffigures
 \listoftables
-\include{tex/bibliography}
+\printbibliography
 \end{document}
