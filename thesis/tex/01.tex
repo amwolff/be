@@ -32,17 +32,17 @@ będą używane w przeciągu całej pracy.
 \subsubsection{Fingerprint}
 Wektor cech pozwalający zidentyfikować dowolny zbiór danych.
 
-Aby fingerprint pełnił praktyczną funkcję identyfikacyjną, tak jak odbitka
-ludzkich linii papilarnych pełni praktyczną funkcję identyfikacyjną, często
-stosuje się algorytm, który kojarzy wektor cech z określonej długości (zwykle
-krótkim) ciągiem bajtów (identyfikatorem; można go także rozumieć jako
+Aby \emph{fingerprint} pełnił praktyczną funkcję identyfikacyjną, tak jak
+odbitka ludzkich linii papilarnych pełni praktyczną funkcję identyfikacyjną,
+często stosuje się algorytm, który kojarzy wektor cech z określonej długości
+(zwykle krótkim) ciągiem bajtów (identyfikatorem; można go także rozumieć jako
 etykieta). Takim algorytmem może być na przykład wysokiej wydajności funkcja
 skrótu (niekoniecznie zdatna do zastosowań kryptograficznych---na przykład
 MurmurHash). W niektórych źródłach można także spotkać się z taką definicją, że
-fingerprint to już sam wynik wyżej wspomnianego algorytmu. Taka definicja nie
-zmienia istoty fingerprintu, ale jest zdecydowanie mniej przydatna w kontekście
-fingerprintingu urządzeń podłączonych do Internetu i przeglądarek internetowych,
-czego dotyczy niniejsza praca.
+\emph{fingerprint} to już sam wynik wyżej wspomnianego algorytmu. Taka definicja
+nie zmienia istoty \emph{fingerprintu}, ale jest zdecydowanie mniej przydatna w
+kontekście \emph{fingerprintingu} urządzeń podłączonych do Internetu i
+przeglądarek internetowych, czego dotyczy niniejsza praca.
 
 \subsubsection{Fingerprint urządzenia podłączonego do Internetu}
 Wektor cech pozwalający zidentyfikować urządzenie podłączone do Internetu.
@@ -58,18 +58,20 @@ Wektor cech pozwalający zidentyfikować instalację przeglądarki internetowej.
 \subsection{Właściwości fingerprintu}
 Ludzkie linie papilarne są na ogół niepowtarzalne, niezmienne i nieusuwalne. Z
 wartości wynikających ze stosowania ich odbitek w swojej dziedzinie badawczej
-czerpie (także etymologicznie) koncepcja fingerprintu i dlatego też fingerprint
-z dobrze dobranymi cechami będzie odzwierciedlać podobne właściwości.
+czerpie (także etymologicznie) koncepcja \emph{fingerprintu} i dlatego też
+\emph{fingerprint} z dobrze dobranymi cechami będzie odzwierciedlać podobne
+właściwości.
 
-W przypadku fingerprintingu urządzeń podłączonych do Internetu i przeglądarek
-internetowych najważniejszymi ich właściwościami są unikalność / różnorodność
-(niepowtarzalność) oraz stabilność (niezmienność), przy czym zwiększenie
-unikalności lub stabilności ma najczęściej negatywny wpływ na drugi parametr.
+W przypadku \emph{fingerprintingu} urządzeń podłączonych do Internetu i
+przeglądarek internetowych najważniejszymi ich właściwościami są unikalność /
+różnorodność (niepowtarzalność) oraz stabilność (niezmienność), przy czym
+zwiększenie unikalności lub stabilności ma najczęściej negatywny wpływ na drugi
+parametr.
 
 Jedną ze stosowanych\footnote{Metrykę tę stosowało na przykład badanie ,,How
 	Unique Is Your Web Browser?'' Electronic Frontier Foundation; w momencie
 pisania pracy jedno z największych badań tego typu.} metod pomiaru unikalności
-fingerprintu urządzeń i przeglądarek jest entropia Shannona.
+\emph{fingerprintu} urządzeń i przeglądarek jest entropia Shannona.
 
 \subsubsection{Entropia Shannona}
 Wartość entropii można rozumieć jako liczbę pytań binarnych potrzebnych do
@@ -81,27 +83,29 @@ się wzorem \[H(D) = -{\sum_{i = 0}^{n - 1}{p(l_{i})\log_{2}{p(l_{i})}}}\] gdzie
 entropia ma wartość maksymalną równą \(\log_{2}{n}\).
 
 \paragraph{Przykład}
-Jeśli zbiór fingerprintów przeglądarek internetowych ma \(32\) bity entropii, to
-w przypadku losowego wyboru jednego z nich oczekujemy, że w najlepszym przypadku
-tylko \(1\) na \(4294967295\) przeglądarek będzie miała taki sam fingerprint.
+Jeśli zbiór \emph{fingerprintów} przeglądarek internetowych ma \(32\) bity
+entropii, to w przypadku losowego wyboru jednego z nich oczekujemy, że w
+najlepszym przypadku tylko \(1\) na \(4294967295\) przeglądarek będzie miała
+taki sam \emph{fingerprint}.
 
 \subsubsection{Stabilność}
 W przypadku dodania kolejnej cechy do wektora cech, identyfikującego urządzenie
 lub przeglądarkę, zwykle zwiększy to entropię, ale także zmniejszy stabilność
-fingerprintu. Dzieje się tak ponieważ jest to kolejna rzecz, która może zmienić
-się w czasie. Jeśli jedną z cech wejściowych jest wersja oprogramowania
+\emph{fingerprintu}. Dzieje się tak ponieważ jest to kolejna rzecz, która może
+zmienić się w czasie. Jeśli jedną z cech wejściowych jest wersja oprogramowania
 urządzenia lub wersja przeglądarki (która zwykle zmienia się parę razy w ciągu
-roku), to kolejne fingerprinty mogą odbiegać od siebie i naiwny klasyfikator,
-korzystający z algorytmu reagującego na najmniejsze zmiany (na przykład funkcja
-skrótu), mógłby nadać takiemu urządzeniu/przeglądarce kolejną etykietę, zamiast
-potraktowania jej jako poprzednio widzianą instalację.
+roku), to kolejne \emph{fingerprinty} mogą odbiegać od siebie i naiwny
+klasyfikator, korzystający z algorytmu reagującego na najmniejsze zmiany (na
+przykład funkcja skrótu), mógłby nadać takiemu urządzeniu/przeglądarce kolejną
+etykietę, zamiast potraktowania jej jako poprzednio widzianą instalację.
 
 \section{Fingerprinting a Internet} % https://sjp.pwn.pl/poradnia/haslo/;228
-Aby lepiej zrozumieć istotę fingerprintu i motywację stojącą za stosowaniem
-fingerprintingu w kontekście urządzeń podłączonych do Internetu oraz
-przeglądarek internetowych, wspominając o różnych innych obszarach przetwarzania
-komputerowego w których wykorzystywany jest fingerprinting w stosownych mu
-celach, kolejne punkty posłużą jako referencja (także historyczna).
+Aby lepiej zrozumieć istotę \emph{fingerprintu} i motywację stojącą za
+stosowaniem \emph{fingerprintingu} w kontekście urządzeń podłączonych do
+Internetu oraz przeglądarek internetowych, wspominając o różnych innych
+obszarach przetwarzania komputerowego w których wykorzystywany jest
+\emph{fingerprinting} w stosownych mu celach, kolejne punkty posłużą jako
+referencja (także historyczna).
 
 \subsection{Początki Internetu}
 Początek Internetu jaki znamy obecnie, to początek stworzonej w 1969 roku na
@@ -136,8 +140,8 @@ się ze współpracujących ze sobą 4 warstw:
 \end{enumerate}
 W najwyższej z warstw, czyli warstwie aplikacji działają takie usługi jak
 przeglądarka czy serwer WWW. To najbardziej interesująca warstwa z perspektywy
-niniejszej pracy, ale fingerprinting urządzeń podłączonych do Internetu może
-odbywać się także w niższych warstwach. % TODO Elaborate?
+niniejszej pracy, ale \emph{fingerprinting} urządzeń podłączonych do Internetu
+może odbywać się także w niższych warstwach. % TODO Elaborate?
 
 \subsection{Początki śledzenia użytkowników Internetu}
 Gwałtowny rozwój komercyjnego Internetu sprawił, że firmy zajmujące się reklamą
@@ -203,37 +207,37 @@ mechanizmy inteligentnego blokowania \emph{third-party cookies}. Powstało takż
 wiele rozszerzeń do przeglądarek, które pozwalają blokować niechciane cookies.
 
 \subsubsection{Inne techniki śledzenia użytkowników}
-Fingerprinting urządzeń podłączonych do Internetu i przeglądarek internetowych,
-to jedna ze zbioru wymyślnych technik, które zaczęto stosować ze względu na
-ułomność i/lub postępujące ograniczenia technik wykorzystujących na przykład
-adresy IP urządzeń i/lub cookies.
+\emph{Fingerprinting} urządzeń podłączonych do Internetu i przeglądarek
+internetowych, to jedna ze zbioru wymyślnych technik, które zaczęto stosować ze
+względu na ułomność i/lub postępujące ograniczenia technik wykorzystujących na
+przykład adresy IP urządzeń i/lub cookies.
 
 \section{Fingerprinting w branży komputerowej}
-Fingerprinting to technika wykorzystywana w wielu obszarach w dyscyplinie
-informatyki; fingerprinting urządzeń podłączonych do Internetu i przeglądarek
-internetowych to tylko pewien wycinek zastosowań tej koncepcji. O ile podane na
-początku tego rozdziału definicje ujmują fingerprint w sposób ogólny i także
-taki, który pokrywa się z definicjami, które można znaleźć w publikacjach
-dotyczących fingerprintingu urządzeń i przeglądarek, to definicje dotyczące
-zastosowań fingerprintu innych bytów mogą być bardziej specyficzne czy też mogą
-eksponować inne właściwości, charakterystyczne dla stosownych zastosowań.
-Kolejne punkty służą jako referencja do ukazania jak szeroko wykorzystywana jest
-omawiana koncepcja.
+\emph{Fingerprinting} to technika wykorzystywana w wielu obszarach w dyscyplinie
+informatyki; \emph{fingerprinting} urządzeń podłączonych do Internetu i
+przeglądarek internetowych to tylko pewien wycinek zastosowań tej koncepcji. O
+ile podane na początku tego rozdziału definicje ujmują \emph{fingerprint} w
+sposób ogólny i także taki, który pokrywa się z definicjami, które można znaleźć
+w publikacjach dotyczących \emph{fingerprintingu} urządzeń i przeglądarek, to
+definicje dotyczące zastosowań \emph{fingerprintu} innych bytów mogą być
+bardziej specyficzne czy też mogą eksponować inne właściwości, charakterystyczne
+dla stosownych zastosowań. Kolejne punkty służą jako referencja do ukazania jak
+szeroko wykorzystywana jest omawiana koncepcja.
 
 \subsection{Fingerprinting audio, wideo i algorytmy ACR}
-Metody fingerprintingu akustycznego i cyfrowych materiałów wideo, znane także
-jako algorytmy Automatic Content Recognition (ACR), powstały głównie ze względu
-na potrzebę kontroli treści umieszczanych w serwisach internetowych pod kątem
-potencjalnych naruszeń praw do wykorzystania. Algorytmy Automatic Content
-Recognition są sparametryzowane w podobny sposób, co algorytmy fingerprintingu
-urządzeń i przeglądarek, czyli istotny jest balans pomiędzy niepowtarzalnością a
-stabilnością fingerprintu. Klasyfikacja fingerprintu audio lub wideo musi
-działać w podobny sposób do zachowania ludzkiego moderatora, czyli w przypadku
-kiedy materiał jest nieodróżnialny dla ludzkiego ucha lub oka jako ten, wobec
-którego przeprowadzany jest proces rozpoznawania, to powinien on zostać
-oflagowany. Proces wykorzystywany przez algorytmy ACR określany jest mianem
-\emph{perceptual hashing}\footnote{Termin nie został przetłumaczony umyślnie, ze
-	względu na fakt, iż polskie nazewnictwo jest w tym przypadku raczej
-nieistniejące.}.
+Metody \emph{fingerprintingu} akustycznego i cyfrowych materiałów wideo, znane
+także jako algorytmy Automatic Content Recognition (ACR), powstały głównie ze
+względu na potrzebę kontroli treści umieszczanych w serwisach internetowych pod
+kątem potencjalnych naruszeń praw do wykorzystania. Algorytmy Automatic Content
+Recognition są sparametryzowane w podobny sposób, co algorytmy
+\emph{fingerprintingu} urządzeń i przeglądarek, czyli istotny jest balans
+pomiędzy niepowtarzalnością a stabilnością \emph{fingerprintu}. Klasyfikacja
+\emph{fingerprintu} audio lub wideo musi działać w podobny sposób do zachowania
+ludzkiego moderatora, czyli w przypadku kiedy materiał jest nieodróżnialny dla
+ludzkiego ucha lub oka jako ten, wobec którego przeprowadzany jest proces
+rozpoznawania, to powinien on zostać oflagowany. Proces wykorzystywany przez
+algorytmy ACR określany jest mianem \emph{perceptual hashing}\footnote{Termin
+	nie został przetłumaczony umyślnie, ze	względu na fakt, iż polskie
+nazewnictwo jest w tym przypadku raczej nieistniejące.}.
 
 \subsection{Fingerprinting klucza publicznego}
