@@ -217,7 +217,7 @@ przykład adresy IP urządzeń i/lub cookies.
 informatyki; \emph{fingerprinting} urządzeń podłączonych do Internetu i
 przeglądarek internetowych to tylko pewien wycinek zastosowań tej koncepcji. O
 ile podane na początku tego rozdziału definicje ujmują \emph{fingerprint} w
-sposób ogólny i także taki, który pokrywa się z definicjami, które można znaleźć
+sposób ogólny i także taki, który jest spójny z definicjami, które można znaleźć
 w publikacjach dotyczących \emph{fingerprintingu} urządzeń i przeglądarek, to
 definicje dotyczące zastosowań \emph{fingerprintu} innych bytów mogą być
 bardziej specyficzne czy też mogą eksponować inne właściwości, charakterystyczne
@@ -241,3 +241,14 @@ algorytmy ACR określany jest mianem \emph{perceptual hashing}\footnote{Termin
 nazewnictwo jest w tym przypadku raczej nieistniejące.}.
 
 \subsection{Fingerprinting klucza publicznego}
+W kryptografii klucza publicznego, w celach autoryzacji klucza publicznego
+pozyskanego w niezaufany sposób (np. ściągając go ze strony internetowej),
+poprzez zaufany kanał wymiany informacji (np. rozmowa telefoniczna), który nie
+pozwala na autoryzację całego klucza w efektywny sposób, stosuje się jego skrót,
+nazywany ,,fingerprintem klucza publicznego''. Wynik zastosowania odpowiedniej
+funkcji skrótu na kluczu publicznym jest na tyle kompaktowy, że pozwala na
+efektywną manualną autoryzację, czyli ręcznie przez człowieka. W celu ułatwienia
+wymiany \emph{fingerprintów} kluczy publicznych poprzez kanały głosowe powstała
+lista słów PGP, która analogicznie do alfabetu fonetycznego NATO asocjuje każdą
+kolejną porcję bitów \emph{fingerprintu} klucza z odpowiednim słowem w języku
+angielskim.
