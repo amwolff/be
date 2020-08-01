@@ -1,4 +1,4 @@
-\chapter{Wprowadzenie do fingerprintingu} % TODO Citations.
+\chapter{Wprowadzenie do fingerprintingu}
 
 \section{Podstawowe pojęcia}
 
@@ -16,8 +16,9 @@ ludzkich linii papilarnych w dziedzinie kryminalistyki).
 
 Angielskie słowo ,,fingerprint'' tłumaczy się jako odcisk palca, jednakże w
 zagranicznych publikacjach dotyczących cyfrowego odcisku palca rzadko występuje
-termin ,,digital fingerprint''. Kontekst użycia jest na tyle wyraźny, że użycie
-samego ,,fingerprint'' jest wystarczające.
+termin ,,digital fingerprint''. Jak piszą Flood i Karlsson
+\cite[s. 4]{flood2012browser}, kontekst użycia jest na tyle wyraźny, że użycie
+samego ,,fingerprint'' jest wyczerpujące.
 
 Zachodnie nazewnictwo ma tę przewagę, że jest zdecydowanie bardziej kompaktowe.
 Także w przypadku słowotwórczego zabiegu \emph{fingerprinting}, oznaczającego
@@ -26,8 +27,10 @@ znakowanie''. Z uwagi na tę kompaktowość i łatwość użycia, w pracy prefer
 będzie użycie oryginalnej nomenklatury.
 
 \subsection{Definicje}
-W kolejnych punktach zawarto najważniejsze definicje i powiązane pojęcia, które
-będą używane w przeciągu całej pracy.
+W kolejnych punktach zawarto najważniejsze definicje i powiązane pojęcia,
+analogiczne do tych obecnych w literaturze
+\cite{eckersley2010unique,flood2012browser}, które będą używane w przeciągu
+całej pracy.
 
 \subsubsection{Fingerprint}
 Wektor cech pozwalający zidentyfikować dowolny zbiór danych.
@@ -49,8 +52,8 @@ Wektor cech pozwalający zidentyfikować urządzenie podłączone do Internetu.
 
 \subsubsection{Instalacja przeglądarki internetowej}
 Instalacja na konkretnym urządzeniu. W przypadku zmiany ustawień, konfiguracji i
-liczby pluginów oraz aktualizacji przeglądarki, instalacja przeglądarki
-pozostaje ciągle tą samą instalacją.
+liczby pluginów / rozszerzeń oraz aktualizacji przeglądarki, instalacja
+przeglądarki pozostaje ciągle tą samą instalacją.
 
 \subsubsection{Fingerprint przeglądarki internetowej}
 Wektor cech pozwalający zidentyfikować instalację przeglądarki internetowej.
@@ -62,15 +65,13 @@ czerpie (także etymologicznie) koncepcja \emph{fingerprintu} i dlatego też
 \emph{fingerprint} z dobrze dobranymi cechami będzie odzwierciedlać podobne
 właściwości.
 
-W przypadku \emph{fingerprintingu} urządzeń podłączonych do Internetu i
-przeglądarek internetowych najważniejszymi ich właściwościami są unikalność /
-różnorodność (niepowtarzalność) oraz stabilność (niezmienność), przy czym
-zwiększenie unikalności lub stabilności ma najczęściej negatywny wpływ na drugi
-parametr.
+W przypadku \emph{fingerprintu} urządzeń podłączonych do Internetu i
+przeglądarek internetowych, najważniejszymi jego właściwościami są
+unikalność/różnorodność (niepowtarzalność) oraz stabilność (niezmienność), przy
+czym zwiększenie unikalności lub stabilności ma najczęściej negatywny wpływ na
+drugi parametr \cite[s. 11]{eckersley2010unique}.
 
-Jedną ze stosowanych\footnote{Metrykę tę stosowało na przykład badanie ,,How
-	Unique Is Your Web Browser?'' Electronic Frontier Foundation; w momencie
-pisania pracy jedno z największych badań tego typu.} metod pomiaru unikalności
+Jedną ze stosowanych \cite[s. 6]{eckersley2010unique} metod pomiaru unikalności
 \emph{fingerprintu} urządzeń i przeglądarek jest entropia Shannona.
 
 \subsubsection{Entropia Shannona}
@@ -109,29 +110,31 @@ referencja (także historyczna).
 
 \subsection{Początki Internetu}
 Początek Internetu jaki znamy obecnie, to początek stworzonej w 1969 roku na
-potrzeby amerykańskiego wojska sieci ARPANET. ARPANET była implementacją
-koncepcji rozproszonych sieci cyfrowych transmisji danych Paula Barana z 1962
-roku. Na samym początku swojego istnienia, Internet wykorzystywany był do tego
-aby rozpraszać obliczenia pomiędzy wiele komputerów---w tym wypadku chodziło o
-superkomputery znajdujące się w innych ośrodkach badawczych (ARPANET powstało na
-Uniwersytecie Kalifornijskim w Los Angeles). W tym samym okresie powstawały inne
-globalne sieci komputerowe, zapoczątkowane zwykle w innym celu (na przykład
-komunikacyjnym, rozrywkowym), które później połączono z ARPANET. Badacze
-historii Internetu wskazują na fakt, iż gwałtowny rozwój Internetu zawdzięcza
-się właśnie komunikacyjnemu i rozrywkowemu aspektowi konkurencyjnych sieci.
+potrzeby amerykańskiego wojska sieci ARPAnet. ARPAnet była implementacją
+niezależnych prac Paula Barana, Donalda Daviesa i Leonarda Kleinrocka z lat 60.
+XX wieku. Na samym początku swojego istnienia, Internet wykorzystywany był do
+tego aby rozpraszać obliczenia pomiędzy wiele komputerów---w tym wypadku
+chodziło o superkomputery znajdujące się w innych ośrodkach badawczych (ARPAnet
+powstało na Uniwersytecie Kalifornijskim w Los Angeles) \cite{press2015very}. W
+tym samym okresie powstawały inne globalne sieci komputerowe, zapoczątkowane
+zwykle w innym celu (na przykład komunikacyjnym, rozrywkowym), które później
+połączono z ARPAnet. Badacze historii Internetu wskazują na fakt, iż gwałtowny
+rozwój Internetu zawdzięcza się właśnie komunikacyjnemu i rozrywkowemu aspektowi
+konkurencyjnych sieci \cite{maigret2012socjologia}.
 
 \subsection{Założenia funkcjonowania Internetu i ich realizacja}
 Po tym jak w 1989 Tim Berners-Lee oraz Robert Cailliau utworzyli projekt sieci
 dokumentów hipertekstowych, czyli tego, co obecnie znamy jako World Wide Web i
 strony internetowe, osoby prywatne oraz instytucje komercyjne zaczęły dostrzegać
 korzyści z użytkowania Internetu, a szczególnie z wykorzystania go jako medium
-reklamy i sprzedaży. Zniesienie zakazu wykorzystywania Internetu do celów
-zarobkowych w 1991 roku zakończyło chwilę w której Internet był medium naukowego
-dyskursu i zapoczątkowało okres istnienia Internetu dla mas, który trwa do dziś.
+reklamy i sprzedaży \cite{press2015very}. Zniesienie zakazu wykorzystywania
+Internetu do celów zarobkowych w 1991 roku zakończyło chwilę w której Internet
+był medium naukowego dyskursu i zapoczątkowało okres istnienia Internetu dla
+mas, który trwa do dziś.
 
 \subsubsection{Perspektywa techniczna}
 Podstawą struktury obecnego Internetu jest model TCP/IP i koncepcyjnie składa
-się ze współpracujących ze sobą 4 warstw:
+się ze współpracujących ze sobą 4 warstw \cite{kahn1974protocol}:
 \begin{enumerate}
 	\item dostępu do sieci
 	\item kontroli transportu
@@ -161,11 +164,11 @@ miliarda\footnote{W rzeczywistości liczba adresów IP w wersji czwartej jest
 niższa.}. Internet dzisiaj, to wielomiliardowa społeczność, a liczba urządzeń
 podłączonych do Internetu zdecydowanie przewyższa wyżej wymienioną estymację.
 Już w 1992 roku zauważono, że w najbliższym czasie pula adresów IPv4 zostanie
-wyczerpana\footnote{RFC 1338}. W następnych latach proponowano kolejne
-rozwiązania (takie jak na przykład NAT\footnote{RFC 1631}), które implementowali
-dostawcy usług internetowych, pozwalając na łączenie się wielu urządzeń za
-pośrednictwem jednego, publicznego adresu IPv4. Wyczerpywanie się kolejnych pul
-adresów pokazuje Rys. 1.
+wyczerpana \cite{fuller1992supernetting}. W następnych latach proponowano
+kolejne rozwiązania (takie jak na przykład NAT \cite{egevang1994ip}), które
+implementowali dostawcy usług internetowych, pozwalając na łączenie się wielu
+urządzeń za pośrednictwem jednego, publicznego adresu IPv4. Wyczerpywanie się
+kolejnych pul adresów pokazuje Rys. 1.
 
 \begin{figure}
 	\includegraphics[width=\textwidth,keepaspectratio]{img/01}
@@ -179,7 +182,7 @@ identyfikować każde urządzenie podłączone do Internetu. W tym momencie wart
 także zaznaczyć, że o ile nowy standard IPv6 pozwalałby na taką identyfikację,
 to został on zaprojektowany z myślą o prywatności i posiada szereg rozszerzeń,
 które w przyszłości (kiedy Internet w pełni przejdzie na adresację w wersji
-szóstej) będą zapobiegać precyzyjnej identyfikacji.
+szóstej) mają zapobiegać precyzyjnej identyfikacji \cite{narten2001privacy}.
 
 \subsubsection{Cookies}
 Małe porcje informacji zapisywane na urządzeniu użytkownika, w obszarze pamięci
@@ -188,29 +191,37 @@ Powstały głównie ze względu na potrzebę poprawienia doświadczeń użytkown
 stronami internetowymi, tak aby zapamiętywać pewien stan, o znaczeniu dla danej
 sesji dla danego użytkownika (na przykład stan koszyka w sklepie internetowym).
 
-Cookies dzielą się na tak zwane \emph{first-party cookies} i \emph{third-party
-cookies}. O ile pierwsze z wymienionego podziału faktycznie desygnowane są do
-tego aby spełniać wymienioną funkcję, to \emph{third-party cookies} mogą być
-nadawane przez skrypty reklamowe (na przykład), umieszczone na serwującej je
-stronie, dzięki czemu użytkownik może być śledzony w kontekście całej sieci
-reklamowej. Ubogie mechanizmy kontroli cookies w przeglądarkach internetowych i
-obawy związane z naruszaniem prywatności użytkowników przez śledzenie
-wykorzystujące cookies, doprowadziły do powstania dyrektywy Unii Europejskiej
-dotyczącej obowiązku informacyjnego, która zawiera m.in. obowiązek informowania
-o polityce stosowania cookies. Doprowadziło to wcześniej także do powstania
-rozszerzeń w przeglądarkach, takich jak nagłówek Do Not Track i Tryb Prywatny,
-które w domyśle miały pomóc częściowo rozwiązać wspomniany problem.
+\emph{Cookies} dzielą się na tak zwane \emph{first-party cookies} i
+\emph{third-party cookies}. O ile pierwsze z wymienionego podziału faktycznie
+desygnowane są do tego aby spełniać wymienioną funkcję, to \emph{third-party
+cookies} mogą być nadawane przez (na przykład) skrypty reklamowe, umieszczone na
+serwującej je stronie, dzięki czemu użytkownik może być śledzony w kontekście
+całej sieci reklamowej. Ubogie mechanizmy kontroli \emph{cookies} w
+przeglądarkach internetowych i obawy związane z naruszaniem prywatności
+użytkowników przez śledzenie wykorzystujące \emph{cookies}, doprowadziły do
+powstania dyrektywy Unii Europejskiej dotyczącej obowiązku informacyjnego, która
+zawiera m.in. obowiązek informowania o polityce stosowania \emph{cookies}.
+Doprowadziło to wcześniej także do powstania rozszerzeń w przeglądarkach, takich
+jak nagłówek Do Not Track i Tryb Prywatny, które w domyśle miały pomóc częściowo
+rozwiązać wspomniany problem.
 
 Niektóre przeglądarki internetowe, takie jak Apple Safari (Intelligent Tracking
 Prevention silnika WebKit) lub Mozilla Firefox wykorzystują obecnie natywne
 mechanizmy inteligentnego blokowania \emph{third-party cookies}. Powstało także
-wiele rozszerzeń do przeglądarek, które pozwalają blokować niechciane cookies.
+wiele rozszerzeń do przeglądarek, które pozwalają blokować niechciane
+\emph{cookies}.
 
 \subsubsection{Inne techniki śledzenia użytkowników}
 \emph{Fingerprinting} urządzeń podłączonych do Internetu i przeglądarek
 internetowych, to jedna ze zbioru wymyślnych technik, które zaczęto stosować ze
 względu na ułomność i/lub postępujące ograniczenia technik wykorzystujących na
-przykład adresy IP urządzeń i/lub cookies.
+przykład adresy IP urządzeń i/lub \emph{cookies}. \emph{Fingeprinting}
+przeglądarek po raz pierwszy opisał Eckersley \cite{eckersley2010unique}, jako
+technikę, która pozwala serwerom sieciowym jednoznacznie zidentyfikować
+urządzenie użytkownika za pomocą informacji wysyłanych przez przeglądarkę
+internetową wtedy, kiedy te informacje są unikalne dla większości z nich,
+tworząc ich \emph{fingerprint}. O relacji urządzeń i przeglądarek pomiędzy ich
+użytkownikami traktuje 2.2.
 
 \section{Fingerprinting w branży komputerowej}
 \emph{Fingerprinting} to technika wykorzystywana w wielu obszarach w dyscyplinie
@@ -226,24 +237,23 @@ szeroko wykorzystywana jest omawiana koncepcja.
 
 \subsection{Fingerprinting audio, wideo i algorytmy ACR}
 Metody \emph{fingerprintingu} akustycznego i cyfrowych materiałów wideo, znane
-także jako algorytmy Automatic Content Recognition (ACR), powstały głównie ze
-względu na potrzebę kontroli treści umieszczanych w serwisach internetowych pod
-kątem potencjalnych naruszeń praw do wykorzystania. Algorytmy Automatic Content
-Recognition są sparametryzowane w podobny sposób, co algorytmy
-\emph{fingerprintingu} urządzeń i przeglądarek, czyli istotny jest balans
-pomiędzy niepowtarzalnością a stabilnością \emph{fingerprintu}. Klasyfikacja
-\emph{fingerprintu} audio lub wideo musi działać w podobny sposób do zachowania
-ludzkiego moderatora, czyli w przypadku kiedy materiał jest nieodróżnialny dla
-ludzkiego ucha lub oka jako ten, wobec którego przeprowadzany jest proces
-rozpoznawania, to powinien on zostać oflagowany. Proces wykorzystywany przez
-algorytmy ACR określany jest mianem \emph{perceptual hashing}\footnote{Termin
-	nie został przetłumaczony umyślnie, ze	względu na fakt, iż polskie
-nazewnictwo jest w tym przypadku raczej nieistniejące.}.
+także jako technologia Automatic Content Recognition (ACR), zostały
+zaprezentowane w 2012 podczas Consumer Electronics Show, pokazując, że
+urządzenia dostępne dla zwykłego konsumenta mogą być na tyle sprytne by
+wyszukiwać informacje w oparciu o kontekst \cite{ng2012brief}. Technologia ACR
+sparametryzowana jest w podobny sposób, co algorytmy \emph{fingerprintingu}
+urządzeń i przeglądarek, czyli istotny jest balans pomiędzy niepowtarzalnością a
+stabilnością \emph{fingerprintu}. Klasyfikacja \emph{fingerprintu} audio lub
+wideo musi działać w podobny sposób do zachowania ludzkiego moderatora, czyli w
+przypadku kiedy materiał jest nieodróżnialny dla ludzkiego ucha lub oka jako
+ten, wobec którego przeprowadzany jest proces rozpoznawania, to powinien on
+zostać oflagowany. Proces wykorzystywany przez technologię Automatic Content
+Recognition określany jest mianem \emph{perceptual hashing}.
 
 \subsection{Fingerprinting klucza publicznego}
 W kryptografii klucza publicznego, w celach autoryzacji klucza publicznego
 pozyskanego w niezaufany sposób (na przykład ściągając go ze strony
-internetowej), poprzez zaufany kanał wymiany informacji (np. rozmowa
+internetowej), poprzez zaufany kanał wymiany informacji (zwykle rozmowa
 telefoniczna), który nie pozwala na autoryzację całego klucza w efektywny
 sposób, stosuje się jego skrót, nazywany ,,fingerprintem klucza publicznego''.
 Wynik zastosowania odpowiedniej funkcji skrótu na kluczu publicznym jest na tyle
