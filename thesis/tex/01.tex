@@ -67,13 +67,13 @@ czerpie (także etymologicznie) koncepcja \emph{fingerprintu} i dlatego też
 właściwości.
 
 W przypadku \emph{fingerprintu} urządzeń podłączonych do Internetu i
-przeglądarek internetowych, najważniejszymi jego właściwościami są
-unikalność/różnorodność (niepowtarzalność) oraz stabilność (niezmienność), przy
-czym zwiększenie unikalności lub stabilności ma najczęściej negatywny wpływ na
-drugi parametr \cite[s. 11]{eckersley2010unique}.
+przeglądarek internetowych najważniejszymi jego właściwościami są unikalność /
+różnorodność (niepowtarzalność) oraz stabilność (niezmienność), przy czym
+zwiększenie unikalności lub stabilności ma najczęściej negatywny wpływ na drugi
+parametr \cite[s. 11]{eckersley2010unique}.
 
-Jedną ze stosowanych \cite[s. 6]{eckersley2010unique} metod pomiaru unikalności
-\emph{fingerprintu} urządzeń i przeglądarek jest entropia Shannona.
+Jedną ze stosowanych metod pomiaru unikalności \emph{fingerprintu} urządzeń i
+przeglądarek jest entropia Shannona \cite[s. 6]{eckersley2010unique}.
 
 \subsubsection{Entropia Shannona}
 Wartość entropii można rozumieć jako liczbę pytań binarnych potrzebnych do
@@ -81,25 +81,25 @@ sklasyfikowania losowo wybranego elementu z danego zbioru. Zatem entropia
 Shannona zbioru \(D\) z etykietami \(\{l_{0}, l_{1}, \dots, l_{n - 1}\}\) wyraża
 się wzorem \[H(D) = -{\sum_{i = 0}^{n - 1}{p(l_{i})\log_{2}{p(l_{i})}}}\] gdzie
 \(p(l_{i})\) to wyrażona ułamkiem częstość \(x \in D\) mającego etykietę
-\(l_{i}\). W przypadku w którym każda etykieta występuje tak samo często
+\(l_{i}\). W przypadku, w którym każda etykieta występuje tak samo często,
 entropia ma wartość maksymalną równą \(\log_{2}{n}\).
 
 \paragraph{Przykład}
 Jeśli zbiór \emph{fingerprintów} przeglądarek internetowych ma \(32\) bity
-entropii, to w przypadku losowego wyboru jednego z nich oczekujemy, że w
+entropii to w przypadku losowego wyboru jednego z nich oczekujemy, że w
 najlepszym przypadku tylko \(1\) na \(4294967295\) przeglądarek będzie miała
 taki sam \emph{fingerprint}.
 
 \subsubsection{Stabilność}
-W przypadku dodania kolejnej cechy do wektora cech, identyfikującego urządzenie
-lub przeglądarkę, zwykle zwiększy to entropię, ale także zmniejszy stabilność
+W przypadku dodania kolejnej cechy do wektora cech identyfikującego urządzenie
+lub przeglądarkę zwykle zwiększy to entropię, ale także zmniejszy stabilność
 \emph{fingerprintu}. Dzieje się tak, ponieważ jest to kolejna rzecz, która może
 zmienić się w czasie. Jeśli jedną z cech wejściowych jest wersja oprogramowania
 urządzenia lub wersja przeglądarki (która zwykle zmienia się parę razy w ciągu
-roku), to kolejne \emph{fingerprinty} mogą odbiegać od siebie i naiwny
-klasyfikator, korzystający z algorytmu reagującego na najmniejsze zmiany (na
-przykład funkcja skrótu), mógłby nadać takiemu urządzeniu/przeglądarce kolejną
-etykietę, zamiast potraktowania jej jako poprzednio widzianą instalację.
+roku) to kolejne \emph{fingerprinty} mogą odbiegać od siebie i naiwny
+klasyfikator korzystający z algorytmu reagującego na najmniejsze zmiany (na
+przykład funkcja skrótu) mógłby nadać takiemu urządzeniu/przeglądarce kolejną
+etykietę zamiast potraktowania jej jako poprzednio widzianą instalację.
 
 \section{Fingerprinting a Internet} % https://sjp.pwn.pl/poradnia/haslo/;228
 Aby lepiej zrozumieć istotę \emph{fingerprintu} i motywację stojącą za
