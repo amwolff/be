@@ -151,7 +151,7 @@ może odbywać się także w niższych warstwach. % TODO Elaborate?
 Gwałtowny rozwój komercyjnego Internetu sprawił, że firmy zajmujące się reklamą
 i sprzedażą w Internecie zaczęły także dostrzegać korzyści płynące z
 identyfikacji i śledzenia użytkowników Internetu. W szczególności zaczęto
-analizować aktywność i zachowanie użytkowników. Oprócz instytucji komercyjnych,
+analizować aktywność i zachowanie użytkowników. Oprócz instytucji komercyjnych
 identyfikacją i śledzeniem użytkowników zainteresowane są instytucje rządowe, co
 dobitnie pokazał wyciek poufnych, tajnych i ściśle tajnych dokumentów NSA w 2013
 roku. Metody identyfikacji, a zarazem śledzenia użytkowników zmieniały się w
@@ -160,17 +160,17 @@ czasie, wraz z rozwojem Internetu.
 \subsubsection{Adres IPv4}
 Adres IPv4 na początku istnienia Internetu był swego rodzaju globalnym
 identyfikatorem, dzięki któremu można było unikatowo identyfikować użytkowników
-Internetu. Adres IPv4 to \(32\) bitowy identyfikator. Prosta estymacja pozwala
-nam zauważyć, że adresów IP w wersji czwartej jest około \(4,3\)
-miliarda\footnote{W rzeczywistości liczba adresów IP w wersji czwartej jest
-niższa.}. Internet dzisiaj, to wielomiliardowa społeczność, a liczba urządzeń
-podłączonych do Internetu zdecydowanie przewyższa wyżej wymienioną estymację.
-Już w 1992 roku zauważono, że w najbliższym czasie pula adresów IPv4 zostanie
-wyczerpana \cite{fuller1992supernetting}. W następnych latach proponowano
-kolejne rozwiązania (takie jak na przykład NAT \cite{egevang1994ip}), które
-implementowali dostawcy usług internetowych, pozwalając na łączenie się wielu
-urządzeń za pośrednictwem jednego, publicznego adresu IPv4. Wyczerpywanie się
-kolejnych pul adresów pokazuje Rys. 1.
+Internetu. Adres IPv4 to 32-bitowy identyfikator. Prosta estymacja pozwala nam
+zauważyć, że adresów IP w wersji czwartej jest około \(4,3\) miliarda\footnote{W
+	rzeczywistości liczba dostępnych adresów jest niższa:
+https://stackoverflow.com/a/2437185}. Internet dzisiaj to wielomiliardowa
+społeczność, a liczba urządzeń podłączonych do Internetu zdecydowanie przewyższa
+wyżej wymienioną estymację. Już w 1992 roku zauważono, że w najbliższym czasie
+pula adresów IPv4 zostanie wyczerpana \cite{fuller1992supernetting}. W
+następnych latach proponowano kolejne rozwiązania (takie jak na przykład NAT
+\cite{egevang1994ip}), które implementowali dostawcy usług internetowych,
+pozwalając na łączenie się wielu urządzeń za pośrednictwem jednego, publicznego
+adresu IPv4. Wyczerpywanie się kolejnych pul adresów pokazuje Rys. 1.
 
 \begin{figure}
 	\includegraphics[width=\textwidth,keepaspectratio]{img/01}
@@ -187,20 +187,20 @@ które w przyszłości (kiedy Internet w pełni przejdzie na adresację w wersji
 szóstej) mają zapobiegać precyzyjnej identyfikacji \cite{narten2001privacy}.
 
 \subsubsection{Cookies}
-Małe porcje informacji zapisywane na urządzeniu użytkownika, w obszarze pamięci
-trwałej przeglądarki, po interakcji ze stroną internetową, która je zapisuje.
+Małe porcje informacji zapisywane na urządzeniu użytkownika w obszarze pamięci
+trwałej przeglądarki po interakcji ze stroną internetową, która je zapisuje.
 Powstały głównie ze względu na potrzebę poprawienia doświadczeń użytkowników ze
-stronami internetowymi, tak aby zapamiętywać pewien stan, o znaczeniu dla danej
+stronami internetowymi tak, aby zapamiętywać pewien stan o znaczeniu dla danej
 sesji dla danego użytkownika (na przykład stan koszyka w sklepie internetowym).
 
 \emph{Cookies} dzielą się na tak zwane \emph{first-party cookies} i
 \emph{third-party cookies}. O ile pierwsze z wymienionego podziału faktycznie
-desygnowane są do tego aby spełniać wymienioną funkcję, to \emph{third-party
-cookies} mogą być nadawane przez (na przykład) skrypty reklamowe, umieszczone na
+desygnowane są do tego, aby spełniać wymienioną funkcję, to \emph{third-party
+cookies} mogą być nadawane przez (na przykład) skrypty reklamowe umieszczone na
 serwującej je stronie, dzięki czemu użytkownik może być śledzony w kontekście
 całej sieci reklamowej. Ubogie mechanizmy kontroli \emph{cookies} w
 przeglądarkach internetowych i obawy związane z naruszaniem prywatności
-użytkowników przez śledzenie wykorzystujące \emph{cookies}, doprowadziły do
+użytkowników przez śledzenie wykorzystujące \emph{cookies} doprowadziły do
 powstania dyrektywy Unii Europejskiej dotyczącej obowiązku informacyjnego, która
 zawiera m.in. obowiązek informowania o polityce stosowania \emph{cookies}.
 Doprowadziło to wcześniej także do powstania rozszerzeń w przeglądarkach, takich
@@ -208,22 +208,22 @@ jak nagłówek Do Not Track i Tryb Prywatny, które w domyśle miały pomóc cz�
 rozwiązać wspomniany problem.
 
 Niektóre przeglądarki internetowe, takie jak Apple Safari (Intelligent Tracking
-Prevention silnika WebKit) lub Mozilla Firefox wykorzystują obecnie natywne
+Prevention silnika WebKit) lub Mozilla Firefox, wykorzystują obecnie natywne
 mechanizmy inteligentnego blokowania \emph{third-party cookies}. Powstało także
 wiele rozszerzeń do przeglądarek, które pozwalają blokować niechciane
 \emph{cookies}.
 
 \subsubsection{Inne metody identyfikacji użytkowników}
 \emph{Fingerprinting} urządzeń podłączonych do Internetu i przeglądarek
-internetowych, to jedna ze zbioru wymyślnych technik, które zaczęto stosować ze
-względu na ułomność i/lub postępujące ograniczenia metod wykorzystujących na
-przykład adresy IP urządzeń i/lub \emph{cookies}. \emph{Fingerprinting}
-przeglądarek po raz pierwszy opisał Eckersley \cite{eckersley2010unique}, jako
-technikę, która pozwala serwerom WWW jednoznacznie zidentyfikować urządzenie
-użytkownika za pomocą informacji wysyłanych przez przeglądarkę internetową
-wtedy, kiedy te informacje są unikalne dla większości z nich, tworząc ich
-\emph{fingerprint}. O relacji urządzeń i przeglądarek pomiędzy ich użytkownikami
-traktuje 2.2.
+internetowych to jedna ze zbioru wymyślnych technik, które zaczęto stosować ze
+względu na ułomność lub postępujące ograniczenia metod wykorzystujących na
+przykład adresy IP urządzeń, lub \emph{cookies}. \emph{Fingerprinting}
+przeglądarek po raz pierwszy opisał Eckersley jako technikę, która pozwala
+serwerom WWW jednoznacznie zidentyfikować urządzenie użytkownika za pomocą
+informacji wysyłanych przez przeglądarkę internetową, wtedy kiedy te informacje
+są unikalne dla większości z nich, tworząc ich \emph{fingerprint}
+\cite{eckersley2010unique}. Relację urządzeń i przeglądarek pomiędzy ich
+użytkownikami opisuje 2.2.
 
 \section{Fingerprinting w branży komputerowej}
 \emph{Fingerprinting} to technika wykorzystywana w wielu obszarach w dyscyplinie
