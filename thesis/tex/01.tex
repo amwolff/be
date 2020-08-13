@@ -16,9 +16,9 @@ ludzkich linii papilarnych w dziedzinie kryminalistyki).
 
 Angielskie słowo ,,fingerprint'' tłumaczy się jako odcisk palca, jednakże w
 zagranicznych publikacjach dotyczących cyfrowego odcisku palca rzadko występuje
-termin ,,digital fingerprint''. Jak piszą Flood i Karlsson
-\cite[s. 4]{flood2012browser}, kontekst użycia jest na tyle wyraźny, że użycie
-samego ,,fingerprint'' jest wyczerpujące.
+termin ,,digital fingerprint''. Jak piszą Flood i Karlsson \cite[s.
+4]{flood2012browser}, kontekst użycia jest na tyle wyraźny, że użycie samego
+,,fingerprint'' jest wyczerpujące.
 
 Zachodnie nazewnictwo ma tę przewagę, że jest zdecydowanie bardziej kompaktowe.
 Także w przypadku słowotwórczego zabiegu \emph{fingerprinting} oznaczającego
@@ -35,18 +35,17 @@ całej pracy.
 \subsubsection{Fingerprint}
 Wektor cech pozwalający zidentyfikować dowolny zbiór danych.
 
-Aby \emph{fingerprint} pełnił praktyczną funkcję identyfikacyjną tak jak odbitka
-ludzkich linii papilarnych pełni praktyczną funkcję identyfikacyjną, często
-stosuje się algorytm, który kojarzy wektor cech z określonej długości (zwykle
-krótkim) ciągiem bajtów (identyfikatorem; można go także rozumieć jako
+Aby \emph{fingerprint} pełnił praktyczną funkcję identyfikacyjną, tak jak
+odbitka ludzkich linii papilarnych pełni praktyczną funkcję identyfikacyjną,
+często stosuje się algorytm, który kojarzy wektor cech z określonej długości
+(zwykle krótkim) ciągiem bajtów (identyfikatorem; można go także rozumieć jako
 etykieta). Takim algorytmem może być na przykład wysokiej wydajności funkcja
 skrótu (niekoniecznie zdatna do zastosowań kryptograficznych---na przykład
 MurmurHash). W niektórych źródłach można także spotkać się z taką definicją, że
-\emph{fingerprint} to już sam wynik wyżej wspomnianego algorytmu
-\cite[s. 123--132]{wu2018beauty}. Taka definicja nie zmienia istoty
-\emph{fingerprintu}, ale jest zdecydowanie mniej przydatna w kontekście
-\emph{fingerprintingu} urządzeń podłączonych do Internetu i przeglądarek
-internetowych.
+\emph{fingerprint} to już sam wynik wyżej wspomnianego algorytmu \cite[s.
+123--132]{wu2018beauty}. Taka definicja nie zmienia istoty \emph{fingerprintu},
+ale jest zdecydowanie mniej przydatna w kontekście \emph{fingerprintingu}
+urządzeń podłączonych do Internetu i przeglądarek internetowych.
 
 \subsubsection{Fingerprint urządzenia podłączonego do Internetu}
 Wektor cech pozwalający zidentyfikować urządzenie podłączone do Internetu.
@@ -85,8 +84,8 @@ się wzorem \[H(D) = -{\sum_{i = 0}^{n - 1}{p(l_{i})\log_{2}{p(l_{i})}}}\] gdzie
 entropia ma wartość maksymalną równą \(\log_{2}{n}\).
 
 \paragraph{Przykład}
-Jeśli zbiór \emph{fingerprintów} przeglądarek internetowych ma \(32\) bity
-entropii to w przypadku losowego wyboru jednego z nich oczekujemy, że w
+Jeśli zbiór \emph{fingerprintów} przeglądarek internetowych posiada \(32\) bity
+entropii, to w przypadku losowego wyboru jednego z nich oczekujemy, że w
 najlepszym przypadku tylko \(1\) na \(4294967295\) przeglądarek będzie miała
 taki sam \emph{fingerprint}.
 
@@ -155,7 +154,7 @@ analizować aktywność i zachowanie użytkowników. Oprócz instytucji komercyj
 identyfikacją i śledzeniem użytkowników zainteresowane są instytucje rządowe, co
 dobitnie pokazał wyciek poufnych, tajnych i ściśle tajnych dokumentów NSA w 2013
 roku. Metody identyfikacji, a zarazem śledzenia użytkowników zmieniały się w
-czasie, wraz z rozwojem Internetu.
+czasie wraz z rozwojem Internetu.
 
 \subsubsection{Adres IPv4}
 Adres IPv4 na początku istnienia Internetu był swego rodzaju globalnym
