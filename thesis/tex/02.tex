@@ -110,14 +110,40 @@ ich niedługa lista prezentowałaby się następująco:
 \begin{itemize}
 	\item Użycie \emph{cookies} (w szczególności \emph{third-party cookies});
 	\item Użycie \emph{supercookies};
-	\item Użycie \emph{fingeprintingu}.
+	\item Użycie \emph{fingerprintingu}.
 \end{itemize}
 
 Oczywiście nic nie stoi na przeszkodzie, aby każda z tych metod była używana w
 połączeniu z innymi.
 
 \section{Zagrożenia związane z fingerprintingiem}
+Al-Fannah i Mitchell \cite[s. 1]{al2020too} konstatują, że identyfikacja za
+pomocą \emph{fingerprintingu} jest znacznie trwalsza niż ta bazująca na
+\emph{cookies}, praktycznie bez możliwości kontroli przez użytkowników i
+nietrywialna do wykrycia. Istnieją zatem przynajmniej trzy powody, dla których
+\emph{fingerprinting} stanowi istotnie większe zagrożenie dla prywatności
+użytkowników (większe niż wszystkie dotychczasowe):
+\begin{itemize}
+	\item Na tę chwilę nie są znane proste sposoby, aby z całkowitą pewnością
+	      wykryć, że dana platforma lub strona internetowa używa
+	      \emph{fingerprintingu};
+	\item Użytkownicy mogą kontrolować moc śledzenia za pomocą \emph{cookies},
+	      regularnie usuwając je lub całkowicie blokując. Jak zostało
+	      nadmienione wcześniej, istnieją także regulacje prawne dotyczące
+	      użycia \emph{cookies}. Nie ma jednak żadnych porównywalnych, równie
+	      prostych do użycia technik kontroli \emph{fingerprintingu};
+	\item \emph{Fingerprinting} (w przeciwieństwie do \emph{cookies}) nie polega
+	      na jednej, konkretnej właściwości HTTP. \emph{Fingerprinting} bazuje
+	      na wielu technologiach, aby zbierać różne informacje o właściwościach
+	      i konfiguracji przeglądarki lub systemu operacyjnego. Każda z tych
+	      informacji to szansa, aby zastosować \emph{fingerprinting}.
+\end{itemize}
 
-\section{Możliwości ochrony prywatności}
+Co więcej, \emph{fingerprinting} może być użyty do tworzenia
+\emph{supercookies}, czyli specjalnych \emph{cookies}, które po usunięciu mogą
+zostać ponownie utworzone, jeśli ta sama przeglądarka zostanie wykryta przez
+użycie \emph{fingerprintingu} \cite[s. 2]{al2020too}.
+
+\section{Możliwości ochrony przed fingerprintingiem}
 
 \section{Pozytywne aspekty fingerprintingu}
