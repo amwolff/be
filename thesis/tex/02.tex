@@ -64,8 +64,7 @@ dziedzinie bezpieczeństwa komputerowego podsumowuje, że zbyt wiele osób myśl
 tym argumencie jak o wyborze pomiędzy bezpieczeństwem a prywatnością.
 ,,Prawdziwym wyborem jest wybór pomiędzy wolnością a kontrolą''
 \cite{schneier2006eternal}. Prawo do prywatności zawiera się w Powszechnej
-Deklaracji Praw
-Człowieka\footnote{https://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=pql}.
+Deklaracji Praw Człowieka \cite{united1949universal}.
 
 \section{Metody identyfikacji użytkowników}
 Tak ja zauważono wcześniej w niniejszej pracy---wraz z komercjalizacją Internetu
@@ -145,5 +144,45 @@ zostać ponownie utworzone, jeśli ta sama przeglądarka zostanie wykryta przez
 użycie \emph{fingerprintingu} \cite[s. 2]{al2020too}.
 
 \section{Możliwości ochrony przed fingerprintingiem}
+Autorzy monografii dotyczącej metod kontroli i ochrony przed
+\emph{fingerprintingiem} wyróżniają dwa typy rozwiązań ochrony przed
+\emph{fingerprintingiem}: możliwe do zastosowania przez użytkowników i takie,
+które powinny zostać zaimplementowane przez autorów oprogramowania
+\cite{al2020too}.
+
+\subsection{Perspektywa użytkownika}
+Kontrola i ochrona, którą mogą zastosować użytkownicy to wybór przeglądarki i
+jej konfiguracja (np. Firefox posiada pewne ustawienia dotyczące ograniczania
+\emph{fingerprintingu}---Rys. 2) lub instalacja dodatkowych rozszerzeń, które
+blokują lub ograniczają \emph{fingerprinting}, blokując JavaScript, fałszując
+atrybuty lub blokując przesyłanie ich zawartości. Niestety każdy z wymienionych
+sposobów wiąże się obecnie z istotną degradacją jakości przeglądania Internetu.
+Przy wyborze aktualnie prawdopodobnie najbardziej skupionej na prywatności
+przeglądarki Tor możemy spotkać się z wieloma ostrzeżeniami. Jest to na przykład
+prośba o niemaksymalizowanie okna przeglądania, aby zapobiec efektywnemu
+używaniu atrybutu rozdzielczości ekranu podczas ewentualnego
+\emph{fingerprintingu}. Używając wyżej wymienionych sposobów, musimy także
+liczyć się z tym, że wiele stron internetowych może po prostu przestać działać.
+Niektóre z rozszerzeń, chociaż często ograniczonych przez to na jak wiele
+pozwalają autorzy oprogramowania, mogą paradoksalnie przyczynić się do
+dokładniejszego \emph{fingerprintingu}. Omawiany \emph{fingerprintability
+	paradox} nazywa sytuację, w której próby ograniczenia \emph{fingerprintingu}
+nieintencjonalnie tworzą nowe źródło danych, których można użyć w trakcie
+\emph{fingerprintingu}. Problem widoczny jest szczególnie, wtedy kiedy danego
+rozszerzenia używa niewielu użytkowników. Niektóre z rozszerzeń mogą także
+fałszować atrybuty w taki sposób, że są one bardzo rzadkie lub wręcz
+nierealistyczne. Taka sytuacja sprzyja unikalnej identyfikacji. Paradoks był
+szeroko omawiany w środowisku naukowym \cite{eckersley2010unique,torres2015fp}.
+Autorzy monografii podkreślają też, że nie ma obecnie żadnych poważnych badań
+dotyczących efektywności istniejących rozszerzeń mających zapobiegać przed
+\emph{fingerprintingiem}.
+
+\begin{figure}
+	\includegraphics[width=\textwidth,keepaspectratio]{img/02}
+	\source{about:config}
+	\caption{Opcje blokujące/ograniczające \emph{fingerprinting} w Firefox 79.0}
+\end{figure}
+
+\subsection{Perspektywa twórców oprogramowania}
 
 \section{Pozytywne aspekty fingerprintingu}
