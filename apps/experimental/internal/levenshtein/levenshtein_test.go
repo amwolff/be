@@ -2,7 +2,12 @@ package levenshtein
 
 import (
 	"fmt"
+	"math"
+	"math/rand"
+	"strings"
 	"testing"
+	"time"
+	"unicode"
 )
 
 func Test_min(t *testing.T) {
@@ -124,4 +129,42 @@ func TestLevenshtein(t *testing.T) {
 			})
 		}
 	})
+}
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+func randomString(n int) string {
+	var b strings.Builder
+
+	for i := 0; i < n; i++ {
+		b.WriteRune(rand.Int31n(unicode.MaxRune + 1))
+	}
+
+	return b.String()
+}
+
+const fast = true
+
+func TestFuzzyLevenshtein(t *testing.T) {
+	if fast {
+		t.Skip()
+	}
+	for i := 0; i < math.MaxUint16; i++ {
+		t.Logf("i = %d", i)
+		s1, s2 := randomString(i), randomString(i)
+		if LinearSpace(s1, s2) != WagnerFischer(s1, s2) {
+			t.Errorf("LS(%s, %s) != WF(%s, %s)", s1, s2, s1, s2)
+		}
+		if LinearSpace(s1, s2) != WagnerFischer(s2, s1) {
+			t.Errorf("LS(%s, %s) != WF(%s, %s)", s1, s2, s2, s1)
+		}
+		if LinearSpace(s2, s1) != WagnerFischer(s1, s2) {
+			t.Errorf("LS(%s, %s) != WF(%s, %s)", s2, s1, s1, s2)
+		}
+		if LinearSpace(s2, s1) != WagnerFischer(s2, s1) {
+			t.Errorf("LS(%s, %s) != WF(%s, %s)", s2, s1, s2, s1)
+		}
+	}
 }
