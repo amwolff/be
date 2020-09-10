@@ -153,7 +153,7 @@ func TestFuzzyLevenshtein(t *testing.T) {
 	}
 	for i := 0; i < math.MaxUint16; i++ {
 		t.Logf("i = %d", i)
-		s1, s2 := randomString(i), randomString(i)
+		s1, s2 := randomString(i-rand.Intn(i+1)), randomString(i-rand.Intn(i+1))
 		if LinearSpace(s1, s2) != WagnerFischer(s1, s2) {
 			t.Errorf("LS(%s, %s) != WF(%s, %s)", s1, s2, s1, s2)
 		}
@@ -167,4 +167,24 @@ func TestFuzzyLevenshtein(t *testing.T) {
 			t.Errorf("LS(%s, %s) != WF(%s, %s)", s2, s1, s2, s1)
 		}
 	}
+}
+
+var s1e3, t1e3 = randomString(1e3), randomString(1e3)
+
+var result int
+
+func BenchmarkLinearSpace(b *testing.B) {
+	var r int
+	for i := 0; i < b.N; i++ {
+		r = LinearSpace(s1e3, t1e3)
+	}
+	result = r
+}
+
+func BenchmarkWagnerFischer(b *testing.B) {
+	var r int
+	for i := 0; i < b.N; i++ {
+		r = WagnerFischer(s1e3, t1e3)
+	}
+	result = r
 }
