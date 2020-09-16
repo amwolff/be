@@ -29,6 +29,47 @@ kolejności warstw modelu TCP/IP zaczynając od warstwy dostępu do sieci):
 \end{enumerate}
 
 \section{Fingerprinting implementacji stosu TCP/IP}
+Jedną z ciekawych właściwości różnic w implementacjach stosu TCP/IP jest fakt,
+iż ruch sieciowy z komputera ofiary może być analizowany w celu wykrycia,
+jakiego systemu operacyjnego używa (na przykład). Powodem tej sytuacji jest
+przeniesienie odpowiedzialności o ustaleniu wartości pewnych parametrów
+protokołów TCP i IP na stronę zajmującą się implementacją. Różne wersje tego
+samego systemu operacyjnego i różne systemy operacyjne używają różnych wartości
+tych parametrów. Może pozwalać to na unikalną identyfikację lub chociaż
+oszacowanie jakiego typu technologią jest druga strona połączenia.
+
+% Initial packet size (16 bits); Initial TTL (8 bits); Window size (16 bits);
+% Max segment size (16 bits); Window scaling value (8 bits); "don't fragment"
+% flag (1 bit); "sackOK" flag (1 bit); "nop" flag (1 bit).
+
+Parametry, które mogą różnić się pomiędzy implementacjami stosu TCP/IP to między
+innymi:
+\begin{itemize}
+	\item początkowy rozmiar pakietu;
+	\item początkowy TTL;
+	\item szerokość okna;
+	\item maksymalna długość segmentu;
+	\item wartość progowa, po której okno zaczyna być skalowane;
+	\item flagi \emph{don't fragment}, \emph{sackOK} i \emph{nop}.
+\end{itemize}
+Sumaryczna ilość informacji, które dają wymienione parametry to 67 bitów.
+Natomiast Hjelmvik \cite{hjelmvik2011passive} pokazuje, że jedynie nawet
+początkowy TTL i szerokość okna wystarczają, aby rozpoznać system operacyjny, z
+którego pochodzi analizowany ruch sieciowy (Rys. 3).
+
+\begin{figure}
+	\includegraphics[width=\textwidth,keepaspectratio]{img/03}
+	\source{\cite{hjelmvik2011passive}}
+	\caption{Różnice w początkowym TTL i szerokości okna pomiędzy systemami}
+\end{figure}
+
+\subsection{Opis algorytmu}
+O ile analiza ruchu sieciowego i wydobywanie odpowiednich parametrów jest
+relatywnie bezpośrednie w przypadku większości z nich, to pewnym problemem jest
+początkowa wartość TTL. W przypadku tego parametru host wysyłający pakiet ustawi
+wartość równą domyślnej dla danego systemu operacyjnego, ale będzie ona
+pomniejszana o jeden dla każdego routera na drodze do hostu docelowego. Zatem
+początkową wartością TTL będzie zaobserwowany TTL plus liczba skoków.
 
 % \section{Źródła danych identyfikacyjnych urządzeń}
 
