@@ -116,20 +116,55 @@ Zbieranie powyższych danych zostanie szczegółowo omówione w niniejszym
 rozdziale.
 
 \subsection{Canvas fingerprinting}
-\emph{Fingerprinting} elementu \texttt{canvas} (HTML5) to technika
-\emph{fingerprintingu}, która polega na prawidłowości tego, że przeglądarki
-internetowe to aktualnie jedne z najbardziej skomplikowanych programów
-komputerowych. Ściślejsze powiązanie przeglądarki z funkcjonalnością systemu
-operacyjnego i podzespołami komputerowymi oznacza, że strony internetowe mają
-większy dostęp do tych zasobów, a zachowanie przeglądarki internetowej różni się
-w zależności od zachowania tych zasobów \cite[s. 1]{mowery2012pixel}. Pewnym
-naturalnym schematem, aby zaimplementować niektóre zaawansowane funkcjonalności
+Przeglądarki internetowe są coraz bardziej skomplikowanymi programami
+komputerowymi i coraz częściej udostępniają stronom internetowym funkcjonalności
+do tej pory oferowane jedynie przez system operacyjny. Pewnym naturalnym
+schematem, aby zaimplementować niektóre zaawansowane funkcjonalności
 przeglądarek, jest korzystanie z zasobów systemowych i sprzętowych hosta. Na
-przykład rysowanie w elemencie \texttt{canvas} używając karty graficznej, daje
-ogromny skok wydajnościowy i choćby większą oszczędność baterii w przypadku
-urządzeń mobilnych.
+przykład przetwarzanie grafiki używając karty graficznej, daje ogromny skok
+wydajnościowy i bardziej oszczędza baterię w przypadku urządzeń mobilnych. Nie
+inaczej jest w przypadku elementu \texttt{canvas}. HTML5 zawiera w sobie
+element, na którym można programowo rysować, a użycie natywnych mechanizmów
+systemu operacyjnego \emph{renderingu} czcionek do tekstu (na
+przykład\footnote{Oczywiście element \texttt{canvas} pozwala na rysowanie
+	praktycznie dowolnych rzeczy (obiektów):
+	https://developer.mozilla.org/pl/docs/Web/API/Canvas\_API/Tutorial})
+gwarantuje, że rezultat będzie zoptymalizowany pod kątem wyświetlania na
+konkretnym ekranie i zgodny z oczekiwaniami użytkownika. Ściślejsze powiązanie
+przeglądarki internetowej z funkcjonalnością systemu operacyjnego i samym
+sprzętem oznacza, że strony internetowe mają większy dostęp do tych zasobów, a
+zachowanie przeglądarki różni się w zależności od zachowania tych zasobów
+\cite[s. 1]{mowery2012pixel}. Trudno wyobrazić sobie liczbę warstw abstrakcji od
+samego sprzętu, przez sterowniki urządzeń i system operacyjny, aż po wyświetlany
+efekt na ekranie użytkownika. Im dalej wgłąb tego stosu, tym więcej nieścisłości
+uwypukli się, rozważając różne konfiguracje sprzętowe, systemy operacyjne i
+przeglądarki internetowe. Z tej prawidłowości został wcześniej w niniejszej
+pracy wyciągnięty wniosek, że \emph{fingerprint} urządzenia może zawierać się w
+\emph{fingerprincie} przeglądarki.
+
+Analogiczną techniką jest \emph{fingerprinting} WebGL, która także polega na
+rysowaniu w elemencie \texttt{canvas} (scen trójwymiarowych).
 
 \subsubsection{Historia}
+W 2012 roku Keaton Rowery i Hovav Schacham z Uniwersytetu Kalifornijskiego w San
+Diego opublikowali artykuł ,,Pixel Perfect: Fingerprinting Canvas in HTML5''
+\cite{mowery2012pixel}, który jako pierwszy poruszył temat Canvas
+fingerprintingu. Autorzy określili wówczas tę technikę jako deterministyczną, o
+wysokiej entropii, niezależną od innych technik, transparentną (niezauważalną)
+dla użytkownika i prostą do zastosowania \cite[s. 1]{mowery2012pixel}.
+Podsumowują, że wszystkie nowe możliwości przeglądarek internetowych mają swój
+koszt \cite[s. 3]{mowery2012pixel}. Ich eksperymenty polegały głównie na
+rysowaniu tekstu w elemencie \texttt{canvas} i pokazały, że co najmniej używany
+system operacyjny, wersja przeglądarki, karta graficzna, zainstalowane czcionki,
+hinting czcionek na poziomie subpiksela, antyaliasing, a nawet konkretne
+ułożenie pikseli na fizycznym ekranie (coś, co mogą brać pod uwagę takie
+technologie jak ClearType) grają role w generowaniu bitmapy z elementu
+\texttt{canvas}. Nawet czcionka Arial, która ma ponad 30 lat renderowała się
+,,na nowe i interesujące sposoby'' w eksperymentach \cite[s.
+6]{mowery2012pixel}. Canvas fingerprinting rozgłos zdobył jednak dopiero po
+publikacji ,,The Web Never Forgets: Persistent Tracking Mechanisms in the Wild’’
+z 2014 roku \cite{acar2014web}. Wtedy o Canvas fingerprintingu pisały wszystkie
+największe media na świecie.
 
 \subsubsection{Algorytm}
 
