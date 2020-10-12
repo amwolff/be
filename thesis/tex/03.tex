@@ -170,9 +170,32 @@ publikacji ,,The Web Never Forgets: Persistent Tracking Mechanisms in the Wild�
 z 2014 roku \cite{acar2014web}. Wtedy o Canvas fingerprintingu pisały wszystkie
 największe media na świecie.
 
-\subsubsection{Algorytm}
+\subsubsection{Pseudokod}
+\begin{algorithm}[H]
+	\SetAlgoVlined
+	\SetAlgoCaptionSeparator{.}
+	\SetKwInOut{Input}{Dane}
+	\SetKwInOut{Output}{Wynik}
+	\SetKwData{Canvas}{canvas}
+	\SetKwData{Ctx}{ctx}
+	\SetKwData{TwoD}{2d}
+	\BlankLine
+	\Input{Element \Canvas}
+	\Output{Reprezentacja graficzna elementu \Canvas}
+	\BlankLine
+	\If{przeglądarka obsługuje wybranie kontekstu graficznego}{
+		\Ctx $\leftarrow$ jeden z kontekstów graficznych, np. \TwoD\;
+		\tcp{użycie \Ctx, aby wpłynąć na element \Canvas}
+		\If{przeglądarka obsługuje pakowanie elementu \Canvas}{
+			\Return{reprezentacja elementu \Canvas}\;
+		}
+		\Return{informacja o braku możliwości wykonania algorytmu}\;
+	}
+	\Return{informacja o braku możliwości wykonania algorytmu}\;
+	\caption{Canvas fingerprinting}
+\end{algorithm}
 
-\subsubsection{Algorytm (implementacja w JavaScript)}
+\subsubsection{Implementacja w JavaScript}
 
 \subsection{Audio fingerprinting}
 
