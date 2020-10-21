@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas fingerprinting implementation</title>
+</head>
+<body>
+<script type="text/javascript">
+    'use strict';
+
+    const font = '18pt Arial';
+    const textBaseline = 'top';
+    const text = 'いろはにほへと　ちりぬるを　わかよたれそ　つねならむ　うゐのおくやま　け' +
+        'ふこえて　あさきゆめみし　ゑひもせす 色は匂へど　散りぬるを　我が世誰ぞ　常ならむ　' +
+        '有為の奥山　今日越えて　浅き夢見じ　酔ひもせず（ん）.';
+
+    const canvas = document.createElement("canvas");
+
+    const ctx = canvas.getContext('2d');
+    if (ctx === null) {
+        throw new Error("Canvas fingerprinting failed!");
+    }
+
+    ctx.font = font;
+    ctx.textBaseline = textBaseline;
+
+    canvas.width = Math.ceil(ctx.measureText(text).width) + 3;
+
+    ctx.font = font;
+    ctx.textBaseline = textBaseline;
+    ctx.fillText(text, 3, 3);
+
+    document.body.appendChild(canvas);
+
+    console.info(canvas.toDataURL());
+</script>
+</body>
+</html>
