@@ -196,6 +196,41 @@ największe media na świecie.
 \end{algorithm}
 
 \subsubsection{Implementacja w JavaScript}
+Implementacja 1 prezentuje implementację Canvas fingerprintingu w JavaScript.
+Różnice w wynikach na wykonania świadczące o potencjale \emph{fingerprintingu} prezentuje
+
+\begin{lstlisting}[float,language=Java,caption=Podstawowy Canvas fingerprinting w JavaScript]
+'use strict';
+
+const font = '18pt Arial';
+const textBaseline = 'top';
+const text = 'Mężny bądź, chroń pułk twój i sześć flag.';
+
+const canvas = document.createElement('canvas');
+
+const ctx = canvas.getContext('2d');
+if (ctx === null) {
+    throw new Error('Canvas fingerprinting failed!');
+}
+
+ctx.font = font;
+ctx.textBaseline = textBaseline;
+
+canvas.width = Math.ceil(ctx.measureText(text).width);
+
+ctx.font = font;
+ctx.textBaseline = textBaseline;
+ctx.fillText(text, 0, 0);
+
+document.body.appendChild(canvas);
+
+const dataURL = canvas.toDataURL();
+
+const w = window.open(dataURL);
+if (w === null) {
+    console.debug(dataURL);
+}
+\end{lstlisting}
 
 \subsection{Audio fingerprinting}
 

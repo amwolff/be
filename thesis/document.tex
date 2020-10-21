@@ -49,6 +49,38 @@
 \usepackage[algoruled]{algorithm2e}
 \SetAlgorithmName{Algorytm}{Spis algorytmów}{Spis algorytmów}
 
+\usepackage{listings}
+
+\lstset{
+    literate=
+        {ą}{{\k{a}}}1
+        {Ą}{{\k{A}}}1
+        {ć}{{\'{c}}}1
+        {Ć}{{\'{C}}}1
+        {ę}{{\k{e}}}1
+        {Ę}{{\k{E}}}1
+        {ł}{{\l{}}}1
+        {Ł}{{\l{}}}1
+        {ń}{{\'{n}}}1
+        {Ń}{{\'{N}}}1
+        {ó}{{\'{o}}}1
+        {Ó}{{\'{O}}}1
+        {ś}{{\'{s}}}1
+        {Ś}{{\'{S}}}1
+        {ż}{{\.{z}}}1
+        {Ż}{{\.{Z}}}1
+        {ź}{{\'{z}}}1
+        {Ź}{{\'{Z}}}1
+} % https://stackoverflow.com/a/52434857
+
+\renewcommand{\lstlistlistingname}{Spis implementacji} % https://sunsite.icm.edu.pl/pub/CTAN/macros/latex/contrib/listings/listings.pdf (35) & https://stackoverflow.com/a/9480618
+
+\renewcommand{\lstlistingname}{Implementacja} % https://sunsite.icm.edu.pl/pub/CTAN/macros/latex/contrib/listings/listings.pdf (36)
+
+\lstset{numberbychapter=false} % https://sunsite.icm.edu.pl/pub/CTAN/macros/latex/contrib/listings/listings.pdf (36)
+
+\lstset{basicstyle=\small,captionpos=b,frame=single,numbers=left} % https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#Settings
+
 \title{Web browsers and Internet-connected devices digital fingerprinting methods - challenges and solutions}
 \author{Artur Wolff}
 \date{February 2021}
@@ -62,6 +94,7 @@
 \usepackage{pdfpages}
 
 \begin{document}
+\renewcommand{\thelstlisting}{\arabic{lstlisting}.} % It must be here because https://tex.stackexchange.com/a/49450
 \includepdf{title/title}
 \include{tex/statement}
 \tableofcontents
@@ -74,5 +107,6 @@
 \listoffigures
 \listoftables
 \listofalgorithms
+\lstlistoflistings
 \printbibliography
 \end{document}
