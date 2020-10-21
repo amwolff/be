@@ -32,7 +32,12 @@
 
     document.body.appendChild(canvas);
 
-    console.info(canvas.toDataURL());
+    const dataURL = canvas.toDataURL();
+
+    const w = window.open(dataURL);
+    if (w === null) {
+        console.debug(dataURL);
+    }
 </script>
 </body>
 </html>
