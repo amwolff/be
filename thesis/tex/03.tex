@@ -111,8 +111,8 @@ komputerowym) to techniki, które polegają na użyciu takich danych jak:
 	\item wsparcie dla interakcji dotykowych przez urządzenie;
 	\item lista obsługiwanych czcionek;
 	\item lista obsługiwanych czcionek Flash;
-	\item \emph{fingerprint}
-	      audio\footnote{https://audiofingerprint.openwpm.com/};
+	\item \emph{fingerprint} Web
+	      Audio\footnote{https://audiofingerprint.openwpm.com/};
 	\item lista podłączonych urządzeń peryferyjnych do urządzenia.
 \end{itemize}
 
@@ -252,7 +252,22 @@ if (w === null) {
 	\caption{Rezultat wykonania Implementacji 1 w Firefox/Ubuntu i Safari/macOS}
 \end{figure}
 
-\subsection{Audio fingerprinting}
+\subsection{Web Audio fingerprinting}
+Techniki \emph{fingerprintingu} używające Web Audio API (i AudioContext API)
+działają na podobnej zasadzie co techniki używające Canvas API. W przypadku tych
+rozwiązań schemat działania jest mniej więcej taki sam: przekaż przeglądarce
+zadanie do wykonania i zaobserwuj, jak je wykonuje (wykonała), a następnie
+zbuduj na podstawie tych (i innych) danych jej \emph{fingerprint}. W przypadku
+Web Audio fingerprintingu używany jest stos dźwiękowy (w sensie technologii), z
+którego korzysta przeglądarka. Otrzymuje ona do wykonania zadanie wygenerowania
+sygnału dźwiękowego na podstawie preferencji dźwiękowych urządzenia i
+zainstalowanego sprzętu audio.
+
+\subsubsection{Historia}
+
+\subsubsection{Pseudokod}
+
+\subsubsection{Implementacja w JavaScript}
 
 \subsection{Pozostałe techniki}
 
