@@ -196,8 +196,14 @@ największe media na świecie.
 \end{algorithm}
 
 \subsubsection{Implementacja w JavaScript}
-Implementacja 1 prezentuje implementację Canvas fingerprintingu w JavaScript.
-Różnice w wynikach na wykonania świadczące o potencjale \emph{fingerprintingu} prezentuje
+Implementacja 1 przedstawia implementację Canvas fingerprintingu w JavaScript.
+Różnice pomiędzy wykonaniem algorytmu w przeglądarce Firefox działającej na
+systemie Ubuntu i przeglądarce Safari działającej na systemie macOS
+przedstawiają Rys. 4 i Rys. 5. Niestety różnice widoczne są gołym okiem bez
+konieczności \emph{hashowania} obrazów. Najprawdopodobniej świadczy to o
+olbrzymim potencjale tej techniki w odniesieniu do \emph{fingerprintingu}.
+Badania przeprowadzone przez Mowery'ego i Shachama potwierdzają, że użycie tej
+techniki pozwala uzyskać relatywnie wysoką entropię \cite{mowery2012pixel}.
 
 \begin{lstlisting}[float,language=Java,caption=Podstawowy Canvas fingerprinting w JavaScript]
 'use strict';
@@ -231,6 +237,20 @@ if (w === null) {
     console.debug(dataURL);
 }
 \end{lstlisting}
+
+\begin{figure}
+	\includegraphics[trim={0 121px 218px 0},clip,frame]{img/04}
+	\includegraphics[trim={0 121px 218px 0},clip,frame]{img/05}
+	\source{Wykonanie Implementacji 1 w Firefox 81.0.2/Ubuntu 20.04.1 i Safari 13.0.5/macOS 10.15.3}
+	\caption{Rezultat wykonania Implementacji 1 w Firefox/Ubuntu i Safari/macOS}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[trim={0 121px 2269px 0},clip,frame]{img/06}
+	\includegraphics[trim={0 121px 2269px 0},clip,frame]{img/07}
+	\source{Wykonanie Implementacji 1 w Firefox 81.0.2/Ubuntu 20.04.1 i Safari 13.0.5/macOS 10.15.3}
+	\caption{Rezultat wykonania Implementacji 1 w Firefox/Ubuntu i Safari/macOS}
+\end{figure}
 
 \subsection{Audio fingerprinting}
 
