@@ -320,6 +320,17 @@ oscillator.start(0); // Uruchomienie przetwarzania potoku.
 \end{figure}
 
 \subsection{Pozostałe techniki}
+Pozyskanie innych, wymienionych na powyższej liście danych jest niestety dużo
+prostsze niż opisany wcześniej Canvas fingerprinting i Web Audio fingerprinting.
+Zwykle polega to na skorzystaniu z API przeglądarek, aby odczytać konkretny
+parametr. W ogólności jest to trywialne zadanie. Oprócz tego potrzebna jest
+wiedza, jakich parametrów pozyskiwanie ma sens i jak je interpretować oraz
+przetwarzać. Dla przykładu Implementacja 3 przedstawia pozyskiwanie nagłówka
+User-Agent.
+
+\begin{lstlisting}[float,language=Java,caption=Wypisywanie nagłówka User-Agent do konsoli JavaScript]
+console.info(navigator.userAgent)
+\end{lstlisting}
 
 % \subsection{Protokoły warstwy drugiej w modelu OSI}
 
