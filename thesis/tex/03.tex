@@ -111,8 +111,8 @@ komputerowym) to techniki, które polegają na użyciu takich danych jak:
 	\item wsparcie dla interakcji dotykowych przez urządzenie;
 	\item lista obsługiwanych czcionek;
 	\item lista obsługiwanych czcionek Flash;
-	\item \emph{fingerprint} Web
-	      Audio\footnote{https://audiofingerprint.openwpm.com/};
+	\item \emph{fingerprint}
+	      \texttt{AudioContext}\footnote{https://audiofingerprint.openwpm.com/};
 	\item lista podłączonych urządzeń peryferyjnych do urządzenia.
 \end{itemize}
 
@@ -271,9 +271,53 @@ który można by uznać za początek lub eskalację użycia tej techniki. Jej
 możliwości badał m.in. projekt Princeton Web Transparency \& Accountability
 Project\footnote{https://webtap.princeton.edu/}\footnote{https://audiofingerprint.openwpm.com/}.
 
-\subsubsection{Pseudokod}
-
 \subsubsection{Implementacja w JavaScript}
+Pseudokod został pominięty ze względu na zbyt dużą szczegółowość i konieczność
+przemycenia szczegółów implementacyjnych. Przedstawiona Implementacja 2 jest
+najprostszym wariantem Web Audio fingerprintingu. Różnice pomiędzy wykonaniem
+algorytmu w przeglądarce Firefox działającej na systemie Ubuntu i przeglądarce
+Chrome działającej na systemie Android przedstawia Rys. 6.
+
+\begin{lstlisting}[float,language=Java,caption=Podstawowy Web Audio fingerprinting w JavaScript]
+const ctx = new AudioContext();
+
+const oscillator = ctx.createOscillator();
+const analyser = ctx.createAnalyser();
+const gain = ctx.createGain();
+const scriptProcessor = ctx.createScriptProcessor(4096, 1, 1);
+
+gain.gain.value = 0; // Wyciszenie.
+
+// Zmiana wyjścia oscylatora na falę trójkątną.
+oscillator.type = 'triangle';
+
+oscillator.connect(analyser);
+analyser.connect(scriptProcessor);
+scriptProcessor.connect(gain);
+gain.connect(ctx.destination);
+
+scriptProcessor.onaudioprocess = function (bins) {
+    bins = new Float32Array(analyser.frequencyBinCount);
+
+    analyser.getFloatFrequencyData(bins);
+    analyser.disconnect();
+
+    const output = Array.from(bins);
+
+    scriptProcessor.disconnect();
+    gain.disconnect();
+
+    console.info(output); // Prezentacja wyniku.
+};
+
+oscillator.start(0); // Uruchomienie przetwarzania potoku.
+\end{lstlisting}
+
+\begin{figure}
+	\includegraphics[width=\textwidth,keepaspectratio]{img/08}
+	\source{https://audiofingerprint.openwpm.com/}
+	\caption{Rezultat wykonania Implementacji 2 w Firefox/Ubuntu i Chrome/Android}
+\end{figure}
 
 \subsection{Pozostałe techniki}
 

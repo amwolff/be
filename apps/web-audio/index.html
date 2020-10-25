@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Audio fingerprinting implementation</title>
+</head>
+<body>
+<script type="text/javascript">
+    const ctx = new AudioContext();
+
+    const oscillator = ctx.createOscillator();
+    const analyser = ctx.createAnalyser();
+    const gain = ctx.createGain();
+    const scriptProcessor = ctx.createScriptProcessor(4096, 1, 1);
+
+    gain.gain.value = 0; // Wyciszenie.
+
+    oscillator.type = 'triangle'; // Zmiana wyjścia oscylatora na falę trójkątną.
+
+    oscillator.connect(analyser);
+    analyser.connect(scriptProcessor);
+    scriptProcessor.connect(gain);
+    gain.connect(ctx.destination);
+
+    scriptProcessor.onaudioprocess = function (bins) {
+        bins = new Float32Array(analyser.frequencyBinCount);
+
+        analyser.getFloatFrequencyData(bins);
+        analyser.disconnect();
+
+        const output = Array.from(bins);
+
+        scriptProcessor.disconnect();
+        gain.disconnect();
+
+        console.info(output); // Prezentacja wyniku.
+    };
+
+    oscillator.start(0); // Uruchomienie przetwarzania potoku.
+</script>
+</body>
+</html>
