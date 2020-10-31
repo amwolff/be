@@ -1,6 +1,20 @@
 \chapter{Eksperymentalny algorytm klasyfikatora fingerprintów}
 
 \section{Motywacja}
+Wcześniej w niniejszej pracy zostało zaznaczone, że \emph{fingerprint} może być
+bardziej unikalny kosztem jego stabilności i odwrotnie. Aby zgrupować kolejne
+\emph{fingerprinty} tej samej przeglądarki internetowej, których różnice
+wynikają z naturalnych przemian tej przeglądarki (np. aktualizacja), możemy użyć
+klasyfikatora opartego na odpowiednim algorytmie. Tę relację przedstawia Rys. 7.
+Dzięki takiemu rozwiązaniu jesteśmy w stanie zachować wiarygodny wskaźnik
+entropii, używając średnio bardziej unikalnych \emph{fingerprintów} o mniejszej
+stabilności.
+
+\begin{figure}
+	\includegraphics[width=\textwidth,keepaspectratio]{img/09}
+	\source{Własne}
+	\caption{Relacja \emph{fingerprint}-przeglądarka}
+\end{figure}
 
 \section{Opis algorytmu}
 
