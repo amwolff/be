@@ -17,7 +17,7 @@ internetowych \cite[s. 13]{eckersley2010unique}.
 \begin{figure}
 	\includegraphics[width=\textwidth,keepaspectratio]{img/09}
 	\source{Diagram przygotowany przez autora niniejszej pracy}
-	\caption{Relacja \emph{fingerprint}-przeglądarka}
+	\caption{Relacja \emph{fingerprint}--przeglądarka}
 \end{figure}
 
 \section{Opis algorytmu}
@@ -68,6 +68,56 @@ długościach odpowiednio \(i\) i \(j\), zdefiniowana jest jako
 \end{displaymath}
 
 \subsubsection{Algorytm Wagnera--Fischera}
+Bezpośrednia implementacja (z definicji) odległości Levenshteina ma zasadniczy
+problem: tak zaimplementowany algorytm będzie działać w czasie
+ponadwielomianowym. Aby się o tym przekonać, wystarczy narysować drzewo wywołań
+rekurencyjnych i zauważyć, że kolejne wywołania nie są rozłączne (nie jest to
+oczywiście formalny dowód). Odległość Levenshteina cechuje własność optymalnej
+podstruktury i bazując na programowaniu dynamicznym, można znaleźć algorytm
+działający w czasie wielomianowym.
+
+Jednym z takich algorytmów jest algorytm Wagnera--Fischera\footnote{Algorytm
+	miał wielu wynalazców. Nazwa ,,Wagnera--Fischera'' powinna być traktowana
+	jedynie jako zwyczajowa:
+	https://en.wikipedia.org/wiki/Wagner-Fischer\_algorithm\#History} (Algorytm 2)
+\cite{wagner1974string}. Implementacja 4 przedstawia implementację algorytmu
+Wagnera--Fischera. Implementacja 5 jest optymalnym wariantem tego algorytmu
+(biorąc pod uwagę zużycie pamięci; Implementacja 4 zużywa kwadratową ilość
+pamięci a Implementacja 5 liniową). Taki wariant jest stosowany później w
+algorytmie klasyfikatora.
+
+\begin{algorithm}
+	\SetAlgoVlined
+	\SetAlgoCaptionSeparator{.}
+	\SetKwInOut{Input}{Dane}
+	\SetKwInOut{Output}{Wynik}
+	\SetKwData{VarA}{a}
+	\SetKwData{VarB}{b}
+	\SetKwData{VarM}{m}
+	\SetKwData{VarN}{n}
+	\SetKwData{VarD}{d}
+	\SetKwData{VarI}{i}
+	\SetKwData{VarJ}{j}
+	\BlankLine
+	\Input{ciągi znaków \VarA i \VarB o długościach odpowiednio \VarM i \VarN}
+	\Output{odległość Levenshteina}
+	\BlankLine
+	\VarD $\leftarrow$ $[0..\VarM, 0..\VarN]$
+	\BlankLine
+	\For{\VarI $\leftarrow$ $1$ \KwTo \VarM}{
+		$\VarD[\VarI, 0]$ $\leftarrow$ \VarI
+	}
+	\For{\VarJ $\leftarrow$ $1$ \KwTo \VarN}{
+		$\VarD[0, \VarJ]$ $\leftarrow$ \VarJ
+	}
+	\tcp{To be continued...}
+	\Return{$\VarD[\VarM, \VarN]$}
+	\caption{Algorytm Wagnera--Fischera}
+\end{algorithm}
+
+\lstinputlisting[float,language=Go,caption=Algorytm Wagnera--Fischera w Go,firstline=18,lastline=44,tabsize=4]{go/levenshtein.go}
+
+\lstinputlisting[float,language=Go,caption=Algorytm Wagnera--Fischera w Go (liniowa pamięć),firstline=46,lastline=74,tabsize=4]{go/levenshtein.go}
 
 \section{Ocena złożoności czasowej i pamięciowej}
 

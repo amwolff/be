@@ -82,6 +82,26 @@
 
 \lstset{basicstyle=\footnotesize,captionpos=b,frame=single,numbers=left} % https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings#Settings
 
+\lstdefinelanguage{Go}{ % Based on https://github.com/korfuri/golang-latex-listings
+  % Keywords as defined in the language grammar
+  morekeywords=[1]{break,default,func,interface,select,case,defer,go,map,struct,chan,else,goto,package,switch,const,fallthrough,if,range,type,continue,for,import,return,var},
+  % Built-in functions
+  morekeywords=[2]{append,cap,close,complex,copy,delete,imag,len,make,new,panic,print,println,real,recover},
+  % Pre-declared types
+  morekeywords=[3]{bool,byte,complex64,complex128,error,float32,float64,int,int8,int16,int32,int64,rune,string,uint,uint8,uint16,uint32,uint64,uintptr},
+  % Constants and zero value
+  morekeywords=[4]{true,false,iota,nil},
+  % Strings: "foo", 'bar', `baz`
+  morestring=[b]{"},
+  morestring=[b]{'},
+  morestring=[b]{`},
+  % Comments: /* comment */ and // comment
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  % Options
+  sensitive=true
+}
+
 \usepackage{amsmath}
 
 \title{Web browsers and Internet-connected devices digital fingerprinting methods - challenges and solutions}
