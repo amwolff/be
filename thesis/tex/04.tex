@@ -10,13 +10,40 @@ Dzięki takiemu rozwiązaniu jesteśmy w stanie zachować wiarygodny wskaźnik
 entropii, używając średnio bardziej unikalnych \emph{fingerprintów} o mniejszej
 stabilności.
 
+Podobne (choć bardziej ograniczone) rozwiązanie zastosował Eckersley w swojej
+pracy, w której po raz pierwszy opisał \emph{fingerprinting} przeglądarek
+internetowych \cite[s. 13]{eckersley2010unique}.
+
 \begin{figure}
 	\includegraphics[width=\textwidth,keepaspectratio]{img/09}
-	\source{Własne}
+	\source{Diagram przygotowany przez autora niniejszej pracy}
 	\caption{Relacja \emph{fingerprint}-przeglądarka}
 \end{figure}
 
 \section{Opis algorytmu}
+Aby zgrupować kolejne, podobne do siebie \emph{fingerprinty} należy wyznaczyć
+podobieństwo każdego nowego \emph{fingerprintu} do wszystkich przechowywanych i
+utożsamić go z tym, do którego jest najbardziej podobny (powyżej pewnej wartości
+podobieństwa). Można to zrobić na parę sposobów. Jednym z najsensowniejszych
+rozwiązań wydaje się podejście, w którym określa się podobieństwo cech
+(komponentów) \emph{fingerprintu}, pomiędzy którymi istnieje relacja większości
+(częściowy porządek). Tak można porównywać na przykład nagłówki User-Agent
+(zawiera w sobie wersję oprogramowania) jako komponent dwóch porównywanych
+\emph{fingerprintów}. Z tych porównań można wnioskować o ogólnym podobieństwie
+dwóch \emph{fingerprintów}.
+
+Porównywanie podobieństwa komponentów, które bezpośrednio lub pośrednio wynikają
+z np. parametrów sprzętowych urządzenia (na przykład \emph{fingerprint} elementu
+\texttt{canvas}), wydaje się bezcelowe. Ich wartość zwykle nie ulega zmianie i
+należałoby zastanowić się nad istnieniem częściowego porządku w ich zbiorze.
+Jednakże ich pewna niezmienność i dalej porównywanie tych komponentów na
+zasadzie równoważności może być przydatne, w szacowaniu jak bardzo ogólne
+podobieństwo jest wiarygodne.
+
+Metryką określającą podobieństwo do siebie dwóch komponentów będzie odległość
+Levenshteina.
+
+\subsection{Odległość Levenshteina}
 
 \section{Ocena złożoności czasowej i pamięciowej}
 
