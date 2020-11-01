@@ -41,9 +41,33 @@ zasadzie równoważności może być przydatne, w szacowaniu jak bardzo ogólne
 podobieństwo jest wiarygodne.
 
 Metryką określającą podobieństwo do siebie dwóch komponentów będzie odległość
-Levenshteina.
+Levenshteina, która jest powszechnie stosowaną miarą odmienności skończonych
+ciągów znaków.
 
 \subsection{Odległość Levenshteina}
+Odległość Levenshteina nie jest na tyle popularnym algorytmem, aby znalazł on
+swoją implementację w bibliotekach standardowych większości popularnych języków
+oprogramowania. Z tego względu autor niniejszej pracy zdecydował się na
+własnoręczną implementację.
+
+\subsubsection{Definicja}
+Odległość Levenshteina pomiędzy dwoma łańcuchami znaków \(a\) i \(b\) o
+długościach odpowiednio \(i\) i \(j\), zdefiniowana jest jako
+\begin{displaymath}
+	\operatorname{ol}_{a,b}(i,j)=
+	\begin{cases}
+		\max(i,j)                          & \text{jeśli }\min(i,j)=0,  \\
+		\min
+		\begin{cases}
+		\operatorname{ol}_{a,b}(i-1,j)+1 \\
+		\operatorname{ol}_{a,b}(i,j,1)+1 \\
+		\operatorname{ol}_{a,b}(i-1,j-1)   & \text{jeśli }a_i=b_j,      \\
+		\operatorname{ol}_{a,b}(i-1,j-1)+1 & \text{jeśli }a_i \neq b_j. 
+	\end{cases} & \text{w innym przypadku}.
+	\end{cases}
+\end{displaymath}
+
+\subsubsection{Algorytm Wagnera--Fischera}
 
 \section{Ocena złożoności czasowej i pamięciowej}
 
