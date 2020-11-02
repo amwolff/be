@@ -95,23 +95,30 @@ algorytmie klasyfikatora.
 	\SetKwData{VarB}{b}
 	\SetKwData{VarM}{m}
 	\SetKwData{VarN}{n}
-	\SetKwData{VarD}{d}
-	\SetKwData{VarI}{i}
-	\SetKwData{VarJ}{j}
+	\SetKwFunction{Minimum}{minimum}
 	\BlankLine
 	\Input{ciągi znaków \VarA i \VarB o długościach odpowiednio \VarM i \VarN}
 	\Output{odległość Levenshteina}
 	\BlankLine
-	\VarD $\leftarrow$ $[0..\VarM, 0..\VarN]$
+	$d \leftarrow [0 \dots m, 0 \dots n]$
 	\BlankLine
-	\For{\VarI $\leftarrow$ $1$ \KwTo \VarM}{
-		$\VarD[\VarI, 0]$ $\leftarrow$ \VarI
+	\For{$i \leftarrow 1$ \KwTo \VarM}{
+		$d[i, 0] \leftarrow i$
 	}
-	\For{\VarJ $\leftarrow$ $1$ \KwTo \VarN}{
-		$\VarD[0, \VarJ]$ $\leftarrow$ \VarJ
+	\For{$j \leftarrow 1$ \KwTo \VarN}{
+		$d[0, j] \leftarrow j$
 	}
-	\tcp{To be continued...}
-	\Return{$\VarD[\VarM, \VarN]$}
+	\For{$j \leftarrow 1$ \KwTo \VarN}{
+		\For{$i \leftarrow 1$ \KwTo \VarM}{
+			\eIf{$a[i - 1] = b[j - 1]$}{
+				$c \leftarrow 0$
+				}{
+				$c \leftarrow 1$
+			}
+			$d \leftarrow$ \Minimum{$d[i - 1, j] + 1, d[i, j - 1] + 1, d[i - 1, j - 1] + c$}
+		}
+	}
+	\Return{$d[m, n]$}
 	\caption{Algorytm Wagnera--Fischera}
 \end{algorithm}
 
