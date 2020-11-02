@@ -54,15 +54,15 @@ własnoręczną implementację.
 Odległość Levenshteina pomiędzy dwoma łańcuchami znaków \(a\) i \(b\) o
 długościach odpowiednio \(i\) i \(j\), zdefiniowana jest jako
 \begin{displaymath}
-	\operatorname{ol}_{a,b}(i,j)=
+	\operatorname{ol}(i,j)=
 	\begin{cases}
-		\max(i,j)                          & \text{jeśli }\min(i,j)=0,  \\
+		\max(i,j)                    & \text{jeśli }\min(i,j)=0,  \\
 		\min
 		\begin{cases}
-		\operatorname{ol}_{a,b}(i-1,j)+1 \\
-		\operatorname{ol}_{a,b}(i,j,1)+1 \\
-		\operatorname{ol}_{a,b}(i-1,j-1)   & \text{jeśli }a_i=b_j,      \\
-		\operatorname{ol}_{a,b}(i-1,j-1)+1 & \text{jeśli }a_i \neq b_j. 
+		\operatorname{ol}(i-1,j)+1 \\
+		\operatorname{ol}(i,j-1)+1 \\
+		\operatorname{ol}(i-1,j-1)   & \text{jeśli }a_i=b_j,      \\
+		\operatorname{ol}(i-1,j-1)+1 & \text{jeśli }a_i \neq b_j. 
 	\end{cases} & \text{w innym przypadku}.
 	\end{cases}
 \end{displaymath}
@@ -118,6 +118,8 @@ algorytmie klasyfikatora.
 \lstinputlisting[float,language=Go,caption=Algorytm Wagnera--Fischera w Go,firstline=18,lastline=44,tabsize=4]{go/levenshtein.go}
 
 \lstinputlisting[float,language=Go,caption=Algorytm Wagnera--Fischera w Go (liniowa pamięć),firstline=46,lastline=74,tabsize=4]{go/levenshtein.go}
+
+\section{Pseudokod}
 
 \section{Ocena złożoności czasowej i pamięciowej}
 
