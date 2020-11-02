@@ -86,6 +86,7 @@ Wagnera--Fischera. Implementacja 5 jest optymalnym wariantem tego algorytmu
 pamięci a Implementacja 5 liniową). Taki wariant jest stosowany później w
 algorytmie klasyfikatora.
 
+% TODO It should be more consistent with the style in the others.
 \begin{algorithm}
 	\SetAlgoVlined
 	\SetAlgoCaptionSeparator{.}
@@ -127,6 +128,19 @@ algorytmie klasyfikatora.
 \lstinputlisting[float,language=Go,caption=Algorytm Wagnera--Fischera w Go (liniowa pamięć),firstline=46,lastline=74,tabsize=4]{go/levenshtein.go}
 
 \section{Pseudokod}
+Algorytm 3 przedstawia eksperymentalny algorytm klasyfikatora.
+
+\begin{algorithm}
+	\SetAlgoVlined
+	\SetAlgoCaptionSeparator{.}
+	\SetKwInOut{Input}{Dane}
+	\SetKwInOut{Output}{Wynik}
+	\BlankLine
+	\Input{\emph{fingerprint}}
+	\Output{\emph{fingerprint}, do którego jest najbardziej podobny, jeśli istnieje}
+	\BlankLine
+	\caption{Eksperymentalny klasyfikator}
+\end{algorithm}
 
 \section{Ocena złożoności czasowej i pamięciowej}
 
