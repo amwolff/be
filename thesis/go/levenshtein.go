@@ -15,8 +15,8 @@ func min(a, b, c int) int {
 	return ret
 }
 
-func WagnerFischer(s, t string) int {
-	m, n := utf8.RuneCountInString(s), utf8.RuneCountInString(t)
+func WagnerFischer(a, b string) int {
+	m, n := utf8.RuneCountInString(a), utf8.RuneCountInString(b)
 	d := make([][]int, m+1)
 	for i := range d {
 		d[i] = make([]int, n+1)
@@ -28,9 +28,9 @@ func WagnerFischer(s, t string) int {
 		d[0][j] = j
 	}
 	j := 1
-	for _, r2 := range t {
+	for _, r2 := range b {
 		i := 1
-		for _, r1 := range s {
+		for _, r1 := range a {
 			var cost int
 			if r1 != r2 {
 				cost = 1
@@ -43,10 +43,10 @@ func WagnerFischer(s, t string) int {
 	return d[m][n]
 }
 
-func LinearSpace(s, t string) int {
-	m, n := utf8.RuneCountInString(s), utf8.RuneCountInString(t)
+func LinearSpace(a, b string) int {
+	m, n := utf8.RuneCountInString(a), utf8.RuneCountInString(b)
 	if m > n {
-		s, t = t, s
+		a, b = b, a
 		m, n = n, m
 	}
 	d := make([]int, m+1)
@@ -54,11 +54,11 @@ func LinearSpace(s, t string) int {
 		d[i] = i
 	}
 	j := 1
-	for _, r2 := range t {
+	for _, r2 := range b {
 		prev := d[0]
 		d[0] = j
 		i := 1
-		for _, r1 := range s {
+		for _, r1 := range a {
 			var cost int
 			if r1 != r2 {
 				cost = 1
