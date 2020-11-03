@@ -34,8 +34,8 @@ func Test_min(t *testing.T) {
 
 func TestLevenshtein(t *testing.T) {
 	type args struct {
-		s string
-		t string
+		a string
+		b string
 	}
 	tests := []struct {
 		name string
@@ -45,24 +45,24 @@ func TestLevenshtein(t *testing.T) {
 		{
 			name: "size difference #1",
 			args: args{
-				s: "abcdef",
-				t: "abcdefg",
+				a: "abcdef",
+				b: "abcdefg",
 			},
 			want: 1,
 		},
 		{
 			name: "size difference #2",
 			args: args{
-				s: "abcdefgh",
-				t: "abcdef",
+				a: "abcdefgh",
+				b: "abcdef",
 			},
 			want: 2,
 		},
 		{
 			name: "s is empty",
 			args: args{
-				s: "",
-				t: "But in the end it’s only a passing thing, this shadow; ev" +
+				a: "",
+				b: "But in the end it’s only a passing thing, this shadow; ev" +
 					"en darkness must pass.",
 			},
 			want: 79,
@@ -70,18 +70,18 @@ func TestLevenshtein(t *testing.T) {
 		{
 			name: "t is empty",
 			args: args{
-				s: "All we have to decide is what to do with the time that is" +
+				a: "All we have to decide is what to do with the time that is" +
 					" given us.",
-				t: "",
+				b: "",
 			},
 			want: 67,
 		},
 		{
 			name: "strings are equal",
 			args: args{
-				s: "Nechť již hříšné saxofony ďáblů rozezvučí síň úděsnými tó" +
+				a: "Nechť již hříšné saxofony ďáblů rozezvučí síň úděsnými tó" +
 					"ny waltzu, tanga a quickstepu.",
-				t: "Nechť již hříšné saxofony ďáblů rozezvučí síň úděsnými tó" +
+				b: "Nechť již hříšné saxofony ďáblů rozezvučí síň úděsnými tó" +
 					"ny waltzu, tanga a quickstepu.",
 			},
 			want: 0,
@@ -89,24 +89,24 @@ func TestLevenshtein(t *testing.T) {
 		{
 			name: "simple 1",
 			args: args{
-				s: "kitten",
-				t: "sitting",
+				a: "kitten",
+				b: "sitting",
 			},
 			want: 3,
 		},
 		{
 			name: "simple 2",
 			args: args{
-				s: "Saturday",
-				t: "Sunday",
+				a: "Saturday",
+				b: "Sunday",
 			},
 			want: 3,
 		},
 		{
 			name: "Japanese",
 			args: args{
-				s: "持ち上げて",
-				t: "解き放して",
+				a: "持ち上げて",
+				b: "解き放して",
 			},
 			want: 4,
 		},
@@ -114,7 +114,7 @@ func TestLevenshtein(t *testing.T) {
 	t.Run("LinearSpace", func(t *testing.T) {
 		for _, tt := range tests {
 			t.Run(tt.name, func(t *testing.T) {
-				if got := LinearSpace(tt.args.s, tt.args.t); got != tt.want {
+				if got := LinearSpace(tt.args.a, tt.args.b); got != tt.want {
 					t.Errorf("LinearSpace() = %v, want %v", got, tt.want)
 				}
 			})
@@ -123,7 +123,7 @@ func TestLevenshtein(t *testing.T) {
 	t.Run("WagnerFischer", func(t *testing.T) {
 		for _, tt := range tests {
 			t.Run(tt.name, func(t *testing.T) {
-				if got := WagnerFischer(tt.args.s, tt.args.t); got != tt.want {
+				if got := WagnerFischer(tt.args.a, tt.args.b); got != tt.want {
 					t.Errorf("WagnerFischer() = %v, want %v", got, tt.want)
 				}
 			})
@@ -169,14 +169,14 @@ func TestFuzzyLevenshtein(t *testing.T) {
 	}
 }
 
-var s1e3, t1e3 = randomString(1e3), randomString(1e3)
+var a1e3, b1e3 = randomString(1e3), randomString(1e3)
 
 var result int
 
 func BenchmarkLinearSpace(b *testing.B) {
 	var r int
 	for i := 0; i < b.N; i++ {
-		r = LinearSpace(s1e3, t1e3)
+		r = LinearSpace(a1e3, b1e3)
 	}
 	result = r
 }
@@ -184,7 +184,7 @@ func BenchmarkLinearSpace(b *testing.B) {
 func BenchmarkWagnerFischer(b *testing.B) {
 	var r int
 	for i := 0; i < b.N; i++ {
-		r = WagnerFischer(s1e3, t1e3)
+		r = WagnerFischer(a1e3, b1e3)
 	}
 	result = r
 }
