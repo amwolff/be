@@ -34,10 +34,10 @@ dwóch \emph{fingerprintów}.
 
 Porównywanie podobieństwa komponentów, które bezpośrednio lub pośrednio wynikają
 z np. parametrów sprzętowych urządzenia (na przykład \emph{fingerprint} elementu
-\texttt{canvas}), wydaje się bezcelowe. Ich wartość zwykle nie ulega zmianie i
-należałoby zastanowić się nad istnieniem częściowego porządku w ich zbiorze.
-Jednakże ich pewna niezmienność i dalej porównywanie tych komponentów na
-zasadzie równoważności może być przydatne, w szacowaniu jak bardzo ogólne
+\texttt{canvas}), wydaje się bezcelowe. Ich wartość jest zwykle stała i
+należałoby zastanowić się nad istnieniem częściowego porządku w takim zbiorze.
+Jednakże ta niezmienność i dalej porównywanie tych komponentów na zasadzie
+równoważności może być przydatne w szacowaniu, w jakim stopniu ogólne
 podobieństwo jest wiarygodne.
 
 Metryką określającą podobieństwo do siebie dwóch komponentów będzie odległość
@@ -45,10 +45,10 @@ Levenshteina, która jest powszechnie stosowaną miarą odmienności skończonyc
 ciągów znaków.
 
 \subsection{Odległość Levenshteina}
-Odległość Levenshteina nie jest na tyle popularnym algorytmem, aby znalazł on
-swoją implementację w bibliotekach standardowych większości popularnych języków
-oprogramowania. Z tego względu autor niniejszej pracy zdecydował się na
-własnoręczną implementację.
+Algorytmy wyznaczające odległość Levenshteina nie są na tyle popularne, aby
+znalazły one swoją implementację w bibliotekach standardowych większości
+popularnych języków oprogramowania. Z tego względu autor niniejszej pracy
+zdecydował się na własnoręczną implementację.
 
 \subsubsection{Definicja}
 Odległość Levenshteina pomiędzy dwoma łańcuchami znaków \(a\) i \(b\) o
@@ -68,13 +68,13 @@ długościach odpowiednio \(i\) i \(j\), zdefiniowana jest jako
 \end{displaymath}
 
 \subsubsection{Algorytm Wagnera--Fischera}
-Bezpośrednia implementacja (z definicji) odległości Levenshteina ma zasadniczy
-problem: tak zaimplementowany algorytm będzie działać w czasie
-ponadwielomianowym. Aby się o tym przekonać, wystarczy narysować drzewo wywołań
-rekurencyjnych i zauważyć, że kolejne wywołania nie są rozłączne (nie jest to
-oczywiście formalny dowód). Odległość Levenshteina cechuje własność optymalnej
-podstruktury i bazując na programowaniu dynamicznym, można znaleźć algorytm
-działający w czasie wielomianowym.
+Bezpośrednia implementacja (z definicji) algorytmu wyznaczającego odległość
+Levenshteina ma zasadniczy problem: tak zaimplementowany algorytm będzie działać
+w czasie ponadwielomianowym. Aby się o tym przekonać, wystarczy narysować drzewo
+wywołań rekurencyjnych i zauważyć, że kolejne wywołania nie są rozłączne (nie
+jest to oczywiście formalny dowód). Wyznaczanie odległości Levenshteina cechuje
+własność optymalnej podstruktury i bazując na programowaniu dynamicznym, można
+znaleźć algorytm działający w czasie wielomianowym.
 
 Jednym z takich algorytmów jest algorytm Wagnera--Fischera\footnote{Algorytm
 	miał wielu wynalazców. Nazwa ,,Wagnera--Fischera'' powinna być traktowana
