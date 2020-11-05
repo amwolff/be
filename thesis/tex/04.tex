@@ -101,25 +101,24 @@ algorytmie klasyfikatora.
 	\Input{ciągi znaków \VarA i \VarB o długościach odpowiednio \VarM i \VarN}
 	\Output{odległość Levenshteina}
 	\BlankLine
-	$d \leftarrow [0 \dots m, 0 \dots n]$
-	\BlankLine
+	$d \leftarrow [0 \dots m, 0 \dots n]$\;
 	\For{$i \leftarrow 1$ \KwTo \VarM}{
-		$d[i, 0] \leftarrow i$
+		$d[i, 0] \leftarrow i$\;
 	}
 	\For{$j \leftarrow 1$ \KwTo \VarN}{
-		$d[0, j] \leftarrow j$
+		$d[0, j] \leftarrow j$\;
 	}
 	\For{$j \leftarrow 1$ \KwTo \VarN}{
 		\For{$i \leftarrow 1$ \KwTo \VarM}{
 			\eIf{$a[i - 1] = b[j - 1]$}{
-				$c \leftarrow 0$
+				$c \leftarrow 0$\;
 				}{
-				$c \leftarrow 1$
+				$c \leftarrow 1$\;
 			}
-			$d \leftarrow$ \Minimum{$d[i - 1, j] + 1, d[i, j - 1] + 1, d[i - 1, j - 1] + c$}
+			$d \leftarrow$ \Minimum{$d[i - 1, j] + 1, d[i, j - 1] + 1, d[i - 1, j - 1] + c$}\;
 		}
 	}
-	\Return{$d[m, n]$}
+	\Return{$d[m, n]$}\;
 	\caption{Algorytm Wagnera--Fischera}
 \end{algorithm}
 
@@ -131,11 +130,11 @@ algorytmie klasyfikatora.
 Algorytm 3 przedstawia eksperymentalny algorytm klasyfikatora.
 
 % [ ] osCpu: getOsCpu
-% [?] languages: getLanguages
+% [ ] languages: getLanguages
 % [ ] colorDepth: getColorDepth
 % [ ] deviceMemory: getDeviceMemory
-% [?] screenResolution: getScreenResolution
-% [?] availableScreenResolution: getAvailableScreenResolution
+% [ ] screenResolution: getScreenResolution
+% [ ] availableScreenResolution: getAvailableScreenResolution
 % [ ] hardwareConcurrency: getHardwareConcurrency
 % [x] timezoneOffset: getTimezoneOffset
 % [x] timezone: getTimezone
@@ -164,10 +163,37 @@ Algorytm 3 przedstawia eksperymentalny algorytm klasyfikatora.
 	\SetAlgoCaptionSeparator{.}
 	\SetKwInOut{Input}{Dane}
 	\SetKwInOut{Output}{Wynik}
+	\SetKwData{VarF}{f}
+	\SetKwData{VarG}{g}
+	\SetKwData{VarMax}{max}
+	\SetKwData{VarRatio}{ratio}
+	\SetKwData{VarCandidate}{candidate}
+	\SetKwData{SetG}{G}
+	\SetKwFunction{HardwareRelatedCompatibility}{hardwareRelatedCompatibility}
+	\SetKwFunction{Continue}{continue}
+	\SetKwFunction{Similarity}{similarity}
+	\SetKw{Null}{NULL}
 	\BlankLine
-	\Input{\emph{fingerprint}}
-	\Output{\emph{fingerprint}, do którego jest najbardziej podobny, jeśli istnieje}
+	\Input{Zbiór \emph{fingerprintów} \SetG i \emph{fingerprint} \VarF}
+	\Output{\emph{fingerprint}, do którego \VarF jest najbardziej podobny, jeśli istnieje}
 	\BlankLine
+	\VarMax $\leftarrow 0$\;
+	\ForEach{\VarG $\in$ \SetG}{
+		\If{\HardwareRelatedCompatibility{\VarF, \VarG} $< 0.9$}{
+			\Continue\;
+		}
+		\BlankLine
+		\VarRatio $\leftarrow$ \Similarity{\VarF, \VarG}\;
+		\BlankLine
+		\If{\VarRatio $>$ \VarMax}{
+			\VarMax $\leftarrow$ \VarRatio\;
+			\VarCandidate $\leftarrow$ \VarG\;
+		}
+	}
+	\If{\VarMax $\ge 0.75$}{
+		\Return{\VarCandidate}\;
+	}
+	\Return{\Null}\;
 	\caption{Eksperymentalny klasyfikator}
 \end{algorithm}
 
