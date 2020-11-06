@@ -277,3 +277,8 @@ TSWLatexianTemp*
 
 # JetBrains
 .idea
+
+# Heaviest Objects In The Universe
+apps/experimental/web/app/node_modules/
+apps/experimental/web/app/.cache
+apps/experimental/web/app/dist
