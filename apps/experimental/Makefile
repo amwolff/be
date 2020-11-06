@@ -5,7 +5,7 @@ web-dev:
 	node:latest npm run dev
 
 web-build:
-	docker run -it --rm --name experimental-web-dev \
+	docker run -it --rm --name experimental-web-build \
 	-v /home/artur/devel/be/apps/experimental/web/app/:/usr/src/app \
 	-w /usr/src/app \
 	node:latest npm run build
