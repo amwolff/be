@@ -204,5 +204,17 @@ w Go.
 \end{algorithm}
 
 \section{Ocena złożoności czasowej i pamięciowej}
+Załóżmy, że \texttt{hardwareRelatedCompatibility} działa w czasie stałym.
+Zgodnie z wcześniejszym ustaleniami \texttt{similarity} powinna działać w czasie
+co najwyżej kwadratowym, proporcjonalnym do długości \emph{fingerprintu}
+(algorytm Wagnera--Fischera działa w czasie \(\Theta(mn)\), gdzie \(m\) i \(n\)
+to długości porównywanych ciągów). Warto jednak zauważyć, że długość
+\emph{fingerprintu} jest stała. Proponowany algorytm przegląda wszystkie
+zapisane wcześniej \emph{fingerprinty} i dla każdego obrotu wykonuje stałą
+pracę. Możemy zatem stwierdzić, że proponowany algorytm działa w czasie
+liniowym.
+
+Mając na uwadze rozważania z poprzedniego akapitu, możemy także stwierdzić, że
+pamięć używana przez proponowany algorytm jest stała.
 
 \section{Ocena efektywności}
