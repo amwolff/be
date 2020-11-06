@@ -86,39 +86,41 @@ Wagnera--Fischera. Implementacja 5 jest optymalnym wariantem tego algorytmu
 pamięci a Implementacja 5 liniową). Taki wariant jest stosowany później w
 algorytmie klasyfikatora.
 
-% TODO It should be more consistent with the style in the others.
 \begin{algorithm}
 	\SetAlgoVlined
 	\SetAlgoCaptionSeparator{.}
 	\SetKwInOut{Input}{Dane}
 	\SetKwInOut{Output}{Wynik}
-	\SetKwData{VarA}{a}
-	\SetKwData{VarB}{b}
 	\SetKwData{VarM}{m}
 	\SetKwData{VarN}{n}
+	\SetKwData{VarC}{c}
+	\SetKwArray{VarA}{a}
+	\SetKwArray{VarB}{b}
+	\SetKwArray{VarD}{d}
+	\SetKwArray{VarE}{}
 	\SetKwFunction{Minimum}{minimum}
 	\BlankLine
 	\Input{ciągi znaków \VarA i \VarB o długościach odpowiednio \VarM i \VarN}
 	\Output{odległość Levenshteina}
 	\BlankLine
-	$d \leftarrow [0 \dots m, 0 \dots n]$\;
+	\VarD $\leftarrow$ \VarE{$0 \dots$ \VarM, $0 \dots$ \VarN}\;
 	\For{$i \leftarrow 1$ \KwTo \VarM}{
-		$d[i, 0] \leftarrow i$\;
+		\VarD{$i$, $0$} $\leftarrow i$\;
 	}
 	\For{$j \leftarrow 1$ \KwTo \VarN}{
-		$d[0, j] \leftarrow j$\;
+		\VarD{$0$, $j$} $\leftarrow j$\;
 	}
 	\For{$j \leftarrow 1$ \KwTo \VarN}{
 		\For{$i \leftarrow 1$ \KwTo \VarM}{
-			\eIf{$a[i - 1] = b[j - 1]$}{
-				$c \leftarrow 0$\;
+			\eIf{\VarA{$i - 1$} $=$ \VarB{$j - 1$}}{
+				\VarC $\leftarrow 0$\;
 				}{
-				$c \leftarrow 1$\;
+				\VarC $\leftarrow 1$\;
 			}
-			$d \leftarrow$ \Minimum{$d[i - 1, j] + 1, d[i, j - 1] + 1, d[i - 1, j - 1] + c$}\;
+			\VarD{$i$, $j$} $\leftarrow$ \Minimum{\VarD{$i - 1$, $j$} $+$ $1$, \VarD{$i$, $j - 1$} $+$ $1$, \VarD{$i - 1$, $j - 1$} $+$ \VarC}\;
 		}
 	}
-	\Return{$d[m, n]$}\;
+	\Return{\VarD{\VarM, \VarN}}\;
 	\caption{Algorytm Wagnera--Fischera}
 \end{algorithm}
 
@@ -127,7 +129,12 @@ algorytmie klasyfikatora.
 \lstinputlisting[float,language=Go,caption=Algorytm Wagnera--Fischera w Go (liniowa pamięć),firstline=46,lastline=74,tabsize=4]{go/levenshtein.go}
 
 \section{Pseudokod}
-Algorytm 3 przedstawia eksperymentalny algorytm klasyfikatora.
+Algorytm 3 obrazuje eksperymentalny algorytm klasyfikatora \emph{fingerprintów}.
+Funkcja \texttt{hardwareRelatedCompatibility} odpowiada za binarne porównanie
+wcześniej omawianych, teoretycznie niezmiennych komponentów. Funkcja
+\texttt{similarity} bazując na odległości Levenshteina, przeprowadza porównanie
+dla reszty komponentów. Implementacja 6 przedstawia implementację tego algorytmu
+w Go.
 
 % [ ] osCpu: getOsCpu
 % [ ] languages: getLanguages
@@ -143,7 +150,6 @@ Algorytm 3 przedstawia eksperymentalny algorytm klasyfikatora.
 % [ ] indexedDB: getIndexedDB
 % [ ] openDatabase: getOpenDatabase
 % [ ] cpuClass: getCpuClass
-% // Maybe it should be excluded: https://github.com/fingerprintjs/fingerprintjs/issues/514#issuecomment-688754892
 % [?] platform: getPlatform
 % [x] plugins: getPlugins
 % [ ] canvas: getCanvasFingerprint
@@ -179,7 +185,7 @@ Algorytm 3 przedstawia eksperymentalny algorytm klasyfikatora.
 	\BlankLine
 	\VarMax $\leftarrow 0$\;
 	\ForEach{\VarG $\in$ \SetG}{
-		\If{\HardwareRelatedCompatibility{\VarF, \VarG} $< 0.9$}{
+		\If{\HardwareRelatedCompatibility{\VarF, \VarG} $< \alpha$}{
 			\Continue\;
 		}
 		\BlankLine
@@ -190,7 +196,7 @@ Algorytm 3 przedstawia eksperymentalny algorytm klasyfikatora.
 			\VarCandidate $\leftarrow$ \VarG\;
 		}
 	}
-	\If{\VarMax $\ge 0.75$}{
+	\If{\VarMax $\ge \beta$}{
 		\Return{\VarCandidate}\;
 	}
 	\Return{\Null}\;
