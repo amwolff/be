@@ -22,12 +22,12 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 		want1        bool
 	}{
 		{
-			name:  "fingerprints and f are empty",
+			name:  "Fingerprints and f are empty",
 			want:  Fingerprint{},
 			want1: false,
 		},
 		{
-			name: "fingerprints is empty",
+			name: "Fingerprints is empty",
 			f: Fingerprint{
 				OsCPU: OsCPU{
 					Value: "Linux x86_64",
@@ -37,7 +37,7 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 			want1: false,
 		},
 		{
-			name: `f is similar to fingerprints["fZRMtpX"]`,
+			name: `f is similar to Fingerprints["fZRMtpX"]`,
 			fingerprints: map[string][]Fingerprint{
 				"fZRMtpX": {
 					fZRMtpX,
@@ -100,7 +100,7 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			e := ExperimentalInMemory{
-				fingerprints: tt.fingerprints,
+				Fingerprints: tt.fingerprints,
 			}
 			got, got1 := e.Do(tt.f)
 			if !reflect.DeepEqual(got, tt.want) {
@@ -175,7 +175,7 @@ func TestNewExperimentalInMemory(t *testing.T) {
 		{
 			name: "basic",
 			want: ExperimentalInMemory{
-				fingerprints: make(map[string][]Fingerprint),
+				Fingerprints: make(map[string][]Fingerprint),
 			},
 		},
 	}
@@ -459,6 +459,7 @@ func Test_similarity(t *testing.T) {
 			},
 			want: 111. / 112,
 		},
+		// TODO(amwolff): add more test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
