@@ -1,3 +1,10 @@
-console.log('hello world')
-console.log('hello world 2')
-console.log('hello world 3')
+import 'regenerator-runtime/runtime';
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
+
+(async () => {
+    const fp = await FingerprintJS.load();
+
+    const result = await fp.get();
+
+    console.log(result.visitorId);
+})();
