@@ -1,32 +1,108 @@
 package classifier
 
 import (
+	"math"
 	"reflect"
 	"testing"
 )
 
+var fZRMtpX = Fingerprint{
+	VisitorID: "fZRMtpX",
+	OsCPU: OsCPU{
+		Value: "Windows NT 6.2",
+	},
+}
+
 func TestExperimentalInMemory_Do(t *testing.T) {
-	type fields struct {
-		fingerprints map[string][]Fingerprint
-	}
-	type args struct {
-		f Fingerprint
-	}
 	tests := []struct {
-		name   string
-		fields fields
-		args   args
-		want   Fingerprint
-		want1  bool
+		name         string
+		fingerprints map[string][]Fingerprint
+		f            Fingerprint
+		want         Fingerprint
+		want1        bool
 	}{
-		// TODO: Add test cases.
+		{
+			name:  "fingerprints and f are empty",
+			want:  Fingerprint{},
+			want1: false,
+		},
+		{
+			name: "fingerprints is empty",
+			f: Fingerprint{
+				OsCPU: OsCPU{
+					Value: "Linux x86_64",
+				},
+			},
+			want:  Fingerprint{},
+			want1: false,
+		},
+		{
+			name: `f is similar to fingerprints["fZRMtpX"]`,
+			fingerprints: map[string][]Fingerprint{
+				"fZRMtpX": {
+					fZRMtpX,
+				},
+			},
+			f: Fingerprint{
+				OsCPU: OsCPU{
+					Value: "Windows NT 6.3",
+				},
+			},
+			want:  fZRMtpX,
+			want1: true,
+		},
+		{
+			name: "f isn't similar to any other fingerprint",
+			fingerprints: map[string][]Fingerprint{
+				"fZRMtpX": {
+					fZRMtpX,
+				},
+			},
+			f: Fingerprint{
+				OsCPU: OsCPU{
+					Value: "Linux x86_64",
+				},
+				Languages: Languages{
+					Value: [][]string{
+						{
+							"en-US",
+						},
+						{
+							"en-US",
+							"en",
+						},
+					},
+				},
+				Timezone: Timezone{
+					Value: "Europe/Warsaw",
+				},
+				Platform: Platform{
+					Value: "Linux x86_64",
+				},
+				Fonts: Fonts{
+					Value: []string{
+						"Batang",
+						"Bitstream Vera Sans Mono",
+						"MS Mincho",
+						"MS UI Gothic",
+						"Meiryo UI",
+						"PMingLiU",
+					},
+				},
+				ProductSub: ProductSub{
+					Value: "20100101",
+				},
+			},
+			want:  Fingerprint{},
+			want1: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			e := ExperimentalInMemory{
-				fingerprints: tt.fields.fingerprints,
+				fingerprints: tt.fingerprints,
 			}
-			got, got1 := e.Do(tt.args.f)
+			got, got1 := e.Do(tt.f)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Do() got = %v, want %v", got, tt.want)
 			}
@@ -96,7 +172,12 @@ func TestNewExperimentalInMemory(t *testing.T) {
 		name string
 		want ExperimentalInMemory
 	}{
-		// TODO: Add test cases.
+		{
+			name: "basic",
+			want: ExperimentalInMemory{
+				fingerprints: make(map[string][]Fingerprint),
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -269,32 +350,6 @@ func TestVendor_String(t *testing.T) {
 	}
 }
 
-func TestWorthless_Do(t *testing.T) {
-	type args struct {
-		f Fingerprint
-	}
-	tests := []struct {
-		name  string
-		args  args
-		want  Fingerprint
-		want1 bool
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			w := Worthless{}
-			got, got1 := w.Do(tt.args.f)
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Do() got = %v, want %v", got, tt.want)
-			}
-			if got1 != tt.want1 {
-				t.Errorf("Do() got1 = %v, want %v", got1, tt.want1)
-			}
-		})
-	}
-}
-
 func Test_hardwareRelatedCompatibility(t *testing.T) {
 	type args struct {
 		a Fingerprint
@@ -326,7 +381,22 @@ func Test_max(t *testing.T) {
 		args args
 		want int
 	}{
-		// TODO: Add test cases.
+		{
+			name: "a > b",
+			args: args{
+				a: math.MaxInt64,
+				b: math.MinInt64,
+			},
+			want: math.MaxInt64,
+		},
+		{
+			name: "a < b",
+			args: args{
+				a: math.MinInt64,
+				b: math.MaxInt64,
+			},
+			want: math.MaxInt64,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -347,7 +417,48 @@ func Test_similarity(t *testing.T) {
 		args args
 		want float64
 	}{
-		// TODO: Add test cases.
+		{
+			name: "basic, empty",
+			want: 1,
+		},
+		{
+			name: "basic, a is empty",
+			args: args{
+				b: Fingerprint{
+					OsCPU: OsCPU{
+						Value: "Linux x86_64",
+					},
+				},
+			},
+			want: 7. / 8,
+		},
+		{
+			name: "basic, b is empty",
+			args: args{
+				a: Fingerprint{
+					OsCPU: OsCPU{
+						Value: "Linux x86_64",
+					},
+				},
+			},
+			want: 7. / 8,
+		},
+		{
+			name: "OsCPU",
+			args: args{
+				a: Fingerprint{
+					OsCPU: OsCPU{
+						Value: "Windows NT 6.2",
+					},
+				},
+				b: Fingerprint{
+					OsCPU: OsCPU{
+						Value: "Windows NT 6.3",
+					},
+				},
+			},
+			want: 111. / 112,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

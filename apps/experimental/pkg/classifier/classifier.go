@@ -363,7 +363,9 @@ func similarity(a, b Fingerprint) float64 {
 		d, l := levenshtein.LinearSpace(c[0], c[1]), max(len(c[0]), len(c[1]))
 		// We are subtracting from 1 here because it then means that these two
 		// strings are compatible in this ratio.
-		ratiosSum += 1 - float64(d)/float64(l)
+		if ratiosSum++; l > 0 {
+			ratiosSum -= float64(d) / float64(l)
+		}
 	}
 
 	return ratiosSum / float64(len(components))
