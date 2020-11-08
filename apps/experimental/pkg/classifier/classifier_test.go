@@ -6,6 +6,11 @@ import (
 	"testing"
 )
 
+const (
+	testError = "test error"
+	testValue = "test value"
+)
+
 func ptrToString(s string) *string {
 	return &s
 }
@@ -31,26 +36,26 @@ func Test_stringValueOrError(t *testing.T) {
 		{
 			name: "has error, no value",
 			args: args{
-				err: ptrToString("test error"),
+				err: ptrToString(testError),
 				val: nil,
 			},
-			want: "test error",
+			want: testError,
 		},
 		{
 			name: "no error, has value",
 			args: args{
 				err: nil,
-				val: ptrToString("test value"),
+				val: ptrToString(testValue),
 			},
-			want: "test value",
+			want: testValue,
 		},
 		{
 			name: "has error, has value",
 			args: args{
-				err: ptrToString("test error"),
-				val: ptrToString("test value"),
+				err: ptrToString(testError),
+				val: ptrToString(testValue),
 			},
-			want: "test error",
+			want: testError,
 		},
 	}
 	for _, tt := range tests {
@@ -83,26 +88,26 @@ func Test_standardStringValueOrError(t *testing.T) {
 		{
 			name: "has error, no value",
 			args: args{
-				err: ptrToString("test error"),
+				err: ptrToString(testError),
 				val: "",
 			},
-			want: "test error",
+			want: testError,
 		},
 		{
 			name: "no error, has value",
 			args: args{
 				err: nil,
-				val: "test value",
+				val: testValue,
 			},
-			want: "test value",
+			want: testValue,
 		},
 		{
 			name: "has error, has value",
 			args: args{
-				err: ptrToString("test error"),
-				val: "test value",
+				err: ptrToString(testError),
+				val: testValue,
 			},
-			want: "test error",
+			want: testError,
 		},
 	}
 	for _, tt := range tests {
@@ -135,85 +140,85 @@ func Test_hardwareRelatedCompatibility(t *testing.T) {
 			args: args{
 				a: Fingerprint{
 					OsCPU: OsCPU{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Languages: Languages{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ColorDepth: ColorDepth{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					DeviceMemory: DeviceMemory{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ScreenResolution: ScreenResolution{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					AvailableScreenResolution: AvailableScreenResolution{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					HardwareConcurrency: HardwareConcurrency{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					TimezoneOffset: TimezoneOffset{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Timezone: Timezone{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					SessionStorage: SessionStorage{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					LocalStorage: LocalStorage{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					IndexedDB: IndexedDB{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					OpenDatabase: OpenDatabase{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					CPUClass: CPUClass{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Platform: Platform{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Plugins: Plugins{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Canvas: Canvas{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					TouchSupport: TouchSupport{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Fonts: Fonts{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Audio: Audio{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					PluginsSupport: PluginsSupport{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ProductSub: ProductSub{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					EmptyEvalLength: EmptyEvalLength{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ErrorFF: ErrorFF{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Vendor: Vendor{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Chrome: Chrome{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					CookiesEnabled: CookiesEnabled{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 				},
 			},
@@ -224,85 +229,85 @@ func Test_hardwareRelatedCompatibility(t *testing.T) {
 			args: args{
 				b: Fingerprint{
 					OsCPU: OsCPU{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Languages: Languages{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ColorDepth: ColorDepth{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					DeviceMemory: DeviceMemory{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ScreenResolution: ScreenResolution{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					AvailableScreenResolution: AvailableScreenResolution{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					HardwareConcurrency: HardwareConcurrency{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					TimezoneOffset: TimezoneOffset{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Timezone: Timezone{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					SessionStorage: SessionStorage{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					LocalStorage: LocalStorage{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					IndexedDB: IndexedDB{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					OpenDatabase: OpenDatabase{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					CPUClass: CPUClass{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Platform: Platform{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Plugins: Plugins{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Canvas: Canvas{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					TouchSupport: TouchSupport{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Fonts: Fonts{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Audio: Audio{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					PluginsSupport: PluginsSupport{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ProductSub: ProductSub{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					EmptyEvalLength: EmptyEvalLength{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ErrorFF: ErrorFF{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Vendor: Vendor{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Chrome: Chrome{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					CookiesEnabled: CookiesEnabled{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 				},
 			},
@@ -313,168 +318,168 @@ func Test_hardwareRelatedCompatibility(t *testing.T) {
 			args: args{
 				a: Fingerprint{
 					OsCPU: OsCPU{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Languages: Languages{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ColorDepth: ColorDepth{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					DeviceMemory: DeviceMemory{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ScreenResolution: ScreenResolution{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					AvailableScreenResolution: AvailableScreenResolution{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					HardwareConcurrency: HardwareConcurrency{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					TimezoneOffset: TimezoneOffset{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Timezone: Timezone{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					SessionStorage: SessionStorage{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					LocalStorage: LocalStorage{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					IndexedDB: IndexedDB{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					OpenDatabase: OpenDatabase{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					CPUClass: CPUClass{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Platform: Platform{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Plugins: Plugins{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Canvas: Canvas{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					TouchSupport: TouchSupport{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Fonts: Fonts{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Audio: Audio{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					PluginsSupport: PluginsSupport{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ProductSub: ProductSub{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					EmptyEvalLength: EmptyEvalLength{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ErrorFF: ErrorFF{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Vendor: Vendor{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Chrome: Chrome{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					CookiesEnabled: CookiesEnabled{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 				},
 				b: Fingerprint{
 					OsCPU: OsCPU{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Languages: Languages{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ColorDepth: ColorDepth{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					DeviceMemory: DeviceMemory{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ScreenResolution: ScreenResolution{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					AvailableScreenResolution: AvailableScreenResolution{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					HardwareConcurrency: HardwareConcurrency{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					TimezoneOffset: TimezoneOffset{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Timezone: Timezone{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					SessionStorage: SessionStorage{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					LocalStorage: LocalStorage{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					IndexedDB: IndexedDB{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					OpenDatabase: OpenDatabase{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					CPUClass: CPUClass{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Platform: Platform{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Plugins: Plugins{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Canvas: Canvas{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					TouchSupport: TouchSupport{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Fonts: Fonts{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Audio: Audio{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					PluginsSupport: PluginsSupport{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ProductSub: ProductSub{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					EmptyEvalLength: EmptyEvalLength{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					ErrorFF: ErrorFF{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Vendor: Vendor{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					Chrome: Chrome{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 					CookiesEnabled: CookiesEnabled{
-						Error: ptrToString("test error"),
+						Error: ptrToString(testError),
 					},
 				},
 			},
@@ -865,12 +870,12 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 		want1        bool
 	}{
 		{
-			name:  "Fingerprints and f are empty",
+			name:  "fingerprints and f are empty",
 			want:  Fingerprint{},
 			want1: false,
 		},
 		{
-			name: "Fingerprints is empty",
+			name: "fingerprints is empty",
 			f: Fingerprint{
 				OsCPU: OsCPU{
 					Value: ptrToString("Linux x86_64"),
@@ -880,7 +885,7 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 			want1: false,
 		},
 		{
-			name: `f is similar to Fingerprints["fZRMtpX"]`,
+			name: `f is similar to fingerprints["fZRMtpX"]`,
 			fingerprints: map[string][]Fingerprint{
 				"fZRMtpX": {
 					fZRMtpX,
@@ -1025,7 +1030,7 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			e := ExperimentalInMemory{
-				Fingerprints: tt.fingerprints,
+				fingerprints: tt.fingerprints,
 			}
 			got, got1 := e.Do(tt.f)
 			if !reflect.DeepEqual(got, tt.want) {
@@ -1048,15 +1053,15 @@ func TestExperimentalInMemory_Store(t *testing.T) {
 
 	e.Store(keyB, Fingerprint{VisitorID: "3"})
 
-	if len(e.Fingerprints) != 2 {
+	if len(e.fingerprints) != 2 {
 		t.Error("storage inconsistency")
 	}
 
-	if len(e.Fingerprints[keyA]) != 2 {
+	if len(e.fingerprints[keyA]) != 2 {
 		t.Errorf("storage inconsistency under key = %s", keyA)
 	}
 
-	if len(e.Fingerprints[keyB]) != 1 {
+	if len(e.fingerprints[keyB]) != 1 {
 		t.Errorf("storage inconsistency under key = %s", keyB)
 	}
 }
@@ -1069,7 +1074,7 @@ func TestNewExperimentalInMemory(t *testing.T) {
 		{
 			name: "basic",
 			want: ExperimentalInMemory{
-				Fingerprints: make(map[string][]Fingerprint),
+				fingerprints: make(map[string][]Fingerprint),
 			},
 		},
 	}
