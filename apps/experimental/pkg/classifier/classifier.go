@@ -603,6 +603,10 @@ func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
 	return Fingerprint{}, false
 }
 
+func (e ExperimentalInMemory) Store(key string, f Fingerprint) {
+	e.Fingerprints[key] = append(e.Fingerprints[key], f)
+}
+
 func NewExperimentalInMemory() ExperimentalInMemory {
 	return ExperimentalInMemory{
 		Fingerprints: make(map[string][]Fingerprint),

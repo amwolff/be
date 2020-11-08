@@ -1038,6 +1038,29 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 	}
 }
 
+func TestExperimentalInMemory_Store(t *testing.T) {
+	e := NewExperimentalInMemory()
+
+	keyA, keyB := "a", "b"
+
+	e.Store(keyA, Fingerprint{VisitorID: "1"})
+	e.Store(keyA, Fingerprint{VisitorID: "2"})
+
+	e.Store(keyB, Fingerprint{VisitorID: "3"})
+
+	if len(e.Fingerprints) != 2 {
+		t.Error("storage inconsistency")
+	}
+
+	if len(e.Fingerprints[keyA]) != 2 {
+		t.Errorf("storage inconsistency under key = %s", keyA)
+	}
+
+	if len(e.Fingerprints[keyB]) != 1 {
+		t.Errorf("storage inconsistency under key = %s", keyB)
+	}
+}
+
 func TestNewExperimentalInMemory(t *testing.T) {
 	tests := []struct {
 		name string
