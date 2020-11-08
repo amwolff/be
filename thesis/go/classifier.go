@@ -575,7 +575,7 @@ func similarity(a, b Fingerprint) float64 {
 }
 
 type ExperimentalInMemory struct {
-	Fingerprints map[string][]Fingerprint
+	fingerprints map[string][]Fingerprint
 }
 
 func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
@@ -584,7 +584,7 @@ func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
 		candidate Fingerprint
 	)
 
-	for _, fingerprints := range e.Fingerprints {
+	for _, fingerprints := range e.fingerprints {
 		for _, g := range fingerprints {
 			if hardwareRelatedCompatibility(f, g) < 0.85 {
 				continue
@@ -603,8 +603,12 @@ func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
 	return Fingerprint{}, false
 }
 
+func (e ExperimentalInMemory) Store(key string, f Fingerprint) {
+	e.fingerprints[key] = append(e.fingerprints[key], f)
+}
+
 func NewExperimentalInMemory() ExperimentalInMemory {
 	return ExperimentalInMemory{
-		Fingerprints: make(map[string][]Fingerprint),
+		fingerprints: make(map[string][]Fingerprint),
 	}
 }
