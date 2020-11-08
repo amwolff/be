@@ -6,30 +6,47 @@ import (
 	"github.com/amwolff/be/apps/experimental/internal/levenshtein"
 )
 
-const sep = " "
+const (
+	Undefined = "f1a626ef-1003-44d8-9cff-f88019975c5c"
+	sep       = " "
+)
+
+func stringValueOrError(err, val *string) string {
+	if err != nil {
+		return *err
+	}
+	if val != nil {
+		return *val
+	}
+	return Undefined
+}
+
+func standardStringValueOrError(err *string, val string) string {
+	if err != nil {
+		return *err
+	}
+	return val
+}
 
 type OsCPU struct {
-	Value    string `json:"value"`
-	Error    string `json:"error"`
-	Duration int    `json:"duration"`
+	Value    *string `json:"value"`
+	Error    *string `json:"error"`
+	Duration int     `json:"duration"`
 }
 
 func (o OsCPU) String() string {
-	if len(o.Error) > 0 {
-		return o.Error
-	}
-	return o.Value
+	return stringValueOrError(o.Error, o.Value)
 }
 
 type Languages struct {
 	Value    [][]string `json:"value"`
-	Error    string     `json:"error"`
+	Error    *string    `json:"error"`
 	Duration int        `json:"duration"`
 }
 
 func (l Languages) String() string {
-	if len(l.Error) > 0 {
-		return l.Error
+	if l.Error != nil {
+		return *l.Error
 	}
 
 	var b strings.Builder
@@ -46,89 +63,83 @@ func (l Languages) String() string {
 
 type (
 	ColorDepth struct {
-		Value    int    `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    int     `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	DeviceMemory struct {
-		Value    int    `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    *int    `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	ScreenResolution struct {
-		Value    [2]int `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    [2]int  `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	AvailableScreenResolution struct {
-		Value    [2]int `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    *[2]int `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	HardwareConcurrency struct {
-		Value    int    `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    int     `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	TimezoneOffset struct {
-		Value    int    `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    int     `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 )
 
 type Timezone struct {
-	Value    string `json:"value"`
-	Error    string `json:"error"`
-	Duration int    `json:"duration"`
+	Value    *string `json:"value"`
+	Error    *string `json:"error"`
+	Duration int     `json:"duration"`
 }
 
 func (t Timezone) String() string {
-	if len(t.Error) > 0 {
-		return t.Error
-	}
-	return t.Value
+	return stringValueOrError(t.Error, t.Value)
 }
 
 type (
 	SessionStorage struct {
-		Value    bool   `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    bool    `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	LocalStorage struct {
-		Value    bool   `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    bool    `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	IndexedDB struct {
-		Value    bool   `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    *bool   `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	OpenDatabase struct {
-		Value    bool   `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    bool    `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	CPUClass struct {
-		Value    string `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    *string `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 )
 
 type Platform struct {
-	Value    string `json:"value"`
-	Error    string `json:"error"`
-	Duration int    `json:"duration"`
+	Value    string  `json:"value"`
+	Error    *string `json:"error"`
+	Duration int     `json:"duration"`
 }
 
 func (p Platform) String() string {
-	if len(p.Error) > 0 {
-		return p.Error
-	}
-	return p.Value
+	return standardStringValueOrError(p.Error, p.Value)
 }
 
 type (
@@ -137,20 +148,24 @@ type (
 		Suffixes string `json:"suffixes"`
 	}
 	PluginsValue struct {
-		Name        string   `json:"name"`
-		Description string   `json:"description"`
-		MimeTypes   []string `json:"mimeTypes"`
+		Name        string                  `json:"name"`
+		Description string                  `json:"description"`
+		MimeTypes   []PluginsValueMimeTypes `json:"mimeTypes"`
 	}
 	Plugins struct {
 		Value    []PluginsValue `json:"value"`
-		Error    string         `json:"error"`
+		Error    *string        `json:"error"`
 		Duration int            `json:"duration"`
 	}
 )
 
 func (p Plugins) String() string {
-	if len(p.Error) > 0 {
-		return p.Error
+	if p.Error != nil {
+		return *p.Error
+	}
+
+	if p.Value == nil {
+		return Undefined
 	}
 
 	var b strings.Builder
@@ -159,11 +174,17 @@ func (p Plugins) String() string {
 		if i > 0 {
 			b.WriteString(sep)
 		}
+
 		b.WriteString(v.Name)
 		b.WriteString(sep)
 		b.WriteString(v.Description)
-		b.WriteString(sep)
-		b.WriteString(strings.Join(v.MimeTypes, sep))
+
+		for _, t := range v.MimeTypes {
+			b.WriteString(sep)
+			b.WriteString(t.Type)
+			b.WriteString(sep)
+			b.WriteString(t.Suffixes)
+		}
 	}
 
 	return b.String()
@@ -176,7 +197,7 @@ type (
 	}
 	Canvas struct {
 		Value    CanvasValue `json:"value"`
-		Error    string      `json:"error"`
+		Error    *string     `json:"error"`
 		Duration int         `json:"duration"`
 	}
 	TouchSupportValue struct {
@@ -186,20 +207,20 @@ type (
 	}
 	TouchSupport struct {
 		Value    TouchSupportValue `json:"value"`
-		Error    string            `json:"error"`
+		Error    *string           `json:"error"`
 		Duration int               `json:"duration"`
 	}
 )
 
 type Fonts struct {
 	Value    []string `json:"value"`
-	Error    string   `json:"error"`
+	Error    *string  `json:"error"`
 	Duration int      `json:"duration"`
 }
 
 func (f Fonts) String() string {
-	if len(f.Error) > 0 {
-		return f.Error
+	if f.Error != nil {
+		return *f.Error
 	}
 	return strings.Join(f.Value, sep)
 }
@@ -207,65 +228,59 @@ func (f Fonts) String() string {
 type (
 	Audio struct {
 		Value    float64 `json:"value"`
-		Error    string  `json:"error"`
+		Error    *string `json:"error"`
 		Duration int     `json:"duration"`
 	}
 	PluginsSupport struct {
-		Value    bool   `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    bool    `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 )
 
 type ProductSub struct {
-	Value    string `json:"value"`
-	Error    string `json:"error"`
-	Duration int    `json:"duration"`
+	Value    string  `json:"value"`
+	Error    *string `json:"error"`
+	Duration int     `json:"duration"`
 }
 
 func (p ProductSub) String() string {
-	if len(p.Error) > 0 {
-		return p.Error
-	}
-	return p.Value
+	return standardStringValueOrError(p.Error, p.Value)
 }
 
 type (
 	EmptyEvalLength struct {
-		Value    int    `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    int     `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	ErrorFF struct {
-		Value    bool   `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    bool    `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 )
 
 type Vendor struct {
-	Value    string `json:"value"`
-	Error    string `json:"error"`
-	Duration int    `json:"duration"`
+	Value    string  `json:"value"`
+	Error    *string `json:"error"`
+	Duration int     `json:"duration"`
 }
 
 func (v Vendor) String() string {
-	if len(v.Error) > 0 {
-		return v.Error
-	}
-	return v.Value
+	return standardStringValueOrError(v.Error, v.Value)
 }
 
 type (
 	Chrome struct {
-		Value    bool   `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    bool    `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 	CookiesEnabled struct {
-		Value    bool   `json:"value"`
-		Error    string `json:"error"`
-		Duration int    `json:"duration"`
+		Value    bool    `json:"value"`
+		Error    *string `json:"error"`
+		Duration int     `json:"duration"`
 	}
 )
 
@@ -360,6 +375,12 @@ func similarity(a, b Fingerprint) float64 {
 	var ratiosSum float64
 
 	for _, c := range components {
+		if c[0] == Undefined || c[1] == Undefined {
+			if c[0] == Undefined && c[1] == Undefined {
+				ratiosSum++
+			}
+			continue
+		}
 		d, l := levenshtein.LinearSpace(c[0], c[1]), max(len(c[0]), len(c[1]))
 		// We are subtracting from 1 here because it then means that these two
 		// strings are compatible in this ratio.

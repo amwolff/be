@@ -6,10 +6,14 @@ import (
 	"testing"
 )
 
+func ptrToString(s string) *string {
+	return &s
+}
+
 var fZRMtpX = Fingerprint{
 	VisitorID: "fZRMtpX",
 	OsCPU: OsCPU{
-		Value: "Windows NT 6.2",
+		Value: ptrToString("Windows NT 6.2"),
 	},
 }
 
@@ -30,7 +34,7 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 			name: "Fingerprints is empty",
 			f: Fingerprint{
 				OsCPU: OsCPU{
-					Value: "Linux x86_64",
+					Value: ptrToString("Linux x86_64"),
 				},
 			},
 			want:  Fingerprint{},
@@ -45,7 +49,7 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 			},
 			f: Fingerprint{
 				OsCPU: OsCPU{
-					Value: "Windows NT 6.3",
+					Value: ptrToString("Windows NT 6.3"),
 				},
 			},
 			want:  fZRMtpX,
@@ -60,7 +64,7 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 			},
 			f: Fingerprint{
 				OsCPU: OsCPU{
-					Value: "Linux x86_64",
+					Value: ptrToString("Linux x86_64"),
 				},
 				Languages: Languages{
 					Value: [][]string{
@@ -74,7 +78,7 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 					},
 				},
 				Timezone: Timezone{
-					Value: "Europe/Warsaw",
+					Value: ptrToString("Europe/Warsaw"),
 				},
 				Platform: Platform{
 					Value: "Linux x86_64",
@@ -113,60 +117,6 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 	}
 }
 
-func TestFonts_String(t *testing.T) {
-	type fields struct {
-		Value    []string
-		Error    string
-		Duration int
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			f := Fonts{
-				Value:    tt.fields.Value,
-				Error:    tt.fields.Error,
-				Duration: tt.fields.Duration,
-			}
-			if got := f.String(); got != tt.want {
-				t.Errorf("String() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestLanguages_String(t *testing.T) {
-	type fields struct {
-		Value    [][]string
-		Error    string
-		Duration int
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			l := Languages{
-				Value:    tt.fields.Value,
-				Error:    tt.fields.Error,
-				Duration: tt.fields.Duration,
-			}
-			if got := l.String(); got != tt.want {
-				t.Errorf("String() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
 func TestNewExperimentalInMemory(t *testing.T) {
 	tests := []struct {
 		name string
@@ -183,168 +133,6 @@ func TestNewExperimentalInMemory(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := NewExperimentalInMemory(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewExperimentalInMemory() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestOsCPU_String(t *testing.T) {
-	type fields struct {
-		Value    string
-		Error    string
-		Duration int
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			o := OsCPU{
-				Value:    tt.fields.Value,
-				Error:    tt.fields.Error,
-				Duration: tt.fields.Duration,
-			}
-			if got := o.String(); got != tt.want {
-				t.Errorf("String() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestPlatform_String(t *testing.T) {
-	type fields struct {
-		Value    string
-		Error    string
-		Duration int
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			p := Platform{
-				Value:    tt.fields.Value,
-				Error:    tt.fields.Error,
-				Duration: tt.fields.Duration,
-			}
-			if got := p.String(); got != tt.want {
-				t.Errorf("String() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestPlugins_String(t *testing.T) {
-	type fields struct {
-		Value    []PluginsValue
-		Error    string
-		Duration int
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			p := Plugins{
-				Value:    tt.fields.Value,
-				Error:    tt.fields.Error,
-				Duration: tt.fields.Duration,
-			}
-			if got := p.String(); got != tt.want {
-				t.Errorf("String() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestProductSub_String(t *testing.T) {
-	type fields struct {
-		Value    string
-		Error    string
-		Duration int
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			p := ProductSub{
-				Value:    tt.fields.Value,
-				Error:    tt.fields.Error,
-				Duration: tt.fields.Duration,
-			}
-			if got := p.String(); got != tt.want {
-				t.Errorf("String() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestTimezone_String(t1 *testing.T) {
-	type fields struct {
-		Value    string
-		Error    string
-		Duration int
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t1.Run(tt.name, func(t1 *testing.T) {
-			t := Timezone{
-				Value:    tt.fields.Value,
-				Error:    tt.fields.Error,
-				Duration: tt.fields.Duration,
-			}
-			if got := t.String(); got != tt.want {
-				t1.Errorf("String() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestVendor_String(t *testing.T) {
-	type fields struct {
-		Value    string
-		Error    string
-		Duration int
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			v := Vendor{
-				Value:    tt.fields.Value,
-				Error:    tt.fields.Error,
-				Duration: tt.fields.Duration,
-			}
-			if got := v.String(); got != tt.want {
-				t.Errorf("String() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -426,7 +214,7 @@ func Test_similarity(t *testing.T) {
 			args: args{
 				b: Fingerprint{
 					OsCPU: OsCPU{
-						Value: "Linux x86_64",
+						Value: ptrToString("Linux x86_64"),
 					},
 				},
 			},
@@ -437,7 +225,18 @@ func Test_similarity(t *testing.T) {
 			args: args{
 				a: Fingerprint{
 					OsCPU: OsCPU{
-						Value: "Linux x86_64",
+						Value: ptrToString("Linux x86_64"),
+					},
+				},
+			},
+			want: 7. / 8,
+		},
+		{
+			name: `special case (a.OsCPU.Value ← "", b.OsCPU.Value ← Undefined)`,
+			args: args{
+				a: Fingerprint{
+					OsCPU: OsCPU{
+						Value: ptrToString(""),
 					},
 				},
 			},
@@ -448,18 +247,78 @@ func Test_similarity(t *testing.T) {
 			args: args{
 				a: Fingerprint{
 					OsCPU: OsCPU{
-						Value: "Windows NT 6.2",
+						Value: ptrToString("Windows NT 6.2"),
 					},
 				},
 				b: Fingerprint{
 					OsCPU: OsCPU{
-						Value: "Windows NT 6.3",
+						Value: ptrToString("Windows NT 6.3"),
 					},
 				},
 			},
 			want: 111. / 112,
 		},
-		// TODO(amwolff): add more test cases.
+		{
+			name: "OsCPU, a has Timezone",
+			args: args{
+				a: Fingerprint{
+					OsCPU: OsCPU{
+						Value: ptrToString("Windows NT 6.2"),
+					},
+					Timezone: Timezone{
+						Value: ptrToString("Europe/London"),
+					},
+				},
+				b: Fingerprint{
+					OsCPU: OsCPU{
+						Value: ptrToString("Windows NT 6.3"),
+					},
+				},
+			},
+			want: 97. / 112,
+		},
+		{
+			name: "OsCPU, b has Timezone",
+			args: args{
+				a: Fingerprint{
+					OsCPU: OsCPU{
+						Value: ptrToString("Windows NT 6.2"),
+					},
+				},
+				b: Fingerprint{
+					OsCPU: OsCPU{
+						Value: ptrToString("Windows NT 6.3"),
+					},
+					Timezone: Timezone{
+						Value: ptrToString("Europe/London"),
+					},
+				},
+			},
+			want: 97. / 112,
+		},
+		{
+			name: "OsCPU, Timezone",
+			args: args{
+				a: Fingerprint{
+					OsCPU: OsCPU{
+						Value: ptrToString("Windows NT 6.2"),
+					},
+					Timezone: Timezone{
+						Value: ptrToString("Europe/London"),
+					},
+				},
+				b: Fingerprint{
+					OsCPU: OsCPU{
+						Value: ptrToString("Windows NT 6.3"),
+					},
+					Timezone: Timezone{
+						Value: ptrToString("Europe/Warsaw"),
+					},
+				},
+			},
+			want: 1359. / 1456,
+		},
+		// TODO(amwolff): add more test cases?
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
