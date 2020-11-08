@@ -1,7 +1,9 @@
 package classifier
 
 import (
+	"math"
 	"strings"
+	"sync"
 
 	"github.com/amwolff/be/apps/experimental/internal/levenshtein"
 )
@@ -326,12 +328,7 @@ type Fingerprint struct {
 
 type Classifier interface {
 	Do(f Fingerprint) (Fingerprint, bool)
-}
-
-type Worthless struct{}
-
-func (w Worthless) Do(f Fingerprint) (Fingerprint, bool) {
-	return Fingerprint{}, false
+	Store(key string, f Fingerprint) float64
 }
 
 func hardwareRelatedCompatibility(a, b Fingerprint) float64 {
@@ -576,6 +573,7 @@ func similarity(a, b Fingerprint) float64 {
 
 type ExperimentalInMemory struct {
 	fingerprints map[string][]Fingerprint
+	mtx          *sync.RWMutex
 }
 
 func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
@@ -584,6 +582,7 @@ func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
 		candidate Fingerprint
 	)
 
+	e.mtx.RLock()
 	for _, fingerprints := range e.fingerprints {
 		for _, g := range fingerprints {
 			if hardwareRelatedCompatibility(f, g) < 0.85 {
@@ -595,6 +594,7 @@ func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
 			}
 		}
 	}
+	e.mtx.RUnlock()
 
 	if max > 0.9 {
 		return candidate, true
@@ -603,12 +603,46 @@ func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
 	return Fingerprint{}, false
 }
 
-func (e ExperimentalInMemory) Store(key string, f Fingerprint) {
-	e.fingerprints[key] = append(e.fingerprints[key], f)
+func (e ExperimentalInMemory) calculateEntropy() float64 {
+	var lengths []int
+
+	e.mtx.RLock()
+	for _, fingerprints := range e.fingerprints {
+		lengths = append(lengths, len(fingerprints))
+	}
+	e.mtx.RUnlock()
+
+	var sum float64
+
+	for _, l := range lengths {
+		sum += float64(l)
+	}
+
+	var entropy float64
+
+	for _, l := range lengths {
+		if freq := float64(l) / sum; freq > 0 {
+			entropy -= freq * math.Log2(freq)
+		}
+	}
+
+	return entropy
+}
+
+func (e ExperimentalInMemory) Store(key string, f Fingerprint) float64 {
+	e.mtx.Lock()
+	if _, ok := e.fingerprints[f.VisitorID]; !ok {
+		e.fingerprints[f.VisitorID] = make([]Fingerprint, 0)
+		e.fingerprints[key] = append(e.fingerprints[key], f)
+	}
+	e.mtx.Unlock()
+
+	return e.calculateEntropy()
 }
 
 func NewExperimentalInMemory() ExperimentalInMemory {
 	return ExperimentalInMemory{
 		fingerprints: make(map[string][]Fingerprint),
+		mtx:          &sync.RWMutex{},
 	}
 }

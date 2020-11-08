@@ -3,6 +3,7 @@ package classifier
 import (
 	"math"
 	"reflect"
+	"sync"
 	"testing"
 )
 
@@ -1029,9 +1030,10 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := ExperimentalInMemory{
-				fingerprints: tt.fingerprints,
-			}
+			e := NewExperimentalInMemory()
+
+			e.fingerprints = tt.fingerprints
+
 			got, got1 := e.Do(tt.f)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Do() got = %v, want %v", got, tt.want)
@@ -1044,25 +1046,84 @@ func TestExperimentalInMemory_Do(t *testing.T) {
 }
 
 func TestExperimentalInMemory_Store(t *testing.T) {
-	e := NewExperimentalInMemory()
+	c := NewExperimentalInMemory()
 
-	keyA, keyB := "a", "b"
+	keyA, keyB, keyC := "a", "b", "c"
 
-	e.Store(keyA, Fingerprint{VisitorID: "1"})
-	e.Store(keyA, Fingerprint{VisitorID: "2"})
+	if e, w := c.Store(keyA, Fingerprint{VisitorID: keyA}), 0.; e != w {
+		t.Errorf("wrong entropy value; got %f, want %f", e, w)
+	}
 
-	e.Store(keyB, Fingerprint{VisitorID: "3"})
-
-	if len(e.fingerprints) != 2 {
+	if len(c.fingerprints) != 1 {
 		t.Error("storage inconsistency")
 	}
-
-	if len(e.fingerprints[keyA]) != 2 {
+	if len(c.fingerprints[keyA]) != 1 {
 		t.Errorf("storage inconsistency under key = %s", keyA)
 	}
-
-	if len(e.fingerprints[keyB]) != 1 {
+	if len(c.fingerprints[keyB]) != 0 {
 		t.Errorf("storage inconsistency under key = %s", keyB)
+	}
+	if len(c.fingerprints[keyC]) != 0 {
+		t.Errorf("storage inconsistency under key = %s", keyC)
+	}
+
+	if e, w := c.Store(keyA, Fingerprint{VisitorID: keyB}), 0.; e != w {
+		t.Errorf("wrong entropy value; got %f, want %f", e, w)
+	}
+
+	if len(c.fingerprints) != 2 {
+		t.Error("storage inconsistency")
+	}
+	if len(c.fingerprints[keyA]) != 2 {
+		t.Errorf("storage inconsistency under key = %s", keyA)
+	}
+	if len(c.fingerprints[keyB]) != 0 {
+		t.Errorf("storage inconsistency under key = %s", keyB)
+	}
+	if len(c.fingerprints[keyC]) != 0 {
+		t.Errorf("storage inconsistency under key = %s", keyC)
+	}
+
+	x := -2./3*math.Log2(2./3) - 1./3*math.Log2(1./3)
+
+	if e, w := c.Store(keyB, Fingerprint{VisitorID: keyC}), x; e != w {
+		t.Errorf("wrong entropy value; got %f, want %f", e, w)
+	}
+
+	if len(c.fingerprints) != 3 {
+		t.Error("storage inconsistency")
+	}
+	if len(c.fingerprints[keyA]) != 2 {
+		t.Errorf("storage inconsistency under key = %s", keyA)
+	}
+	if len(c.fingerprints[keyB]) != 1 {
+		t.Errorf("storage inconsistency under key = %s", keyB)
+	}
+	if len(c.fingerprints[keyC]) != 0 {
+		t.Errorf("storage inconsistency under key = %s", keyC)
+	}
+
+	if e, w := c.Store(keyA, Fingerprint{VisitorID: keyA}), x; e != w {
+		t.Errorf("wrong entropy value; got %f, want %f", e, w)
+	}
+	if e, w := c.Store(keyA, Fingerprint{VisitorID: keyB}), x; e != w {
+		t.Errorf("wrong entropy value; got %f, want %f", e, w)
+	}
+	if e, w := c.Store(keyB, Fingerprint{VisitorID: keyC}), x; e != w {
+		t.Errorf("wrong entropy value; got %f, want %f", e, w)
+	}
+
+	if len(c.fingerprints) != 3 {
+		t.Error("storage inconsistency")
+	}
+	if len(c.fingerprints[keyA]) != 2 {
+		t.Errorf("storage inconsistency under key = %s", keyA)
+	}
+	if len(c.fingerprints[keyB]) != 1 {
+		t.Errorf("storage inconsistency under key = %s", keyB)
+	}
+	if len(c.fingerprints[keyC]) != 0 {
+		t.Errorf("storage inconsistency under key = %s", keyC)
 	}
 }
 
@@ -1075,6 +1136,7 @@ func TestNewExperimentalInMemory(t *testing.T) {
 			name: "basic",
 			want: ExperimentalInMemory{
 				fingerprints: make(map[string][]Fingerprint),
+				mtx:          &sync.RWMutex{},
 			},
 		},
 	}
