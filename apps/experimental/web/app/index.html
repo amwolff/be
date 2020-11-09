@@ -2,10 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <title>Web browsers and Internet-connected devices digital fingerprinting
         methods - challenges and solutions</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            align-items: center;
+            display: flex;
+            height: 95%;
+            justify-content: center;
+        }
+
+        .output {
+            background: #9398A9;
+            box-shadow: 4px 3px 1px #575C6D;
+            height: 99%;
+            max-width: 700px;
+            overflow: auto;
+            width: 95%;
+        }
+
+        .output .heading {
+            color: #FFEDC4;
+            font-size: 100%;
+            margin: 2%;
+        }
+
+        .output pre {
+            color: #FFFCF6;
+            font-family: monospace;
+            font-size: 150%;
+            margin: 2%;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .output pre.big {
+            font-size: 200%;
+        }
+
+        .output pre.small {
+            font-size: 100%;
+        }
+
+        @media (orientation: portrait) {
+            .output {
+                max-width: 95%;
+            }
+        }
+
+        #status {
+            font-weight: bold;
+        }
+
+        .footer {
+            align-items: center;
+            display: flex;
+            height: 5%;
+            justify-content: center;
+        }
+
+        .footer-text {
+            color: #575C6D;
+            font-size: 50%;
+        }
+    </style>
 </head>
 <body>
 <script src="./index.js"></script>
+<div class="container">
+    <div class="output">
+        <div id="status" class="heading">Fingerprinting... 0%</div>
+    </div>
+</div>
+<div class="footer">
+    <span class="footer-text">Ta strona jest częścią <a
+                href="https://github.com/amwolff/be">mojej pracy inżynierskiej</a>. ミリタリーテクニカルアカデミー.</span>
+</div>
 </body>
 </html>
