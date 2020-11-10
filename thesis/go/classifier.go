@@ -596,7 +596,7 @@ func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
 	}
 	e.mtx.RUnlock()
 
-	if max > 0.9 {
+	if max > 0.95 {
 		return candidate, true
 	}
 

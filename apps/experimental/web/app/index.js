@@ -3,7 +3,7 @@
 import 'regenerator-runtime/runtime';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
-const url = 'http://localhost:1236/fp';
+const url = 'https://32e3b93aae8e.ngrok.io/fp';
 
 function addOutput(node, className, text) {
     const p = document.createElement('pre');
