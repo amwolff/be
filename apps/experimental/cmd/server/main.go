@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"net/http"
 	"net/http/httputil"
@@ -12,7 +13,7 @@ import (
 )
 
 func logRequest(sugar *zap.SugaredLogger, r *http.Request) {
-	b, err := httputil.DumpRequest(r, true)
+	b, err := httputil.DumpRequest(r, false)
 	if err != nil {
 		sugar.Debugf("DumpRequest: %v", err)
 	} else {
@@ -20,20 +21,15 @@ func logRequest(sugar *zap.SugaredLogger, r *http.Request) {
 	}
 }
 
-func getRootHandler(sugar *zap.SugaredLogger) http.HandlerFunc {
+func getRootHandler(sugar *zap.SugaredLogger, base http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-
 		logRequest(sugar, r)
-
-		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		base.ServeHTTP(w, r)
 	}
 }
 
 func getFpHandler(sugar *zap.SugaredLogger, c classifier.Classifier) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-
 		logRequest(sugar, r)
 
 		if r.Method != http.MethodPost {
@@ -57,15 +53,15 @@ func getFpHandler(sugar *zap.SugaredLogger, c classifier.Classifier) http.Handle
 		sf, ok := c.Do(f)
 		if !ok {
 			sugar.Infow("Got new", "f", f.VisitorID)
-			sugar.Debug(f)
+			// sugar.Debug(f)
 
 			entropy = c.Store(f.VisitorID, f)
 
 			http.Error(w, http.StatusText(http.StatusCreated), http.StatusCreated)
 		} else {
 			sugar.Infow("Got similar", "f", f.VisitorID, "similar", sf.VisitorID)
-			sugar.Debug(f)
-			sugar.Debug(sf)
+			// sugar.Debug(f)
+			// sugar.Debug(sf)
 
 			entropy = c.Store(sf.VisitorID, f)
 		}
@@ -74,8 +70,18 @@ func getFpHandler(sugar *zap.SugaredLogger, c classifier.Classifier) http.Handle
 	}
 }
 
+func maybeIncreaseLevel(debug bool) zap.Option {
+	if debug {
+		return zap.IncreaseLevel(zap.DebugLevel)
+	}
+	return zap.IncreaseLevel(zap.InfoLevel)
+}
+
 func main() {
-	l, err := zap.NewDevelopment(zap.IncreaseLevel(zap.InfoLevel))
+	dir, debug := flag.String("dir", "", ""), flag.Bool("debug", false, "")
+	flag.Parse()
+
+	l, err := zap.NewDevelopment(maybeIncreaseLevel(*debug))
 	if err != nil {
 		panic(fmt.Sprintf("NewProduction: %v", err))
 	}
@@ -84,14 +90,12 @@ func main() {
 
 	sugar := l.Sugar()
 
-	c := classifier.NewExperimentalInMemory()
+	http.Handle("/", getRootHandler(sugar.Named("root handler"), http.FileServer(http.Dir(*dir))))
+	http.Handle("/fp", getFpHandler(sugar.Named("fp handler"), classifier.NewExperimentalInMemory()))
 
-	http.Handle("/", getRootHandler(sugar.Named("root handler")))
-	http.Handle("/fp", getFpHandler(sugar.Named("fp handler"), c))
+	const addr = ":1236"
 
-	const addr = ":8084"
-
-	go sugar.Infof("Started to listen at %s", addr)
+	go sugar.Infof("Listening at %s", addr)
 
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		sugar.Errorf("ListenAndServe: %v", err)

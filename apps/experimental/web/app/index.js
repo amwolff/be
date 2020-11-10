@@ -3,12 +3,12 @@
 import 'regenerator-runtime/runtime';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
-const url = 'http://192.168.0.172:8084/fp';
+const url = 'http://localhost:1236/fp';
 
-function addOutput(node, text, size) {
+function addOutput(node, className, text) {
     const p = document.createElement('pre');
 
-    p.classList.add(size);
+    p.classList.add(className);
     p.textContent = text;
 
     node.appendChild(p);
@@ -25,7 +25,7 @@ function addHeader(node, text) {
 
 function addSection(output, header, content, size) {
     addHeader(output, header);
-    addOutput(output, content, size);
+    addOutput(output, size, content);
 }
 
 (async () => {
@@ -40,18 +40,15 @@ function addSection(output, header, content, size) {
     const options = {
         method: 'POST',
         body: JSON.stringify(components),
-        // headers: {
-        //     'Content-Type': 'text/plain'
-        // }
+        headers: {
+            'Content-Type': 'application/json',
+        },
     };
 
     const response = await fetch(url, options);
 
     const t1 = performance.now();
 
-    document.querySelector('#status').textContent = 'Fingerprinting... 100%';
-
-    const output = document.querySelector('.output');
     let content;
 
     switch (response.status) {
@@ -65,8 +62,12 @@ function addSection(output, header, content, size) {
             return;
     }
 
+    document.querySelector('#status').textContent = 'Fingerprinting... 100%';
+
+    const output = document.querySelector('.output');
+
     addSection(output, 'Status', content, 'small');
     addSection(output, 'ID', result.visitorId, 'big');
     addSection(output, 't_1 - t_0', t1 - t0 + 'ms', 'small');
-    addSection(output, 'Components', JSON.stringify(result.components, null, 2), 'small');
+    addSection(output, 'Components', FingerprintJS.componentsToDebugString(result.components), 'small');
 })();

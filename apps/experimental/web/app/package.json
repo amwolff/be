@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel --hmr-port 1235 index.html",
+    "dev": "parcel watch index.html --hmr-port 1235",
     "build": "parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
