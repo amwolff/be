@@ -32,8 +32,8 @@ rozwiązań wydaje się podejście, w którym określa się podobieństwo cech
 \emph{fingerprintów}. Z tych porównań można wnioskować o ogólnym podobieństwie
 dwóch \emph{fingerprintów}.
 
-Porównywanie podobieństwa komponentów, które bezpośrednio lub pośrednio wynikają
-z np. parametrów sprzętowych urządzenia (na przykład \emph{fingerprint} elementu
+Określanie podobieństwa komponentów, które bezpośrednio lub pośrednio wynikają z
+np. parametrów sprzętowych urządzenia (na przykład \emph{fingerprint} elementu
 \texttt{canvas}), wydaje się bezcelowe. Ich wartość jest zwykle stała i
 należałoby zastanowić się nad istnieniem częściowego porządku w takim zbiorze.
 Jednakże ta niezmienność i dalej porównywanie tych komponentów na zasadzie
@@ -129,40 +129,41 @@ algorytmie klasyfikatora.
 \lstinputlisting[float,language=Go,caption=Algorytm Wagnera--Fischera w Go (liniowa pamięć),firstline=46,lastline=74,tabsize=4]{go/levenshtein.go}
 
 \section{Pseudokod}
-Algorytm 3 obrazuje eksperymentalny algorytm klasyfikatora \emph{fingerprintów}.
-Funkcja \texttt{hardwareRelatedCompatibility} odpowiada za binarne porównanie
-binarnych komponentów (w tym wcześniej omawianych, teoretycznie niezmiennych
-komponentów). Funkcja \texttt{similarity} bazując na odległości Levenshteina,
-przeprowadza porównanie dla reszty komponentów. Implementacja 6 przedstawia
-implementację tego algorytmu w Go.
+Algorytm 3 przedstawia pseudokod proponowanego algorytmu klasyfikatora
+\emph{fingerprintów}. Funkcja \texttt{hardwareRelatedCompatibility} określa
+równoważność komponentów mających binarną lub liczbową reprezentację (w tym
+wcześniej omawianych, teoretycznie niezmiennych komponentów). Funkcja
+\texttt{similarity} bazując na odległości Levenshteina, określa wzajemne
+podobieństwo reszty komponentów. Implementacja 6 przedstawia implementację tego
+algorytmu w Go.
 
-% [ ] osCpu: getOsCpu
-% [ ] languages: getLanguages
-% [ ] colorDepth: getColorDepth
-% [ ] deviceMemory: getDeviceMemory
-% [ ] screenResolution: getScreenResolution
-% [ ] availableScreenResolution: getAvailableScreenResolution
-% [ ] hardwareConcurrency: getHardwareConcurrency
-% [x] timezoneOffset: getTimezoneOffset
-% [x] timezone: getTimezone
-% [ ] sessionStorage: getSessionStorage
-% [ ] localStorage: getLocalStorage
-% [ ] indexedDB: getIndexedDB
-% [ ] openDatabase: getOpenDatabase
-% [ ] cpuClass: getCpuClass
-% [?] platform: getPlatform
-% [x] plugins: getPlugins
-% [ ] canvas: getCanvasFingerprint
-% [ ] touchSupport: getTouchSupport
-% [x] fonts: getFonts
-% [ ] audio: getAudioFingerprint
-% [ ] pluginsSupport: getPluginsSupport
-% [x] productSub: getProductSub
-% [ ] emptyEvalLength: getEmptyEvalLength
-% [ ] errorFF: getErrorFF
-% [x] vendor: getVendor
-% [ ] chrome: getChrome
-% [ ] cookiesEnabled: areCookiesEnabled
+% [x] osCpu
+% [x] languages
+% [ ] colorDepth
+% [ ] deviceMemory
+% [ ] screenResolution
+% [ ] availableScreenResolution
+% [ ] hardwareConcurrency
+% [ ] timezoneOffset
+% [x] timezone
+% [ ] sessionStorage
+% [ ] localStorage
+% [ ] indexedDB
+% [ ] openDatabase
+% [x] cpuClass
+% [x] platform
+% [x] plugins
+% [ ] canvas
+% [ ] touchSupport
+% [x] fonts
+% [ ] audio
+% [ ] pluginsSupport
+% [x] productSub
+% [ ] emptyEvalLength
+% [ ] errorFF
+% [x] vendor
+% [ ] chrome
+% [ ] cookiesEnabled
 
 \begin{algorithm}
 	\SetAlgoVlined
@@ -230,22 +231,6 @@ generujący. Komponenty używane do generowania \emph{fingerprintu} przedstawiaj
 Tab. 1 i Tab. 2. Listing kodu serwera i kodu uruchamianego po stronie klienta
 dostępny jest w Dodatku A.
 
-\subsection{Testy efektywności}
-Po wejściu na stronę interfejs widoczny na Rys. 8 informował użytkownika o tym,
-czy \emph{fingerprint} jego przeglądarki/urządzenia znajduje się już w bazie
-danych, skrócie \emph{fingerprintu}, czasie wykonania skryptu i zebranych
-komponentach.
-
-Krótkie (dobrowolne) testy przeprowadzone na grupie znajomych autora pokazały,
-że prosta heurystyka bez problemu poradziła sobie z unikalną identyfikacją
-użytkowników, a także identyfikacją pomiędzy normalnym trybem przeglądarki a
-tzw. trybem prywatnym (najnowsze wersje niektórych przeglądarek internetowych
-fałszują wartości komponentów pomiędzy trybami---w domyśle w celach ochrony
-prywatności). Algorytm radził sobie często także w unikalnej identyfikacji
-użytkowników pomiędzy przeglądarkami zainstalowanymi na tym samym urządzeniu.
-
-\subsubsection{Dalsza praca}
-
 \begin{table}
 	\centering
 	\caption{Komponenty używane w implementacji klasyfikatora}
@@ -303,8 +288,40 @@ użytkowników pomiędzy przeglądarkami zainstalowanymi na tym samym urządzeni
 	\end{tabular}
 \end{table}
 
+\subsection{Testy efektywności}
+Po wejściu na stronę interfejs widoczny na Rys. 8 informował użytkownika o tym,
+czy \emph{fingerprint} jego przeglądarki/urządzenia znajduje się już w bazie
+danych, skrócie \emph{fingerprintu}, czasie wykonania skryptu i zebranych
+komponentach.
+
+Krótkie (dobrowolne) testy przeprowadzone na grupie znajomych autora pokazały,
+że prosta heurystyka bez problemu poradziła sobie z unikalną identyfikacją
+użytkowników, a także identyfikacją pomiędzy normalnym trybem przeglądarki a
+tzw. trybem prywatnym (najnowsze wersje niektórych przeglądarek internetowych
+fałszują wartości komponentów pomiędzy trybami---w domyśle w celach ochrony
+prywatności). Algorytm radził sobie często także w unikalnej identyfikacji
+użytkowników pomiędzy przeglądarkami zainstalowanymi na tym samym urządzeniu.
+
 \begin{figure}
 	\includegraphics[width=\textwidth,keepaspectratio]{img/10}
 	\source{Zrzut ekranu wykonany na urządzeniu Apple iPad Air}
 	\caption{Interfejs aplikacji klienckiej eksperymentalnego klasyfikatora}
 \end{figure}
+
+\subsection{Wnioski}
+Przeprowadzenie testu na większej grupie użytkowników pozwoliłoby określić
+faktyczną skuteczność algorytmu. Pozwoliłoby określić procent poprawnych,
+niezamierzonych i nieutworzonych klasyfikacji, a także oszacować teoretyczną
+granicę entropii dla proponowanych komponentów. Taka analiza pokazałaby także
+które komponenty można byłoby odrzucić, a które dodać. W przypadku
+przeprowadzenia większego testu zastosowanie wyników analizy, jakie binarne i
+liczbowe źródła danych powinny mieć większą wagę (w przedstawionej implementacji
+funkcja \texttt{hardwareRelatedCompatibility} traktuje zgodność/niezgodność
+wszystkich komponentów tak samo; w domyśle komponenty związane z konfiguracją
+sprzętową powinny mieć większą wagę) mogłoby zredukować liczbę fałszywie
+dodatnich oraz fałszywie ujemnych wyników klasyfikacji. Istnieje także
+możliwość, że zaproponowany heurystyczny algorytm okaże się mniej wydajny od np.
+zastosowania metod uczenia maszynowego do klasyfikacji \emph{fingerprintów}.
+Podsumowując: wyniki przeprowadzonego testu wskazują na spory potencjał w
+stosowaniu takich rozwiązań jak klasyfikatory. Niestety nie jest to także dobra
+wiadomość dla prywatności typowych użytkowników Internetu.
