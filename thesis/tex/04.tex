@@ -131,10 +131,10 @@ algorytmie klasyfikatora.
 \section{Pseudokod}
 Algorytm 3 obrazuje eksperymentalny algorytm klasyfikatora \emph{fingerprintów}.
 Funkcja \texttt{hardwareRelatedCompatibility} odpowiada za binarne porównanie
-wcześniej omawianych, teoretycznie niezmiennych komponentów. Funkcja
-\texttt{similarity} bazując na odległości Levenshteina, przeprowadza porównanie
-dla reszty komponentów. Implementacja 6 przedstawia implementację tego algorytmu
-w Go.
+binarnych komponentów (w tym wcześniej omawianych, teoretycznie niezmiennych
+komponentów). Funkcja \texttt{similarity} bazując na odległości Levenshteina,
+przeprowadza porównanie dla reszty komponentów. Implementacja 6 przedstawia
+implementację tego algorytmu w Go.
 
 % [ ] osCpu: getOsCpu
 % [ ] languages: getLanguages
@@ -222,5 +222,89 @@ pamięć używana przez proponowany algorytm jest stała.
 \section{Ocena efektywności}
 
 \subsection{Opis utworzonego rozwiązania}
+W celu zbadania efektywności proponowanego algorytmu utworzono system złożony z
+dokumentowej bazy danych przechowującej zbierane przez aplikację serwera
+(implementującego Algorytm 3; Implementacja 6) \emph{fingerprinty}, który
+serwował także uruchamiany po stronie przeglądarki klienta (ofiary) skrypt je
+generujący. Komponenty używane do generowania \emph{fingerprintu} przedstawiają
+Tab. 1 i Tab. 2. Listing kodu serwera i kodu uruchamianego po stronie klienta
+dostępny jest w Dodatku A.
 
 \subsection{Testy efektywności}
+Po wejściu na stronę interfejs widoczny na Rys. 8 informował użytkownika o tym,
+czy \emph{fingerprint} jego przeglądarki/urządzenia znajduje się już w bazie
+danych, skrócie \emph{fingerprintu}, czasie wykonania skryptu i zebranych
+komponentach.
+
+Krótkie (dobrowolne) testy przeprowadzone na grupie znajomych autora pokazały,
+że prosta heurystyka bez problemu poradziła sobie z unikalną identyfikacją
+użytkowników, a także identyfikacją pomiędzy normalnym trybem przeglądarki a
+tzw. trybem prywatnym (najnowsze wersje niektórych przeglądarek internetowych
+fałszują wartości komponentów pomiędzy trybami---w domyśle w celach ochrony
+prywatności). Algorytm radził sobie często także w unikalnej identyfikacji
+użytkowników pomiędzy przeglądarkami zainstalowanymi na tym samym urządzeniu.
+
+\subsubsection{Dalsza praca}
+
+\begin{table}
+	\centering
+	\caption{Komponenty używane w implementacji klasyfikatora}
+	\begin{tabular}{|l|c|}
+		\hline
+		Komponent                                   & Związany z konfiguracją sprzętową? \\
+		\hline
+		\emph{fingerprint} elementu \texttt{canvas} & Tak                                    \\
+		\texttt{Error.prototype.toSource()}         & Nie                                    \\
+		\texttt{eval.toString().length}             & Nie                                    \\
+		\texttt{navigator.browserLanguage}          & Nie                                    \\
+		\texttt{navigator.cpuClass}                 & Tak                                    \\
+		\texttt{navigator.deviceMemory}             & Tak                                    \\
+		\texttt{navigator.hardwareConcurrency}      & Tak                                    \\
+		\texttt{navigator.language}                 & Nie                                    \\
+		\texttt{navigator.languages}                & Nie                                    \\
+		\texttt{navigator.maxTouchPoints}           & Tak                                    \\
+		\texttt{navigator.oscpu}                    & Nie                                    \\
+		\texttt{navigator.platform}                 & Nie                                    \\
+		\texttt{navigator.plugins}                  & Nie                                    \\
+		\texttt{navigator.productSub}               & Nie                                    \\
+		\texttt{navigator.systemLanguage}           & Nie                                    \\
+		\texttt{navigator.userLanguage}             & Nie                                    \\
+		\texttt{navigator.vendor}                   & Nie                                    \\
+		\texttt{TouchEvent}                         & Tak                                    \\
+		\texttt{window.chrome}                      & Nie                                    \\
+		\texttt{window.indexedDB}                   & Nie                                    \\
+		\texttt{window.Intl.DateTimeFormat()}       & Nie                                    \\
+		\texttt{window.localStorage}                & Nie                                    \\
+		\texttt{window.OfflineAudioContext}         & Tak                                    \\
+		\texttt{window.ontouchstart}                & Tak                                    \\
+		\texttt{window.openDatabase}                & Nie                                    \\
+		\texttt{window.screen.availHeight}          & Tak                                    \\
+		\texttt{window.screen.availWidth}           & Tak                                    \\
+		\texttt{window.screen.colorDepth}           & Tak                                    \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{Komponenty używane w implementacji klasyfikatora cd.}
+	\begin{tabular}{|l|c|}
+		\hline
+		Komponent                                 & Związany z konfiguracją sprzętową? \\
+		\hline
+		\texttt{window.screen.height}             & Tak                                    \\
+		\texttt{window.screen.width}              & Tak                                    \\
+		\texttt{window.sessionStorage}            & Nie                                    \\
+		\texttt{window.webkitOfflineAudioContext} & Tak                                    \\
+		Lista czcionek                            & Nie                                    \\
+		Obsługa \emph{cookies}                   & Nie                                    \\
+		Przesunięcie strefy czasowej             & Nie                                    \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}
+	\includegraphics[width=\textwidth,keepaspectratio]{img/10}
+	\source{Zrzut ekranu wykonany na urządzeniu Apple iPad Air}
+	\caption{Interfejs aplikacji klienckiej eksperymentalnego klasyfikatora}
+\end{figure}
