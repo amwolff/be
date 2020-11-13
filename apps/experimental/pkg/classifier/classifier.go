@@ -585,7 +585,7 @@ func (e ExperimentalInMemory) Do(f Fingerprint) (Fingerprint, bool) {
 	e.mtx.RLock()
 	for _, fingerprints := range e.fingerprints {
 		for _, g := range fingerprints {
-			if hardwareRelatedCompatibility(f, g) < 0.85 {
+			if hardwareRelatedCompatibility(f, g) < 0.9 {
 				continue
 			}
 
