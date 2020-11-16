@@ -64,6 +64,8 @@ function addSection(output, header, content, size) {
 
     document.querySelector('#status').textContent = 'Fingerprinting... 100%';
 
+    delete result.components['visitorID']
+
     const output = document.querySelector('.output');
 
     addSection(output, 'Status', content, 'small');
