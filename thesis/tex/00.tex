@@ -18,9 +18,9 @@
 % [x] 7. Co w pracy mogłoby się znaleźć, ale ze względów merytorycznych, logicznych czy nawet objętościowych, zostało pominięte?
 % [-] 8. Jakie zastosowano metody badań i dlaczego je wybrano?
 % [x] 9. Jaki jest stand wiedzy (źródeł) w danym obszarze badawczym?
-% [ ] 10. Z jakimi trudnymi problemami spotkał się autor przygotowując pracę?
-% [ ] 11. Jaka jest struktura pracy?
-% [ ] 12. Jak należy rozumieć i definiować niekonwencjonalne pojęcia lub skróty używane w pracy?
+% [x] 10. Z jakimi trudnymi problemami spotkał się autor przygotowując pracę?
+% [x] 11. Jaka jest struktura pracy?
+% [x] 12. Jak należy rozumieć i definiować niekonwencjonalne pojęcia lub skróty używane w pracy?
 
 Temat niniejszej pracy został wybrany głównie ze względu na chęć przedstawienia
 niektórych aspektów metod cyfrowego odcisku palca przeglądarek internetowych i
@@ -33,26 +33,26 @@ Identyfikacja użytkowników Internetu zaczęła być pożądana w chwili kiedy
 Internet stał się masowym medium. Identyfikacja wykorzystywana jest zwykle do
 śledzenia użytkowników przez platformy reklamowe w sieci, ale może być także
 używana do całkowitej deanonimizacji użytkowników. Tworzenie cyfrowych odcisków
-(\emph{fingerprinting}) palca to jedna z metod identyfikacji, która pozwala
+palca (\emph{fingerprinting}) to jedna z metod identyfikacji, która pozwala
 serwerom WWW jednoznacznie zidentyfikować urządzenie użytkownika za pomocą
 informacji wysyłanych przez to urządzenie lub przeglądarkę internetową
 (działającą na tym urządzeniu) wtedy, kiedy te informacje są unikalne dla
-większości z nich, tworząc ich cyfrowy odcisk \emph{fingerprint}. Pisząc
+większości z nich, tworząc ich cyfrowy odcisk palca (\emph{fingerprint}). Pisząc
 bardziej obrazowo: na przykład w przypadku przeglądarek---w przeciwieństwie do
 cookies lub lokalnych obiektów przechowywania cyfrowy odcisk przeglądarki
 internetowej pozostaje ten sam nawet w tzw. trybie prywatnym, lub po
 zresetowaniu przeglądarki do ustawień fabrycznych. Jest to zatem identyfikacja
 niezależna od stanu, którą na dodatek bardzo trudno wykryć lub jest to zupełnie
 niemożliwe. Biorąc pod uwagę te właściwości, jest to zupełna nowość w tej
-materii. Tworzenie cyfrowych odcisków palca rzutuje m.in. na obszary
-bezpieczeństwa komputerowego i prywatności. W historii Internetu bezpieczeństwo
-i prywatność były często rozważanymi tematami; dyskusja o bezpośrednich
-zagrożeniach w związku z tymi obszarami i czynne zapobieganie ich rozwojowi jest
-zwykle sprawą najwyższej wagi. Celem niniejszej pracy jest zapoznanie odbiorcy z
-koncepcją cyfrowych odcisków palca, zbadanie problematyki prywatności i
-anonimowości w ich kontekście i wyróżnienie oraz szczegółowe opisanie kluczowych
-metod tej techniki identyfikacji użytkowników. Rozważana jest także skuteczność
-tych metod i możliwości usprawnienia ich efektywności.
+materii. Tworzenie cyfrowych odcisków rzutuje m.in. na obszary bezpieczeństwa
+komputerowego i prywatności. W historii Internetu bezpieczeństwo i prywatność
+były często rozważanymi tematami; dyskusja o bezpośrednich zagrożeniach w
+związku z tymi obszarami i czynne zapobieganie ich rozwojowi jest zwykle sprawą
+najwyższej wagi. Celem niniejszej pracy jest zapoznanie odbiorcy z koncepcją
+cyfrowych odcisków, zbadanie problematyki prywatności i anonimowości w ich
+kontekście i wyróżnienie oraz szczegółowe opisanie kluczowych metod tej techniki
+identyfikacji użytkowników. Rozważana jest także skuteczność tych metod i
+możliwości usprawnienia ich efektywności.
 
 W pracy skupiono się na genezie tworzenia niniejszych odcisków, zagrożeniach,
 jakie ze sobą niosą, pozytywnych aspektach dostępności kolejnej metody
@@ -66,11 +66,37 @@ szczegółowe metody, których dokładna implementacja i działanie jest silnie
 zależne od konkretnych potrzeb.
 
 Stan wiedzy badanego obszaru jest relatywnie słaby, ale wynika to z jego
-młodości. O tworzeniu cyfrowych odcisków palca przeglądarek internetowych i
-urządzeń podłączonych do Internetu rozmawia się od około dekady. Wtedy
-opublikowana zostaje pierwsza praca definiująca niektóre z podstawowych efektów,
-z którymi mamy do czynienia do tej pory. Większość badań powstała ze względu na
-obserwację rozwoju opisywanych metod ,,w środowisku naturalnym''; tworzenie
-cyfrowych odcisków używane było przez różne firmy przed zgłębianiem tematu w
-środowisku akademickim. Obszar jest zatem dosyć młody, ale liczba publikacji z
-nim związanych nie przestaje rosnąć.
+młodości. O tworzeniu cyfrowych odcisków przeglądarek internetowych i urządzeń
+podłączonych do Internetu rozmawia się od około dekady. Wtedy opublikowana
+zostaje pierwsza praca definiująca niektóre z podstawowych efektów, z którymi
+mamy do czynienia do tej pory. Większość badań powstała ze względu na obserwację
+rozwoju opisywanych metod ,,w środowisku naturalnym''; tworzenie cyfrowych
+odcisków używane było przez różne firmy przed zgłębianiem tematu w środowisku
+akademickim. Obszar jest zatem dosyć młody, ale liczba publikacji z nim
+związanych nie przestaje rosnąć.
+
+Problemy, które wynikły w trakcie pisania pracy to brak autorytatywnej
+literatury i niewielka liczba nowych publikacji poruszających pewne szczególne
+aspekty omawianego obszaru. Wynika to najpewniej ze zbyt szybko zmieniających
+się środowisk, które należałoby opisywać. Bardzo wartościowe publikacje, na
+które autor chciałby zwrócić uwagę ze względu na ich wysoką jakość to ostatnie
+prace dotyczące \emph{fingerprintingu} autorstwa CJ Mitchella, W Li i NM
+Al-Fannaha z Uniwersytetu Londyńskiego. Pewnym problemem było także testowanie
+heurystycznych algorytmów klasyfikatora ze względu na potrzebę uczestnictwa w
+nich sporej liczby urządzeń/użytkowników. Dzięki pomocy rodziny i znajomych
+autora ten problem był mniej dotkliwy.
+
+Praca podzielona jest na cztery rozdziały. W pierwszym rozdziale opisano jak
+rozumieć i zdefiniowano niekonwencjonalne pojęcia, skróty używane w pracy.
+Opisano historię, podstawy funkcjonowania Internetu (założenia i ich realizację)
+i szczegółowo tło, na jakim zarysowuje się nowa, opisywana technika
+identyfikacji użytkowników. W drugim rozdziale zbadano problematykę prywatności
+i anonimowości w Internecie oraz wpływ na nią opisywanej techniki. Rozdział ten
+zawiera także przegląd rozwiązań i wyzwań dotyczących tworzenia cyfrowych
+odcisków, a także ich potencjał w innych, mniej oczywistych obszarach. Trzeci
+rozdział zawiera przegląd wybranych metod i autorskie przykłady prezentujące
+możliwości tych metod. Czwarty rozdział jest najbardziej eksperymentalnym, ale
+także ,,produktowym'' rozdziałem. W tym rozdziale przedstawiono mechanizmy,
+które mogą zwiększyć efektywność opisywanych wcześniej metod. Opisano kluczowe
+algorytmy i utworzony, proponowany klasyfikator. Opracowane zostały także wyniki
+przeprowadzonych badań nad zwiększaniem efektywności.
